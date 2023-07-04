@@ -8,6 +8,49 @@ importers:
 
   .: {}
 
+  packages/argo-atlantis:
+    dependencies:
+      '@argo/constants':
+        specifier: workspace:^
+        version: link:../constants
+      '@openzeppelin/contracts':
+        specifier: ^4.9.2
+        version: 4.9.2
+      '@openzeppelin/contracts-upgradeable':
+        specifier: ^4.9.2
+        version: 4.9.2
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.3.1
+      hardhat:
+        specifier: ^2.16.1
+        version: 2.16.1(ts-node@10.9.1)(typescript@5.0.4)
+      hardhat-deploy:
+        specifier: ^0.11.34
+        version: 0.11.34
+      hardhat-gas-reporter:
+        specifier: ^1.0.9
+        version: 1.0.9(hardhat@2.16.1)
+    devDependencies:
+      '@nomicfoundation/hardhat-toolbox':
+        specifier: ^3.0.0
+        version: 3.0.0(@nomicfoundation/hardhat-chai-matchers@2.0.1)(@nomicfoundation/hardhat-ethers@3.0.3)(@nomicfoundation/hardhat-network-helpers@1.0.8)(@nomicfoundation/hardhat-verify@1.0.3)(@typechain/ethers-v6@0.4.0)(@typechain/hardhat@8.0.0)(@types/chai@4.3.5)(@types/mocha@10.0.1)(@types/node@20.3.3)(chai@4.3.7)(ethers@6.6.2)(hardhat-gas-reporter@1.0.9)(hardhat@2.16.1)(solidity-coverage@0.8.3)(ts-node@10.9.1)(typechain@8.2.0)(typescript@5.0.4)
+      prettier:
+        specifier: ^2.8.8
+        version: 2.8.8
+      prettier-plugin-solidity:
+        specifier: ^1.1.3
+        version: 1.1.3(prettier@2.8.8)
+      solhint:
+        specifier: ^3.4.1
+        version: 3.4.1
+      solhint-plugin-prettier:
+        specifier: ^0.0.5
+        version: 0.0.5(prettier-plugin-solidity@1.1.3)(prettier@2.8.8)
+      solidity-coverage:
+        specifier: ^0.8.3
+        version: 0.8.3(hardhat@2.16.1)
+
   packages/constants: {}
 
   packages/contracts:
