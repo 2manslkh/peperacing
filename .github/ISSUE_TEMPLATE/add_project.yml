@@ -1,0 +1,14 @@
+name: 🌟 Add a project
+description: 🌟 Add a project to Argo's ecosystem
+title: 🌟 [PROJECT_NAME]
+labels: ["project"]
+assignees:
+  - 2manslkh
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Project Details
+      description: Description of project
+    validations:
+      required: true

@@ -1,0 +1,12 @@
+name: 💡 Feature request
+description: 💡 Request a feature
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the feature request
+      description: A concise description of what the problem and proposed solution is.
+      value: Description of the feature request here.
+    validations:
+      required: true

@@ -1,0 +1,18 @@
+name: 🐛 Bug report
+description: 🐛 Report a bug
+labels: ["bug"]
+body:
+  - type: input
+    id: scope
+    attributes:
+      label: Scope
+      description: Which project/package is affected
+      value: scope
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A concise description of the problem and what you expected to happen.
+      value: Description of the bug here.
+    validations:
+      required: true
