@@ -56,3 +56,13 @@ Run everything in the root directory
 ## Frontend example
 
 ![Demo](docs/frontend-demo.gif)
+
+## Commit Guide
+
+1. Conventional commits
+`feat/fix(scope): commit message`
+
+2. Scopes
+   1. repo: Changes to the mono-repo itself
+   2. [package-name]: Changes to the specified package
+      1. e.g. Change to the contracts package => `feat(contracts): add erc721 contract`
