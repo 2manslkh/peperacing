@@ -1,5 +1,5 @@
 name: 💡 Feature request
-description: 💡 Request a feature
+description: Request a feature
 labels: ["enhancement", "needs-triage"]
 body:
   - type: textarea
