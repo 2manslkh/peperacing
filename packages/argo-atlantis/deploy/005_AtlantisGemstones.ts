@@ -1,7 +1,6 @@
 import 'dotenv/config';
 
 import { AtlantisAddressRegistry } from '../typechain';
-import { GasLogger } from '../utils/GasLogger';
 
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;

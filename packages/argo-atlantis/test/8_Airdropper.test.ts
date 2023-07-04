@@ -27,13 +27,13 @@ describe('Airdropper', function () {
 
     // Setup Test
     await deployments.fixture(['Airdropper', 'Mock', 'Gold']);
-    airdropper = await ethers.getContract('Airdropper', owner);
-    erc20 = await ethers.getContract('Gold', owner);
-    erc721 = await ethers.getContract('MockArgonauts', owner);
-    erc1155 = await ethers.getContract('MockERC1155', owner);
+    airdropper = await deployments.get('Airdropper', owner);
+    erc20 = await deployments.get('Gold', owner);
+    erc721 = await deployments.get('MockArgonauts', owner);
+    erc1155 = await deployments.get('MockERC1155', owner);
 
     // Devmint erc20
-    expect(await erc20.balanceOf(owner.address)).to.equal(ethers.utils.parseEther('10000000000')); // TODO: remove in prod: 10 billion gold minted to deployer
+    expect(await erc20.balanceOf(owner.address)).to.equal(ethers.parseEther('10000000000')); // TODO: remove in prod: 10 billion gold minted to deployer
 
     // Devmint erc721
     await erc721.connect(owner).mint(TEST_WALLETS);
@@ -56,11 +56,11 @@ describe('Airdropper', function () {
 
     // Create an array of bignumbers from with value of 10 to 200
     const amounts = Array.from({ length: TEST_WALLETS }, (_, i) => i + 1).map((i) =>
-      ethers.utils.parseEther(i.toString())
+      ethers.parseEther(i.toString())
     );
 
     // Approve gold to airdropper
-    await erc20.connect(owner).approve(airdropper.address, ethers.utils.parseEther('1000000'));
+    await erc20.connect(owner).approve(airdropper.address, ethers.parseEther('1000000'));
 
     // Chunk array
 
@@ -76,7 +76,7 @@ describe('Airdropper', function () {
     for (let i = 0; i < TEST_WALLETS; i++) {
       let balance = await erc20.balanceOf(addresses[i]);
 
-      expect(balance).to.equal(ethers.utils.parseEther((i + 1).toString()));
+      expect(balance).to.equal(ethers.parseEther((i + 1).toString()));
     }
   });
 

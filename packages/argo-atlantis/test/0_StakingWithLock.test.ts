@@ -2,28 +2,28 @@ import { deployments, ethers } from 'hardhat';
 
 import { AtlantisGemstones } from '../typechain';
 import { Gold } from '../typechain';
-import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { StakingWithLock } from '../typechain';
 import { Stardust } from '../typechain';
 import { expect } from 'chai';
+import { getContract } from '../utils/helper';
 
 describe('StakingWithLock', () => {
   let stakingWithLock: StakingWithLock;
-  let owner: SignerWithAddress;
-  let staker: SignerWithAddress;
-  let whitelistedContract: SignerWithAddress;
-  let nonWhitelistedContract: SignerWithAddress;
+  let owner: Signer;
+  let staker: Signer;
+  let whitelistedContract: Signer;
+  let nonWhitelistedContract: Signer;
   let gold: Gold;
   let stardust: Stardust;
-  const goldAmount = ethers.utils.parseEther('100');
-  const stardustAmount = ethers.utils.parseEther('10');
+  const goldAmount = ethers.parseEther('100');
+  const stardustAmount = ethers.parseEther('10');
   beforeEach(async () => {
     // Get fixtures
     await deployments.fixture(['Mock', 'Phase1']);
     [owner, staker, whitelistedContract, nonWhitelistedContract] = await ethers.getSigners();
-    stakingWithLock = await ethers.getContract('StakingWithLock');
-    gold = await ethers.getContract('Gold');
-    stardust = await ethers.getContract('Stardust');
+    stakingWithLock = await getContractAt('StakingWithLock');
+    gold = await deployments.get('Gold');
+    stardust = await deployments.get('Stardust');
     // Approve gold to be staked
     await gold.connect(staker).approve(stakingWithLock.address, goldAmount.mul(1000));
     // Approve stardust to be staked

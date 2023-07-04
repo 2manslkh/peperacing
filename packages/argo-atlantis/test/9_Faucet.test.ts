@@ -38,12 +38,12 @@ describe('Faucet', function () {
 
     // Setup Test
     await deployments.fixture(['AtlantisAddressRegistry', 'Phase1', 'Phase2', 'Mock', 'AtlantisFaucet']);
-    faucet = await ethers.getContract('AtlantisFaucet', owner);
-    planets = await ethers.getContract('MockAtlantisPlanets', owner);
-    equipments = await ethers.getContract('AtlantisEquipments', owner);
-    argonauts = await ethers.getContract('MockArgonauts', owner);
-    gemstones = await ethers.getContract('AtlantisGemstones', owner);
-    spaceships = await ethers.getContract('AtlantisSpaceships', owner);
+    faucet = await deployments.get('AtlantisFaucet', owner);
+    planets = await deployments.get('MockAtlantisPlanets', owner);
+    equipments = await deployments.get('AtlantisEquipments', owner);
+    argonauts = await deployments.get('MockArgonauts', owner);
+    gemstones = await deployments.get('AtlantisGemstones', owner);
+    spaceships = await deployments.get('AtlantisSpaceships', owner);
   });
 
   it('should drip', async function () {

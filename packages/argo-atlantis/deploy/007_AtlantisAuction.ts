@@ -1,7 +1,6 @@
 import 'dotenv/config';
 
 import { AtlantisAddressRegistry } from '../typechain';
-import { GasLogger } from '../utils/GasLogger';
 import { ethers } from 'hardhat';
 
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
@@ -22,9 +21,9 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   if (chainId == '25') {
     console.log('Cronos Mainnet');
     TIME_BUFFER = 300; // Time in seconds between 2 bids for a single user
-    RESERVE_PRICE = ethers.utils.parseEther('1000'); // Minimum Bid in CRO
+    RESERVE_PRICE = ethers.parseEther('1000'); // Minimum Bid in CRO
     MIN_BID_INCREMENT_PERCENTAGE = 10; // Minimum Increment Percentage from LOWEST BIDDER (10 = 10% increment from lowest bid)
-    MIN_STACKED_BID_INCREMENT = ethers.utils.parseEther('50'); // Minimum Bid Increment in CRO
+    MIN_STACKED_BID_INCREMENT = ethers.parseEther('50'); // Minimum Bid Increment in CRO
     START_TIME = Math.floor(Date.now() / 1000);
     START_TIME = START_TIME + 3600;
     END_TIME = START_TIME + 7200;
@@ -32,17 +31,17 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     END_TIME = 1682604000;
   } else if (chainId == '338') {
     TIME_BUFFER = 300; // Time in seconds between 2 bids for a single user
-    RESERVE_PRICE = ethers.utils.parseEther('1000'); // Minimum Bid in CRO
+    RESERVE_PRICE = ethers.parseEther('1000'); // Minimum Bid in CRO
     MIN_BID_INCREMENT_PERCENTAGE = 10; // Minimum Increment Percentage from LOWEST BIDDER (10 = 10% increment from lowest bid)
-    MIN_STACKED_BID_INCREMENT = ethers.utils.parseEther('50'); // Minimum Bid Increment in CRO
+    MIN_STACKED_BID_INCREMENT = ethers.parseEther('50'); // Minimum Bid Increment in CRO
     START_TIME = Math.floor(Date.now() / 1000);
     START_TIME = START_TIME + 3600;
     END_TIME = START_TIME + 7200; // End Time in Unix Timestamp of the auction (END_TIME != 0) (24hrs after start time)
   } else if (chainId == '31337') {
     TIME_BUFFER = 60; // Time in seconds between 2 bids for a single user
-    RESERVE_PRICE = ethers.utils.parseEther('1000'); // Minimum Bid in CRO
+    RESERVE_PRICE = ethers.parseEther('1000'); // Minimum Bid in CRO
     MIN_BID_INCREMENT_PERCENTAGE = 10; // Minimum Increment Percentage from LOWEST BIDDER (10 = 10% increment from lowest bid)
-    MIN_STACKED_BID_INCREMENT = ethers.utils.parseEther('50'); // Minimum Bid Increment in CRO
+    MIN_STACKED_BID_INCREMENT = ethers.parseEther('50'); // Minimum Bid Increment in CRO
     START_TIME = Math.floor(Date.now() / 1000 - 50000);
     START_TIME = START_TIME + 1800;
     END_TIME = START_TIME + 10800; // End Time in Unix Timestamp of the auction (END_TIME != 0) (72hrs after start time)

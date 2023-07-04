@@ -1,11 +1,8 @@
 import 'dotenv/config';
 
 import { AtlantisAddressRegistry } from '../typechain';
-import { GasLogger } from '../utils/GasLogger';
 import { Gold } from '../typechain/contracts/Gold';
 import { ethers } from 'hardhat';
-
-const gasLogger = new GasLogger();
 
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;

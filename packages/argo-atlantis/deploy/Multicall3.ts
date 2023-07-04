@@ -1,9 +1,5 @@
 import 'dotenv/config';
 
-import { GasLogger } from '../utils/GasLogger';
-
-const gasLogger = new GasLogger();
-
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
   const { deployer } = await getNamedAccounts();

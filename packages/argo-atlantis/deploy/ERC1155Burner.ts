@@ -1,9 +1,7 @@
 import 'dotenv/config';
-import { GasLogger } from '../utils/GasLogger';
-import { ethers } from 'hardhat';
-import { MockERC1155 } from '../typechain';
 
-const gasLogger = new GasLogger();
+import { MockERC1155 } from '../typechain';
+import { ethers } from 'hardhat';
 
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;

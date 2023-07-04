@@ -1,7 +1,6 @@
 import 'dotenv/config';
 
 import { AtlantisAddressRegistry } from '../typechain';
-import { GasLogger } from '../utils/GasLogger';
 
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
@@ -20,11 +19,11 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   let registry: AtlantisAddressRegistry = await deployments.getOrNull('AtlantisAddressRegistry');
 
   // let stardustCosts = [
-  //   ethers.utils.parseEther('25000'),
-  //   ethers.utils.parseEther('36000'),
-  //   ethers.utils.parseEther('49000'),
-  //   ethers.utils.parseEther('64000'),
-  //   ethers.utils.parseEther('81000'),
+  //   ethers.parseEther('25000'),
+  //   ethers.parseEther('36000'),
+  //   ethers.parseEther('49000'),
+  //   ethers.parseEther('64000'),
+  //   ethers.parseEther('81000'),
   // ];
 
   // Initialise empty Stardust Costs all 0

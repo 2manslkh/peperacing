@@ -2,8 +2,8 @@ import 'dotenv/config';
 
 import { AddressRegistry } from '../typechain';
 import { AtlantisEquipments } from '../typechain/contracts/AtlantisEquipments';
-import { AtlantisSpaceships } from '../typechain/contracts/AtlantisSpaceships';
 import { AtlantisFaucet } from '../typechain';
+import { AtlantisSpaceships } from '../typechain/contracts/AtlantisSpaceships';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { chunkArray } from '../utils/helper';
 import { expect } from 'chai';
@@ -25,19 +25,19 @@ describe('AtlantisSpaceships', function () {
 
     // Setup Test
     await deployments.fixture(['Phase1', 'Phase2', 'Mock']);
-    atlantisSpaceships = await ethers.getContract('AtlantisSpaceships', owner);
-    atlantisEquipments = await ethers.getContract('AtlantisEquipments', owner);
-    addressRegistry = await ethers.getContract('AtlantisAddressRegistry', owner);
+    atlantisSpaceships = await deployments.get('AtlantisSpaceships', owner);
+    atlantisEquipments = await deployments.get('AtlantisEquipments', owner);
+    addressRegistry = await deployments.get('AtlantisAddressRegistry', owner);
 
     // Set stardust cost on AtlantisEquipments
     await atlantisEquipments
       .connect(owner)
       .setStardustCosts([
-        ethers.utils.parseEther('250'),
-        ethers.utils.parseEther('360'),
-        ethers.utils.parseEther('490'),
-        ethers.utils.parseEther('640'),
-        ethers.utils.parseEther('810'),
+        ethers.parseEther('250'),
+        ethers.parseEther('360'),
+        ethers.parseEther('490'),
+        ethers.parseEther('640'),
+        ethers.parseEther('810'),
       ]);
     // Set gemstones cost on AtlantisEquipments
     await atlantisEquipments.connect(owner).setGemstonesRequired([9, 13, 19, 27, 40]);
@@ -70,7 +70,7 @@ describe('AtlantisSpaceships', function () {
     //   await atlantisSpaceships.connect(owner).setSpaceshipRarity(spaceshipIdsChunked[i], randomNumbersChunked[i]);
     // }
   });
-  beforeEach(async function () {});
+  beforeEach(async function () { });
 
   describe('Constants', function () {
     it('Name is set to AtlantisSpaceships', async function () {
@@ -91,7 +91,7 @@ describe('AtlantisSpaceships', function () {
   });
 
   describe('Minting', function () {
-    beforeEach(async function () {});
+    beforeEach(async function () { });
 
     it('should be able to airdrop', async function () {
       // Mint 100 spaceship to random users

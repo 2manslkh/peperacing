@@ -25,20 +25,20 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   // Chain Dependent Settings
   if (chainId == '25') {
     ARGONAUTS_ADDRESS = '0xa996aD2b9f240F78b063E47F552037658c4563d1';
-    ATLANTIS_PLANETS_ADDRESS = (await ethers.getContract('AtlantisPlanets')).address;
-    ATLANTIS_MATERIALS_ADDRESS = (await ethers.getContract('AtlantisGemstones')).address;
-    ATLANTIS_EQUIPMENTS_ADDRESS = (await ethers.getContract('AtlantisEquipments')).address;
-    ATLANTIS_SPACESHIPS_ADDRESS = (await ethers.getContract('AtlantisSpaceships')).address;
-    gold = (await ethers.getContract('Gold')) as Gold;
+    ATLANTIS_PLANETS_ADDRESS = (await deployments.get('AtlantisPlanets')).address;
+    ATLANTIS_MATERIALS_ADDRESS = (await deployments.get('AtlantisGemstones')).address;
+    ATLANTIS_EQUIPMENTS_ADDRESS = (await deployments.get('AtlantisEquipments')).address;
+    ATLANTIS_SPACESHIPS_ADDRESS = (await deployments.get('AtlantisSpaceships')).address;
+    gold = await ethers.getContractAt('Gold', (await deployments.get('Gold'))) as Gold;
     WETH = '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23';
   } else if (chainId == '338') {
     console.log('Testnet');
-    ARGONAUTS_ADDRESS = (await ethers.getContract('MockArgonauts')).address;
-    ATLANTIS_PLANETS_ADDRESS = (await ethers.getContract('MockAtlantisPlanets')).address;
-    ATLANTIS_MATERIALS_ADDRESS = (await ethers.getContract('AtlantisGemstones')).address;
-    ATLANTIS_EQUIPMENTS_ADDRESS = (await ethers.getContract('AtlantisEquipments')).address;
-    ATLANTIS_SPACESHIPS_ADDRESS = (await ethers.getContract('AtlantisSpaceships')).address;
-    gold = (await ethers.getContract('Gold')) as Gold;
+    ARGONAUTS_ADDRESS = (await deployments.get('MockArgonauts')).address;
+    ATLANTIS_PLANETS_ADDRESS = (await deployments.get('MockAtlantisPlanets')).address;
+    ATLANTIS_MATERIALS_ADDRESS = (await deployments.get('AtlantisGemstones')).address;
+    ATLANTIS_EQUIPMENTS_ADDRESS = (await deployments.get('AtlantisEquipments')).address;
+    ATLANTIS_SPACESHIPS_ADDRESS = (await deployments.get('AtlantisSpaceships')).address;
+    gold = await ethers.getContractAt('Gold', (await deployments.get('Gold'))) as Gold;
     WETH = '0x6904D2084BE89c7DFE93d9Ba3f63fDB77AaFb77A';
     // Console log all these addresses
     console.log('ARGONAUTS_ADDRESS: ', ARGONAUTS_ADDRESS);
@@ -48,13 +48,13 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     console.log('ATLANTIS_SPACESHIPS_ADDRESS: ', ATLANTIS_SPACESHIPS_ADDRESS);
     console.log('gold: ', gold.address);
   } else if (chainId == '31337') {
-    ARGONAUTS_ADDRESS = (await ethers.getContract('MockArgonauts')).address;
-    ATLANTIS_PLANETS_ADDRESS = (await ethers.getContract('AtlantisPlanets')).address;
-    ATLANTIS_MATERIALS_ADDRESS = (await ethers.getContract('AtlantisGemstones')).address;
-    ATLANTIS_EQUIPMENTS_ADDRESS = (await ethers.getContract('AtlantisEquipments')).address;
-    ATLANTIS_SPACESHIPS_ADDRESS = (await ethers.getContract('AtlantisSpaceships')).address;
-    gold = (await ethers.getContract('Gold')) as Gold;
-    WETH = (await ethers.getContract('MockWCRO')).address;
+    ARGONAUTS_ADDRESS = (await deployments.get('MockArgonauts')).address;
+    ATLANTIS_PLANETS_ADDRESS = (await deployments.get('AtlantisPlanets')).address;
+    ATLANTIS_MATERIALS_ADDRESS = (await deployments.get('AtlantisGemstones')).address;
+    ATLANTIS_EQUIPMENTS_ADDRESS = (await deployments.get('AtlantisEquipments')).address;
+    ATLANTIS_SPACESHIPS_ADDRESS = (await deployments.get('AtlantisSpaceships')).address;
+    gold = await ethers.getContractAt('Gold', (await deployments.get('Gold'))) as Gold;
+    WETH = (await deployments.get('MockWCRO')).address;
   } else {
     return;
   }
@@ -76,37 +76,37 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     status: number;
     paymentToken: string;
   }[] = [
-    {
-      name: 'Argonauts',
-      address: ARGONAUTS_ADDRESS ? ARGONAUTS_ADDRESS : '',
-      status: 1,
-      paymentToken: WETH,
-    },
-    {
-      name: 'AtlantisPlanets',
-      address: ATLANTIS_PLANETS_ADDRESS,
-      status: 1,
-      paymentToken: WETH,
-    },
-    {
-      name: 'AtlantisGemstones',
-      address: ATLANTIS_MATERIALS_ADDRESS,
-      status: 2,
-      paymentToken: gold.address,
-    },
-    {
-      name: 'AtlantisEquipments',
-      address: ATLANTIS_EQUIPMENTS_ADDRESS,
-      status: 2,
-      paymentToken: gold.address,
-    },
-    {
-      name: 'AtlantisSpaceships',
-      address: ATLANTIS_SPACESHIPS_ADDRESS,
-      status: 1,
-      paymentToken: WETH,
-    },
-  ];
+      {
+        name: 'Argonauts',
+        address: ARGONAUTS_ADDRESS ? ARGONAUTS_ADDRESS : '',
+        status: 1,
+        paymentToken: WETH,
+      },
+      {
+        name: 'AtlantisPlanets',
+        address: ATLANTIS_PLANETS_ADDRESS,
+        status: 1,
+        paymentToken: WETH,
+      },
+      {
+        name: 'AtlantisGemstones',
+        address: ATLANTIS_MATERIALS_ADDRESS,
+        status: 2,
+        paymentToken: gold.address,
+      },
+      {
+        name: 'AtlantisEquipments',
+        address: ATLANTIS_EQUIPMENTS_ADDRESS,
+        status: 2,
+        paymentToken: gold.address,
+      },
+      {
+        name: 'AtlantisSpaceships',
+        address: ATLANTIS_SPACESHIPS_ADDRESS,
+        status: 1,
+        paymentToken: WETH,
+      },
+    ];
 
   const atlantisMarketplace = await deploy('AtlantisMarketplace', {
     from: deployer,

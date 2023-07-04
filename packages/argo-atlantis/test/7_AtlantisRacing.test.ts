@@ -1,14 +1,14 @@
 import 'dotenv/config';
 
 import { AtlantisEquipments } from '../typechain/contracts/AtlantisEquipments';
+import { AtlantisFaucet } from '../typechain';
 import { AtlantisRacing } from '../typechain/contracts/AtlantisRacing';
 import { AtlantisSpaceships } from '../typechain/contracts/AtlantisSpaceships';
 import { Gold } from '../typechain/contracts/Gold';
-import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
-import { Stardust } from '../typechain/contracts/Stardust';
-import { StakingWithLock } from '../typechain';
-import { AtlantisFaucet } from '../typechain';
 import { MockArgonauts } from '../typechain';
+import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
+import { StakingWithLock } from '../typechain';
+import { Stardust } from '../typechain/contracts/Stardust';
 import { chunkArray } from '../utils/helper';
 import { expect } from 'chai';
 
@@ -34,39 +34,39 @@ describe('AtlantisRacing', function () {
 
     // Setup Test
     await deployments.fixture(['Phase1', 'Phase2', 'Mock', 'AtlantisFaucet']);
-    atlantisSpaceships = await ethers.getContract('AtlantisSpaceships', owner);
-    atlantisEquipments = await ethers.getContract('AtlantisEquipments', owner);
-    atlantisRacing = await ethers.getContract('AtlantisRacing', owner);
-    argonauts = await ethers.getContract('MockArgonauts', owner);
-    gold = await ethers.getContract('Gold', owner);
-    stardust = await ethers.getContract('Stardust', owner);
-    staking = await ethers.getContract('StakingWithLock', owner);
-    faucet = await ethers.getContract('AtlantisFaucet', owner);
+    atlantisSpaceships = await deployments.get('AtlantisSpaceships', owner);
+    atlantisEquipments = await deployments.get('AtlantisEquipments', owner);
+    atlantisRacing = await deployments.get('AtlantisRacing', owner);
+    argonauts = await deployments.get('MockArgonauts', owner);
+    gold = await deployments.get('Gold', owner);
+    stardust = await deployments.get('Stardust', owner);
+    staking = await deployments.get('StakingWithLock', owner);
+    faucet = await deployments.get('AtlantisFaucet', owner);
     await faucet.whitelistAddresses([owner.address, user1.address, user2.address]);
     // Transfer 1200 ether to faucet
-    await owner.sendTransaction({ to: faucet.address, value: ethers.utils.parseEther('1200') });
+    await owner.sendTransaction({ to: faucet.address, value: ethers.parseEther('1200') });
     // await faucet.connect(owner).drip();
     // await faucet.connect(user1).drip();
     // await faucet.connect(user2).drip();
 
     // Mint stardust and gold to atlantisRacing contract
-    // await stardust.connect(owner).devMint(ethers.utils.parseEther('1000000'));
-    // await gold.connect(owner).devMint(ethers.utils.parseEther('20000000'));
+    // await stardust.connect(owner).devMint(ethers.parseEther('1000000'));
+    // await gold.connect(owner).devMint(ethers.parseEther('20000000'));
     // Stake gold for stardust
-    await gold.connect(owner).approve(staking.address, ethers.utils.parseEther('10000000'));
-    await staking.connect(owner).stake(ethers.utils.parseEther('10000000'));
+    await gold.connect(owner).approve(staking.address, ethers.parseEther('10000000'));
+    await staking.connect(owner).stake(ethers.parseEther('10000000'));
     // Transfer to atlantisRacing contract
-    await stardust.connect(owner).transfer(atlantisRacing.address, ethers.utils.parseEther('10000000'));
-    await gold.connect(owner).transfer(atlantisRacing.address, ethers.utils.parseEther('10000000'));
+    await stardust.connect(owner).transfer(atlantisRacing.address, ethers.parseEther('10000000'));
+    await gold.connect(owner).transfer(atlantisRacing.address, ethers.parseEther('10000000'));
     // Set stardust cost on AtlantisEquipments
     await atlantisEquipments
       .connect(owner)
       .setStardustCosts([
-        ethers.utils.parseEther('250'),
-        ethers.utils.parseEther('360'),
-        ethers.utils.parseEther('490'),
-        ethers.utils.parseEther('640'),
-        ethers.utils.parseEther('810'),
+        ethers.parseEther('250'),
+        ethers.parseEther('360'),
+        ethers.parseEther('490'),
+        ethers.parseEther('640'),
+        ethers.parseEther('810'),
       ]);
     // Set gemstones cost on AtlantisEquipments
     await atlantisEquipments.connect(owner).setGemstonesRequired([9, 13, 19, 27, 40]);
@@ -106,7 +106,7 @@ describe('AtlantisRacing', function () {
     // expect(await atlantisRacing.seasonStarted()).to.be.true;
   });
 
-  describe('Constants', function () {});
+  describe('Constants', function () { });
 
   describe('Game', function () {
     beforeEach(async function () {
@@ -425,7 +425,7 @@ describe('AtlantisRacing', function () {
     });
 
     describe('Admin', function () {
-      beforeEach(async function () {});
+      beforeEach(async function () { });
 
       describe('Setting Season End Time', async function () {
         it('should revert if not owner', async function () {
@@ -472,8 +472,8 @@ describe('AtlantisRacing', function () {
           expect(await gold.balanceOf(owner.address)).to.be.equals(racingGoldBalance.add(ownerGoldBalance));
         });
       });
-      describe('Emergency Unstake Spaceships', async function () {});
-      describe('Emergency Unstake Argonauts', async function () {});
+      describe('Emergency Unstake Spaceships', async function () { });
+      describe('Emergency Unstake Argonauts', async function () { });
     });
   });
 });

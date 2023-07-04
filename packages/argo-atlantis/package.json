@@ -20,6 +20,7 @@
     "@argo/constants": "workspace:^",
     "@openzeppelin/contracts": "^4.9.2",
     "@openzeppelin/contracts-upgradeable": "^4.9.2",
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.3.1",
     "hardhat": "^2.16.1",
     "hardhat-deploy": "^0.11.34",

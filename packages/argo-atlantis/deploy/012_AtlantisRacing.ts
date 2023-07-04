@@ -20,20 +20,20 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   }
   // Chain Dependent Settings
   if (chainId == '25') {
-    TOTAL_STARDUST_PER_SECOND = ethers.utils.parseEther('1.5');
+    TOTAL_STARDUST_PER_SECOND = ethers.parseEther('1.5');
     // Get current block timestamp
     const block = await ethers.provider.getBlock('latest');
     const blockTimestamp = block.timestamp;
     SEASON_END_TIME = blockTimestamp + 60 * 60 * 24 * 365;
   } else if (chainId == '338') {
-    TOTAL_STARDUST_PER_SECOND = ethers.utils.parseEther('1.5');
+    TOTAL_STARDUST_PER_SECOND = ethers.parseEther('1.5');
     // Get current block timestamp
     const block = await ethers.provider.getBlock('latest');
     const blockTimestamp = block.timestamp;
     // Add 1 week to current block timestamp
     SEASON_END_TIME = blockTimestamp + 60 * 60 * 24 * 20;
   } else if (chainId == '31337') {
-    TOTAL_STARDUST_PER_SECOND = ethers.utils.parseEther('0.5');
+    TOTAL_STARDUST_PER_SECOND = ethers.parseEther('0.5');
     // Get current block timestamp
     const block = await ethers.provider.getBlock('latest');
     const blockTimestamp = block.timestamp;

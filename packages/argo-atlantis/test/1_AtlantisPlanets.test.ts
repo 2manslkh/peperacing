@@ -9,7 +9,7 @@ import {
   TOKENS_500_000_000,
   USER_PLANET_TOKEN_ID,
 } from '../utils/constants';
-import { BigNumber, BigNumberish } from 'ethers';
+import { BigNumber, BigNumberish, Signer } from 'ethers';
 import { chunkArray, getGemstoneArray, setupElementArray, setupIdArray, setupOrbitArray } from '../utils/helper';
 import { deployments, ethers } from 'hardhat';
 
@@ -17,16 +17,15 @@ import { AtlantisGemstones } from './../typechain/contracts/AtlantisGemstones';
 import { AtlantisPlanets } from '../typechain/contracts/AtlantisPlanets';
 import { Gold } from './../typechain/contracts/Gold';
 import { MockArgonauts } from '../typechain/contracts/common/MockArgonauts';
-import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { StakingWithLock } from './../typechain/contracts/StakingWithLock';
 import { Stardust } from './../typechain/contracts/Stardust';
 import { XARGO } from './../typechain/contracts/common/MockXARGO.sol/XARGO';
 import { expect } from 'chai';
 
 const { Buffer } = require('buffer');
-let owner: SignerWithAddress;
-let user: SignerWithAddress;
-let user2: SignerWithAddress;
+let owner: Signer;
+let user: Signer;
+let user2: Signer;
 let atlantisPlanets: AtlantisPlanets;
 let atlantisGemstones: AtlantisGemstones;
 let argonauts: MockArgonauts;
@@ -34,7 +33,6 @@ let xargo: XARGO;
 let stardust: Stardust;
 let stakingWithLock: StakingWithLock;
 let gold: Gold;
-
 // Constants
 let ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 let BASE_URI: string;
@@ -91,13 +89,13 @@ const setupAtlantisPlanetsFixture = deployments.createFixture(
 
     await deployments.fixture(['Mock', 'Phase1']);
 
-    atlantisPlanets = await ethers.getContract('MockAtlantisPlanets', owner);
-    atlantisGemstones = await ethers.getContract('AtlantisGemstones', owner);
-    argonauts = await ethers.getContract('MockArgonauts', owner);
-    stardust = await ethers.getContract('Stardust', owner);
-    xargo = await ethers.getContract('XARGO', owner);
-    stakingWithLock = await ethers.getContract('StakingWithLock', owner);
-    gold = await ethers.getContract('Gold', owner);
+    atlantisPlanets = await deployments.get('MockAtlantisPlanets', owner);
+    atlantisGemstones = await deployments.get('AtlantisGemstones', owner);
+    argonauts = await deployments.get('MockArgonauts', owner);
+    stardust = await deployments.get('Stardust', owner);
+    xargo = await deployments.get('XARGO', owner);
+    stakingWithLock = await deployments.get('StakingWithLock', owner);
+    gold = await deployments.get('Gold', owner);
 
     // Set Stage to 2
     await atlantisPlanets.setStage(2);
@@ -197,14 +195,14 @@ const setupPreAtlantisPlanetsFixture = deployments.createFixture(
 
     await deployments.fixture(['Mock', 'Phase1']);
 
-    atlantisPlanets = await ethers.getContract('MockAtlantisPlanets', owner);
+    atlantisPlanets = await deployments.get('MockAtlantisPlanets', owner);
     console.log('atlantisPlanets.address', atlantisPlanets.address);
-    atlantisGemstones = await ethers.getContract('AtlantisGemstones', owner);
-    argonauts = await ethers.getContract('MockArgonauts', owner);
-    stardust = await ethers.getContract('Stardust', owner);
-    xargo = await ethers.getContract('XARGO', owner);
-    stakingWithLock = await ethers.getContract('StakingWithLock', owner);
-    gold = await ethers.getContract('Gold', owner);
+    atlantisGemstones = await deployments.get('AtlantisGemstones', owner);
+    argonauts = await deployments.get('MockArgonauts', owner);
+    stardust = await deployments.get('Stardust', owner);
+    xargo = await deployments.get('XARGO', owner);
+    stakingWithLock = await deployments.get('StakingWithLock', owner);
+    gold = await deployments.get('Gold', owner);
 
     return {
       owner,
@@ -384,7 +382,7 @@ describe('AtlantisPlanets', function () {
     });
     // TODO:
     describe('should not mint if...', async function () {
-      beforeEach(async function () {});
+      beforeEach(async function () { });
 
       it('stage is not 2', async function () {
         await expect(atlantisPlanets.connect(owner).mint(1, { value: PUBLIC_MINT_COST })).to.be.revertedWithCustomError(

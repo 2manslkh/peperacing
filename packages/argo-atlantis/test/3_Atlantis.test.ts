@@ -14,10 +14,10 @@ import { chunkArray, getGemstoneArray } from '../utils/helper';
 import { deployments, ethers } from 'hardhat';
 
 import { Atlantis } from '../typechain/contracts/Atlantis';
+import { AtlantisFaucet } from '../typechain';
 import { AtlantisGemstones } from './../typechain/contracts/AtlantisGemstones';
 import { AtlantisPlanets } from './../typechain/contracts/AtlantisPlanets';
 import { Gold } from '../typechain/contracts/Gold';
-import { AtlantisFaucet } from '../typechain';
 import { MockArgonauts } from '../typechain/contracts/common/MockArgonauts';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { StakingWithLock } from './../typechain/contracts/StakingWithLock';
@@ -67,14 +67,14 @@ const setupPhase2 = deployments.createFixture(async ({ deployments, getNamedAcco
 
   await deployments.fixture(['Phase1', 'Phase2', 'Mock']);
 
-  atlantis = await ethers.getContract('Atlantis', owner);
-  atlantisPlanets = await ethers.getContract('AtlantisPlanets', owner);
-  atlantisGemstones = await ethers.getContract('AtlantisGemstones', owner);
-  argonauts = await ethers.getContract('MockArgonauts', owner);
-  stardust = await ethers.getContract('Stardust', owner);
-  xargo = await ethers.getContract('XARGO', owner);
-  stakingWithLock = await ethers.getContract('StakingWithLock', owner);
-  gold = await ethers.getContract('Gold', owner);
+  atlantis = await deployments.get('Atlantis', owner);
+  atlantisPlanets = await deployments.get('AtlantisPlanets', owner);
+  atlantisGemstones = await deployments.get('AtlantisGemstones', owner);
+  argonauts = await deployments.get('MockArgonauts', owner);
+  stardust = await deployments.get('Stardust', owner);
+  xargo = await deployments.get('XARGO', owner);
+  stakingWithLock = await deployments.get('StakingWithLock', owner);
+  gold = await deployments.get('Gold', owner);
   // Set Stage to 2
   await atlantisPlanets.setStage(2);
   // Set Public Mint Cost to 0
@@ -206,7 +206,7 @@ describe('Atlantis', function () {
   });
 
   describe('Expedition', function () {
-    beforeEach(async function () {});
+    beforeEach(async function () { });
     it('should calculate correct gemstoneGenerated', async function () {
       // Get gemstone Generated with these test cases
 
@@ -230,25 +230,25 @@ describe('Atlantis', function () {
 
     it('should calculate correct stardust', async function () {
       // Get gemstone Generated with these test cases
-      await atlantis.setBaseStardustRate(ethers.utils.parseEther('50'));
+      await atlantis.setBaseStardustRate(ethers.parseEther('50'));
       let stardustGenerated = await atlantis.calculateStardustPerExpedition(1, 0);
-      expect(stardustGenerated).to.equal(ethers.utils.parseEther('50'));
+      expect(stardustGenerated).to.equal(ethers.parseEther('50'));
       stardustGenerated = await atlantis.calculateStardustPerExpedition(10, 0);
-      expect(stardustGenerated).to.equal(ethers.utils.parseEther('90.5'));
+      expect(stardustGenerated).to.equal(ethers.parseEther('90.5'));
       stardustGenerated = await atlantis.calculateStardustPerExpedition(20, 0);
-      expect(stardustGenerated).to.equal(ethers.utils.parseEther('230.5'));
+      expect(stardustGenerated).to.equal(ethers.parseEther('230.5'));
       stardustGenerated = await atlantis.calculateStardustPerExpedition(20, 1);
-      expect(stardustGenerated).to.equal(ethers.utils.parseEther('276.6'));
+      expect(stardustGenerated).to.equal(ethers.parseEther('276.6'));
       stardustGenerated = await atlantis.calculateStardustPerExpedition(20, 2);
-      expect(stardustGenerated).to.equal(ethers.utils.parseEther('322.7'));
+      expect(stardustGenerated).to.equal(ethers.parseEther('322.7'));
       stardustGenerated = await atlantis.calculateStardustPerExpedition(20, 3);
-      expect(stardustGenerated).to.equal(ethers.utils.parseEther('368.8'));
+      expect(stardustGenerated).to.equal(ethers.parseEther('368.8'));
     });
     it('should start and end expedition receiving correct rewards', async function () {
       // Start Expedition
       await atlantis
         .connect(user)
-        .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.utils.parseEther('1') });
+        .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.parseEther('1') });
 
       // Should Retrieve Correct Expedition details
       let expedition = await atlantis.expeditions(0);
@@ -285,7 +285,7 @@ describe('Atlantis', function () {
       // Start Expedition
       await atlantis
         .connect(user)
-        .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.utils.parseEther('1') });
+        .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.parseEther('1') });
 
       // Should Retrieve Correct Expedition details
       let expedition = await atlantis.expeditions(0);
@@ -322,7 +322,7 @@ describe('Atlantis', function () {
       // Start Expedition
       await atlantis
         .connect(user)
-        .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.utils.parseEther('1') });
+        .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.parseEther('1') });
 
       // Should Retrieve Correct Expedition details
       let expedition = await atlantis.expeditions(0);
@@ -362,7 +362,7 @@ describe('Atlantis', function () {
       // Start Expedition
       await atlantis
         .connect(user)
-        .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.utils.parseEther('1') });
+        .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.parseEther('1') });
       // Log balance after expedition
       let balanceAfter = await ethers.provider.getBalance(user.address);
       console.log('Balance After: ', ethers.utils.formatEther(balanceAfter));
@@ -407,7 +407,7 @@ describe('Atlantis', function () {
       // Start expedition
       await atlantis
         .connect(user)
-        .startExpedition(USER_PLANET_TOKEN_ID, [argonauts.address], [0], { value: ethers.utils.parseEther('1') });
+        .startExpedition(USER_PLANET_TOKEN_ID, [argonauts.address], [0], { value: ethers.parseEther('1') });
       // Check expedition
       let expedition = await atlantis.getExpeditionInfo(0);
       expect(expedition.collectionAddresses[0]).to.equal(argonauts.address);
@@ -417,7 +417,7 @@ describe('Atlantis', function () {
 
     it('should not start expedition if not owner of planet', async function () {
       await expect(
-        atlantis.connect(user).startExpedition(OTHER_PLANET_TOKEN_ID, [], [], { value: ethers.utils.parseEther('1') })
+        atlantis.connect(user).startExpedition(OTHER_PLANET_TOKEN_ID, [], [], { value: ethers.parseEther('1') })
       ).to.be.revertedWith('ERC721: caller is not token owner or approved');
     });
 
@@ -425,7 +425,7 @@ describe('Atlantis', function () {
       await expect(
         atlantis
           .connect(user)
-          .startExpedition(USER_PLANET_TOKEN_ID, [argonauts.address], [0], { value: ethers.utils.parseEther('1') })
+          .startExpedition(USER_PLANET_TOKEN_ID, [argonauts.address], [0], { value: ethers.parseEther('1') })
       ).to.be.revertedWithCustomError(atlantis, 'InvalidExpeditionInput');
     });
 
@@ -437,7 +437,7 @@ describe('Atlantis', function () {
       await expect(
         atlantis
           .connect(user)
-          .startExpedition(USER_PLANET_TOKEN_ID, [argonauts.address], [1], { value: ethers.utils.parseEther('1') })
+          .startExpedition(USER_PLANET_TOKEN_ID, [argonauts.address], [1], { value: ethers.parseEther('1') })
       ).to.be.revertedWithCustomError(argonauts, 'TransferFromIncorrectOwner');
     });
     it('should receive back staked nfts', async function () {
@@ -452,7 +452,7 @@ describe('Atlantis', function () {
       // Start expedition
       await atlantis
         .connect(user)
-        .startExpedition(USER_PLANET_TOKEN_ID, [argonauts.address], [0], { value: ethers.utils.parseEther('1') });
+        .startExpedition(USER_PLANET_TOKEN_ID, [argonauts.address], [0], { value: ethers.parseEther('1') });
       // Check that argonauts and planets are transferred
       expect(await argonauts.balanceOf(user.address)).to.equal(argonautsBalanceBefore.sub(1));
       expect(await atlantisPlanets.balanceOf(user.address)).to.equal(planetsBalanceBefore.sub(1));
@@ -471,7 +471,7 @@ describe('Atlantis', function () {
         // Start Expedition
         await atlantis
           .connect(user)
-          .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.utils.parseEther('1') });
+          .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.parseEther('1') });
 
         // Should Retrieve Correct Expedition details
         let expedition = await atlantis.expeditions(0);
@@ -495,7 +495,7 @@ describe('Atlantis', function () {
         // Start Expedition
         await atlantis
           .connect(user)
-          .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.utils.parseEther('1') });
+          .startExpedition(USER_PLANET_TOKEN_ID, [], [], { value: ethers.parseEther('1') });
 
         // Should Retrieve Correct Expedition details
         let expedition = await atlantis.expeditions(0);

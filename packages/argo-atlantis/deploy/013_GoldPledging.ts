@@ -1,17 +1,17 @@
 import 'dotenv/config';
-import { Gold, Stardust } from '../typechain';
-import { GasLogger } from '../utils/GasLogger';
-import { ethers } from 'hardhat';
 
-const gasLogger = new GasLogger();
+import { Gold, Stardust } from '../typechain';
+
+import { ethers } from 'hardhat';
+import { getContract } from '../utils/helper';
 
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
   // Get gold and stardust contracts
-  const gold = (await ethers.getContract('Gold', deployer)) as Gold;
-  const stardust = (await ethers.getContract('Stardust', deployer)) as Stardust;
+  const gold = await getContract('Gold');
+  const stardust = (await getContract('Stardust')) as Stardust;
   // Chain Dependent Settings
   if (chainId == '25') {
   } else if (chainId == '338') {
@@ -28,7 +28,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const endBlock = 9716473;
 
   // Initialise rewardPerBlock to 1
-  const rewardPerBlock = ethers.utils.parseEther('0.5');
+  const rewardPerBlock = ethers.parseEther('0.5');
   let contract = await deploy('GoldPledging', {
     from: deployer,
     log: true,

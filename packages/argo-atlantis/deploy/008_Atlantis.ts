@@ -52,15 +52,9 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     }
   });
 
-  // Get atlantis contract
-  const Atlantis = await ethers.getContractFactory('Atlantis');
+  // Get atlantis contract and set rarity multiplier
+  await execute('Atlantis', { from: deployer, log: true }, 'setRarityMultiplier', [10, 12, 14, 16]);
 
-  // Attach
-  const AtlantisContract = Atlantis.attach(contract.address);
-  // Set material rate for atlantis
-  //await AtlantisContract.setGemstoneRate(levelArray, materialArray);
-  //await AtlantisContract.setNftGemstoneMultiplier([10, 12, 14, 16]);
-  await AtlantisContract.setRarityMultiplier([10, 12, 14, 16]);
 };
 
 module.exports.tags = ['Phase1', 'Atlantis'];

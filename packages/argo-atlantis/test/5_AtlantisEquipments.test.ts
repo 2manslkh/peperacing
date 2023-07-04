@@ -36,12 +36,12 @@ describe('AtlantisEquipments', function () {
 
     // Setup Test
     await deployments.fixture(['Phase2', 'Mock', 'Phase1']);
-    atlantisEquipments = await ethers.getContract('AtlantisEquipments', owner);
-    atlantisGemstones = await ethers.getContract('AtlantisGemstones', owner);
-    stardust = await ethers.getContract('Stardust', owner);
-    stakingWithLock = await ethers.getContract('StakingWithLock', owner);
-    addressRegistry = await ethers.getContract('AtlantisAddressRegistry', owner);
-    gold = await ethers.getContract('Gold', owner);
+    atlantisEquipments = await deployments.get('AtlantisEquipments', owner);
+    atlantisGemstones = await deployments.get('AtlantisGemstones', owner);
+    stardust = await deployments.get('Stardust', owner);
+    stakingWithLock = await deployments.get('StakingWithLock', owner);
+    addressRegistry = await deployments.get('AtlantisAddressRegistry', owner);
+    gold = await deployments.get('Gold', owner);
 
     /** Token Ids
      * 1  2  3 Fire Lightning Steel Equipment Level 1
@@ -71,11 +71,11 @@ describe('AtlantisEquipments', function () {
     // await atlantisEquipments
     //   .connect(owner)
     //   .setStardustCosts([
-    //     ethers.utils.parseEther('250'),
-    //     ethers.utils.parseEther('360'),
-    //     ethers.utils.parseEther('490'),
-    //     ethers.utils.parseEther('640'),
-    //     ethers.utils.parseEther('810'),
+    //     ethers.parseEther('250'),
+    //     ethers.parseEther('360'),
+    //     ethers.parseEther('490'),
+    //     ethers.parseEther('640'),
+    //     ethers.parseEther('810'),
     //   ]);
     // // Set Gemstones cost on AtlantisEquipments
     // await atlantisEquipments.connect(owner).setGemstonesRequired([9, 13, 19, 27, 40]);
@@ -109,7 +109,7 @@ describe('AtlantisEquipments', function () {
   //     // Send 1000 ether to AtlantisEquipments
   //     await owner.sendTransaction({
   //       to: atlantisEquipments.address,
-  //       value: ethers.utils.parseEther('1000'),
+  //       value: ethers.parseEther('1000'),
   //     });
   //   });
 
@@ -119,16 +119,16 @@ describe('AtlantisEquipments', function () {
   //     await atlantisEquipments.connect(owner).withdrawFund();
   //     let balanceAfter = await ethers.provider.getBalance(owner.address);
   //     expect(await ethers.provider.getBalance(atlantisEquipments.address)).to.be.equals(0);
-  //     expect(balanceAfter.sub(balanceBefore)).to.be.greaterThan(ethers.utils.parseEther('999'));
+  //     expect(balanceAfter.sub(balanceBefore)).to.be.greaterThan(ethers.parseEther('999'));
   //   });
   // });
 
   describe('Minting', function () {
-    beforeEach(async function () {});
+    beforeEach(async function () { });
 
     it('should be able to mint random tokenid from 1-3', async function () {
       // mint 100 times
-      await atlantisEquipments.connect(owner).mint(user1.address, 1, { value: ethers.utils.parseEther('30') });
+      await atlantisEquipments.connect(owner).mint(user1.address, 1, { value: ethers.parseEther('30') });
 
       // Add up balance of tokenIds 1-3 and check if it is 1
       let balance = BigNumber.from(0);
@@ -178,25 +178,25 @@ describe('AtlantisEquipments', function () {
         expect(await atlantisGemstones.balanceOf(user1.address, i)).to.be.equals(50);
       }
       // Dev Mint Stardust Tokens
-      await stardust.connect(user1).devMint(ethers.utils.parseEther('1000000'));
-      expect(await stardust.balanceOf(user1.address)).to.equal(ethers.utils.parseEther('1000000'));
+      await stardust.connect(user1).devMint(ethers.parseEther('1000000'));
+      expect(await stardust.balanceOf(user1.address)).to.equal(ethers.parseEther('1000000'));
 
       // Approve Stardust to approve
-      await stardust.connect(user1).approve(atlantisEquipments.address, ethers.utils.parseEther('1000000000'));
+      await stardust.connect(user1).approve(atlantisEquipments.address, ethers.parseEther('1000000000'));
       expect(await stardust.allowance(user1.address, atlantisEquipments.address)).to.equal(
-        ethers.utils.parseEther('1000000000')
+        ethers.parseEther('1000000000')
       );
       // Approve Stardust to approve
-      await stardust.connect(user1).approve(stakingWithLock.address, ethers.utils.parseEther('1000000000'));
-      await stardust.connect(user1).approve(atlantisEquipments.address, ethers.utils.parseEther('1000000000'));
+      await stardust.connect(user1).approve(stakingWithLock.address, ethers.parseEther('1000000000'));
+      await stardust.connect(user1).approve(atlantisEquipments.address, ethers.parseEther('1000000000'));
       expect(await stardust.allowance(user1.address, stakingWithLock.address)).to.equal(
-        ethers.utils.parseEther('1000000000')
+        ethers.parseEther('1000000000')
       );
       // Mint gold to user1
-      await gold.connect(user1).devMint(ethers.utils.parseEther('1000000'));
+      await gold.connect(user1).devMint(ethers.parseEther('1000000'));
       // Stake gold in stakingwithLOck
-      await gold.connect(user1).approve(stakingWithLock.address, ethers.utils.parseEther('1000000000'));
-      await stakingWithLock.connect(user1).stake(ethers.utils.parseEther('1000000'));
+      await gold.connect(user1).approve(stakingWithLock.address, ethers.parseEther('1000000000'));
+      await stakingWithLock.connect(user1).stake(ethers.parseEther('1000000'));
     });
 
     // Gemstones Should be consumed
@@ -325,9 +325,9 @@ describe('AtlantisEquipments', function () {
       let fusionCost2 = await atlantisEquipments.calculateFusionCost(14, 1);
       let fusionCost3 = await atlantisEquipments.calculateFusionCost(15, 1);
       // expect fusion cost to be 250 ether
-      expect(fusionCost1).to.be.equals(ethers.utils.parseEther('250'));
-      expect(fusionCost2).to.be.equals(ethers.utils.parseEther('250'));
-      expect(fusionCost3).to.be.equals(ethers.utils.parseEther('250'));
+      expect(fusionCost1).to.be.equals(ethers.parseEther('250'));
+      expect(fusionCost2).to.be.equals(ethers.parseEther('250'));
+      expect(fusionCost3).to.be.equals(ethers.parseEther('250'));
       await atlantisEquipments.connect(user1).fuseEquipment(13, 1);
       await atlantisEquipments.connect(user1).fuseEquipment(14, 1);
       await atlantisEquipments.connect(user1).fuseEquipment(15, 1);
@@ -342,7 +342,7 @@ describe('AtlantisEquipments', function () {
 
       // Expect user to have 750 lesser stardust than before
       expect(await stardust.balanceOf(user1.address)).to.be.equals(
-        stardustBalanceBefore.sub(ethers.utils.parseEther('750'))
+        stardustBalanceBefore.sub(ethers.parseEther('750'))
       );
       // Expect user to have 9 less gemstones than before
       expect(await atlantisGemstones.balanceOf(user1.address, 10)).to.equal(gemstonesBalanceBefore.sub(9));
@@ -363,9 +363,9 @@ describe('AtlantisEquipments', function () {
       let fusionCost2 = await atlantisEquipments.calculateFusionCost(17, 1);
       let fusionCost3 = await atlantisEquipments.calculateFusionCost(18, 1);
       // expect fusion cost to be 250 ether
-      expect(fusionCost1).to.be.equals(ethers.utils.parseEther('360'));
-      expect(fusionCost2).to.be.equals(ethers.utils.parseEther('360'));
-      expect(fusionCost3).to.be.equals(ethers.utils.parseEther('360'));
+      expect(fusionCost1).to.be.equals(ethers.parseEther('360'));
+      expect(fusionCost2).to.be.equals(ethers.parseEther('360'));
+      expect(fusionCost3).to.be.equals(ethers.parseEther('360'));
       await atlantisEquipments.connect(user1).fuseEquipment(16, 1);
       await atlantisEquipments.connect(user1).fuseEquipment(17, 1);
       await atlantisEquipments.connect(user1).fuseEquipment(18, 1);
@@ -380,7 +380,7 @@ describe('AtlantisEquipments', function () {
 
       // Expect user to have 360*3 lesser stardust than before
       expect(await stardust.balanceOf(user1.address)).to.be.equals(
-        stardustBalanceBefore.sub(ethers.utils.parseEther('1080'))
+        stardustBalanceBefore.sub(ethers.parseEther('1080'))
       );
       // Expect user to have 9 less gemstones than before
       expect(await atlantisGemstones.balanceOf(user1.address, 10)).to.equal(gemstonesBalanceBefore.sub(13));
@@ -401,9 +401,9 @@ describe('AtlantisEquipments', function () {
       let fusionCost2 = await atlantisEquipments.calculateFusionCost(20, 1);
       let fusionCost3 = await atlantisEquipments.calculateFusionCost(21, 1);
       // expect fusion cost to be 250 ether
-      expect(fusionCost1).to.be.equals(ethers.utils.parseEther('490'));
-      expect(fusionCost2).to.be.equals(ethers.utils.parseEther('490'));
-      expect(fusionCost3).to.be.equals(ethers.utils.parseEther('490'));
+      expect(fusionCost1).to.be.equals(ethers.parseEther('490'));
+      expect(fusionCost2).to.be.equals(ethers.parseEther('490'));
+      expect(fusionCost3).to.be.equals(ethers.parseEther('490'));
       await atlantisEquipments.connect(user1).fuseEquipment(19, 1);
       await atlantisEquipments.connect(user1).fuseEquipment(20, 1);
       await atlantisEquipments.connect(user1).fuseEquipment(21, 1);
@@ -418,7 +418,7 @@ describe('AtlantisEquipments', function () {
 
       // Expect user to have 490*3 lesser stardust than before
       expect(await stardust.balanceOf(user1.address)).to.be.equals(
-        stardustBalanceBefore.sub(ethers.utils.parseEther('1470'))
+        stardustBalanceBefore.sub(ethers.parseEther('1470'))
       );
       // Expect user to have 19 less gemstones than before
       expect(await atlantisGemstones.balanceOf(user1.address, 10)).to.equal(gemstonesBalanceBefore.sub(19));
@@ -439,9 +439,9 @@ describe('AtlantisEquipments', function () {
       let fusionCost2 = await atlantisEquipments.calculateFusionCost(23, 1);
       let fusionCost3 = await atlantisEquipments.calculateFusionCost(24, 1);
       // expect fusion cost to be 250 ether
-      expect(fusionCost1).to.be.equals(ethers.utils.parseEther('640'));
-      expect(fusionCost2).to.be.equals(ethers.utils.parseEther('640'));
-      expect(fusionCost3).to.be.equals(ethers.utils.parseEther('640'));
+      expect(fusionCost1).to.be.equals(ethers.parseEther('640'));
+      expect(fusionCost2).to.be.equals(ethers.parseEther('640'));
+      expect(fusionCost3).to.be.equals(ethers.parseEther('640'));
       await atlantisEquipments.connect(user1).fuseEquipment(22, 1);
       await atlantisEquipments.connect(user1).fuseEquipment(23, 1);
       await atlantisEquipments.connect(user1).fuseEquipment(24, 1);
@@ -456,7 +456,7 @@ describe('AtlantisEquipments', function () {
 
       // Expect user to have 640*3 lesser stardust than before
       expect(await stardust.balanceOf(user1.address)).to.be.equals(
-        stardustBalanceBefore.sub(ethers.utils.parseEther('1920'))
+        stardustBalanceBefore.sub(ethers.parseEther('1920'))
       );
       // Expect user to have 27 less gemstones than before
       expect(await atlantisGemstones.balanceOf(user1.address, 10)).to.equal(gemstonesBalanceBefore.sub(27));
@@ -477,9 +477,9 @@ describe('AtlantisEquipments', function () {
       let fusionCost2 = await atlantisEquipments.calculateFusionCost(26, 1);
       let fusionCost3 = await atlantisEquipments.calculateFusionCost(27, 1);
       // expect fusion cost to be 250 ether
-      expect(fusionCost1).to.be.equals(ethers.utils.parseEther('810'));
-      expect(fusionCost2).to.be.equals(ethers.utils.parseEther('810'));
-      expect(fusionCost3).to.be.equals(ethers.utils.parseEther('810'));
+      expect(fusionCost1).to.be.equals(ethers.parseEther('810'));
+      expect(fusionCost2).to.be.equals(ethers.parseEther('810'));
+      expect(fusionCost3).to.be.equals(ethers.parseEther('810'));
       await atlantisEquipments.connect(user1).fuseEquipment(25, 1);
       await atlantisEquipments.connect(user1).fuseEquipment(26, 1);
       await atlantisEquipments.connect(user1).fuseEquipment(27, 1);
@@ -494,7 +494,7 @@ describe('AtlantisEquipments', function () {
 
       // Expect user to have 810*3 lesser stardust than before
       expect(await stardust.balanceOf(user1.address)).to.be.equals(
-        stardustBalanceBefore.sub(ethers.utils.parseEther('2430'))
+        stardustBalanceBefore.sub(ethers.parseEther('2430'))
       );
 
       // Expect user to have 40 less gemstones than before

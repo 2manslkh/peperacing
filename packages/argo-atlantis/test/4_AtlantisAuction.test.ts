@@ -30,8 +30,8 @@ describe('AtlantisAuction', function () {
 
     // Setup Test
     await deployments.fixture(['Phase1', 'Mock']);
-    atlantisAuction = await ethers.getContract('AtlantisAuction', owner);
-    atlantisPlanets = await ethers.getContract('MockAtlantisPlanets', owner);
+    atlantisAuction = await deployments.get('AtlantisAuction', owner);
+    atlantisPlanets = await deployments.get('MockAtlantisPlanets', owner);
   });
 
   describe('Bidding', function () {
@@ -41,7 +41,7 @@ describe('AtlantisAuction', function () {
 
     it('should set bid', async function () {
       // Owner Bid 100 ETH
-      let tx = await atlantisAuction.bid({ value: ethers.utils.parseEther('1000') });
+      let tx = await atlantisAuction.bid({ value: ethers.parseEther('1000') });
       let receipt = await tx.wait();
 
       // Check Bid
@@ -50,7 +50,7 @@ describe('AtlantisAuction', function () {
       // get first bid
       let firstBid = bid[0];
       expect(firstBid.bidder).to.equal(owner.address);
-      expect(firstBid.amount).to.equal(ethers.utils.parseEther('1000'));
+      expect(firstBid.amount).to.equal(ethers.parseEther('1000'));
       expect(firstBid.bidTime).to.not.equal(0);
     });
 
@@ -59,7 +59,7 @@ describe('AtlantisAuction', function () {
       for (let i = 1; i < 13; i++) {
         // console.log(i);
 
-        let tx = await atlantisAuction.connect(signers[i]).bid({ value: ethers.utils.parseEther('1000') });
+        let tx = await atlantisAuction.connect(signers[i]).bid({ value: ethers.parseEther('1000') });
         let receipt = await tx.wait();
       }
       // Check Bids
@@ -76,7 +76,7 @@ describe('AtlantisAuction', function () {
 
     it('should not bid if does not meet min bid', async function () {
       // Owner Bid 100 ETH
-      await expect(atlantisAuction.bid({ value: ethers.utils.parseEther('999') })).to.be.revertedWithCustomError(
+      await expect(atlantisAuction.bid({ value: ethers.parseEther('999') })).to.be.revertedWithCustomError(
         atlantisAuction,
         'ReservePriceNotMet'
       );
@@ -85,10 +85,10 @@ describe('AtlantisAuction', function () {
       for (let i = 1; i < 13; i++) {
         // console.log(i);
 
-        let tx = await atlantisAuction.connect(signers[i]).bid({ value: ethers.utils.parseEther('2000') });
+        let tx = await atlantisAuction.connect(signers[i]).bid({ value: ethers.parseEther('2000') });
       }
       // Owner Bid 100 ETH
-      await expect(atlantisAuction.bid({ value: ethers.utils.parseEther('1999') })).to.be.revertedWithCustomError(
+      await expect(atlantisAuction.bid({ value: ethers.parseEther('1999') })).to.be.revertedWithCustomError(
         atlantisAuction,
         'IncrementalPriceNotMet'
       );
@@ -99,31 +99,31 @@ describe('AtlantisAuction', function () {
 
         let tx = await atlantisAuction
           .connect(signers[i])
-          .bid({ value: ethers.utils.parseEther('1500').add(ethers.utils.parseEther('100').mul(i - 1)) });
+          .bid({ value: ethers.parseEther('1500').add(ethers.parseEther('100').mul(i - 1)) });
       }
       // Check Bids
       let bid = await atlantisAuction.getAllActiveBids();
       //console.log('🚀 | bid', bid);
 
       // Exactly 1 more than the lowest bid (should revert)
-      await expect(atlantisAuction.bid({ value: ethers.utils.parseEther('1501') })).to.be.revertedWithCustomError(
+      await expect(atlantisAuction.bid({ value: ethers.parseEther('1501') })).to.be.revertedWithCustomError(
         atlantisAuction,
         'IncrementalPriceNotMet'
       );
 
       // Exactly 1% more than the lowest bid (should revert)
       await expect(
-        atlantisAuction.bid({ value: ethers.utils.parseEther('1500').mul(101).div(100) })
+        atlantisAuction.bid({ value: ethers.parseEther('1500').mul(101).div(100) })
       ).to.be.revertedWithCustomError(atlantisAuction, 'IncrementalPriceNotMet');
 
       // Exactly 10% more than the lowest bid
-      await atlantisAuction.bid({ value: ethers.utils.parseEther('1600').mul(110).div(100) });
+      await atlantisAuction.bid({ value: ethers.parseEther('1600').mul(110).div(100) });
     });
 
     it('should not bid if does not min increment', async function () {
       // Owner Bid 100 ETH
-      await atlantisAuction.bid({ value: ethers.utils.parseEther('1000') });
-      await expect(atlantisAuction.bid({ value: ethers.utils.parseEther('1') })).to.be.revertedWithCustomError(
+      await atlantisAuction.bid({ value: ethers.parseEther('1000') });
+      await expect(atlantisAuction.bid({ value: ethers.parseEther('1') })).to.be.revertedWithCustomError(
         atlantisAuction,
         'BidIncrementTooLow'
       );
@@ -136,7 +136,7 @@ describe('AtlantisAuction', function () {
 
         let tx = await atlantisAuction
           .connect(signers[i])
-          .bid({ value: ethers.utils.parseEther('1500').add(ethers.utils.parseEther('100').mul(i - 1)) });
+          .bid({ value: ethers.parseEther('1500').add(ethers.parseEther('100').mul(i - 1)) });
         let receipt = await tx.wait();
       }
       // Owner Bid 100 ETH
@@ -158,7 +158,7 @@ describe('AtlantisAuction', function () {
 
         let tx = await atlantisAuction
           .connect(signers[i])
-          .bid({ value: ethers.utils.parseEther('3000').add(ethers.utils.parseEther('100').mul(i - 1)) });
+          .bid({ value: ethers.parseEther('3000').add(ethers.parseEther('100').mul(i - 1)) });
       }
 
       // End Auction

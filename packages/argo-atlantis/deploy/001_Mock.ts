@@ -1,10 +1,7 @@
 import 'dotenv/config';
 
 import { AtlantisAddressRegistry } from '../typechain';
-import { GasLogger } from '../utils/GasLogger';
 import { ethers } from 'hardhat';
-
-const gasLogger = new GasLogger();
 
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
@@ -31,7 +28,6 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   let mockERC1155 = await deploy('MockERC1155', {
     from: deployer,
     log: true,
-
     args: [],
   });
 

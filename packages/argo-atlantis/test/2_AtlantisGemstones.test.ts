@@ -38,10 +38,10 @@ describe('AtlantisGemstones', function () {
 
     // Setup Test
     await deployments.fixture(['Phase1', 'Mock']);
-    atlantisGemstones = await ethers.getContract('AtlantisGemstones', owner);
-    stardust = await ethers.getContract('Stardust', owner);
-    stakingWithLock = await ethers.getContract('StakingWithLock', owner);
-    gold = await ethers.getContract('Gold', owner);
+    atlantisGemstones = await deployments.get('AtlantisGemstones', owner);
+    stardust = await deployments.get('Stardust', owner);
+    stakingWithLock = await deployments.get('StakingWithLock', owner);
+    gold = await deployments.get('Gold', owner);
   });
 
   describe('Constants', function () {
@@ -89,7 +89,7 @@ describe('AtlantisGemstones', function () {
   });
 
   describe('Minting', function () {
-    beforeEach(async function () {});
+    beforeEach(async function () { });
 
     it('should not be directly mintable', async function () {
       await expect(atlantisGemstones.connect(user1).mint(user1.address, 1, 1)).to.be.revertedWithCustomError(
@@ -112,24 +112,24 @@ describe('AtlantisGemstones', function () {
         await atlantisGemstones.connect(owner).mint(user1.address, i, 3);
       }
       // Dev Mint Stardust Tokens
-      await stardust.connect(user1).devMint(ethers.utils.parseEther('1000000'));
-      expect(await stardust.balanceOf(user1.address)).to.equal(ethers.utils.parseEther('1000000'));
+      await stardust.connect(user1).devMint(ethers.parseEther('1000000'));
+      expect(await stardust.balanceOf(user1.address)).to.equal(ethers.parseEther('1000000'));
 
       // Approve Stardust to approve
-      await stardust.connect(user1).approve(atlantisGemstones.address, ethers.utils.parseEther('1000000000'));
+      await stardust.connect(user1).approve(atlantisGemstones.address, ethers.parseEther('1000000000'));
       expect(await stardust.allowance(user1.address, atlantisGemstones.address)).to.equal(
-        ethers.utils.parseEther('1000000000')
+        ethers.parseEther('1000000000')
       );
       // Approve Stardust to approve
-      await stardust.connect(user1).approve(stakingWithLock.address, ethers.utils.parseEther('1000000000'));
+      await stardust.connect(user1).approve(stakingWithLock.address, ethers.parseEther('1000000000'));
       expect(await stardust.allowance(user1.address, stakingWithLock.address)).to.equal(
-        ethers.utils.parseEther('1000000000')
+        ethers.parseEther('1000000000')
       );
       // Mint gold to user1
-      await gold.connect(user1).devMint(ethers.utils.parseEther('1000000'));
+      await gold.connect(user1).devMint(ethers.parseEther('1000000'));
       // Stake gold in stakingwithLOck
-      await gold.connect(user1).approve(stakingWithLock.address, ethers.utils.parseEther('1000000000'));
-      await stakingWithLock.connect(user1).stake(ethers.utils.parseEther('1000000'));
+      await gold.connect(user1).approve(stakingWithLock.address, ethers.parseEther('1000000000'));
+      await stakingWithLock.connect(user1).stake(ethers.parseEther('1000000'));
     });
 
     // Gemstones Should be consumed
@@ -143,7 +143,7 @@ describe('AtlantisGemstones', function () {
         expect(await atlantisGemstones.balanceOf(user1.address, i)).to.be.equals(0);
         expect(await atlantisGemstones.balanceOf(user1.address, i + 3)).to.be.equals(4);
         expect(await stardust.balanceOf(user1.address)).to.be.equals(
-          currentBalance.sub(ethers.utils.parseEther('200'))
+          currentBalance.sub(ethers.parseEther('200'))
         );
       }
     });
@@ -155,7 +155,7 @@ describe('AtlantisGemstones', function () {
         expect(await atlantisGemstones.balanceOf(user1.address, i)).to.be.equals(0);
         expect(await atlantisGemstones.balanceOf(user1.address, i + 3)).to.be.equals(4);
         expect(await stardust.balanceOf(user1.address)).to.be.equals(
-          currentBalance.sub(ethers.utils.parseEther('200'))
+          currentBalance.sub(ethers.parseEther('200'))
         );
       }
     });
@@ -167,7 +167,7 @@ describe('AtlantisGemstones', function () {
         expect(await atlantisGemstones.balanceOf(user1.address, i)).to.be.equals(0);
         expect(await atlantisGemstones.balanceOf(user1.address, i + 3)).to.be.equals(4);
         expect(await stardust.balanceOf(user1.address)).to.be.equals(
-          currentBalance.sub(ethers.utils.parseEther('200'))
+          currentBalance.sub(ethers.parseEther('200'))
         );
       }
     });
@@ -190,22 +190,22 @@ describe('AtlantisGemstones', function () {
         await atlantisGemstones.connect(owner).mint(owner.address, i, 99);
       }
       // Dev Mint Stardust Tokens
-      await stardust.connect(user1).devMint(ethers.utils.parseEther('1000'));
-      expect(await stardust.balanceOf(user1.address)).to.equal(ethers.utils.parseEther('1000'));
+      await stardust.connect(user1).devMint(ethers.parseEther('1000'));
+      expect(await stardust.balanceOf(user1.address)).to.equal(ethers.parseEther('1000'));
 
       // Approve stardust to approve
-      await stardust.connect(user1).approve(stakingWithLock.address, ethers.utils.parseEther('1000'));
+      await stardust.connect(user1).approve(stakingWithLock.address, ethers.parseEther('1000'));
       // Approve stardust to gemstones contract
-      await stardust.connect(user1).approve(atlantisGemstones.address, ethers.utils.parseEther('1000'));
+      await stardust.connect(user1).approve(atlantisGemstones.address, ethers.parseEther('1000'));
       expect(await stardust.allowance(user1.address, stakingWithLock.address)).to.equal(
-        ethers.utils.parseEther('1000')
+        ethers.parseEther('1000')
       );
       // Approve stardust to approve
-      await stardust.connect(owner).approve(stakingWithLock.address, ethers.utils.parseEther('1000'));
+      await stardust.connect(owner).approve(stakingWithLock.address, ethers.parseEther('1000'));
       // Approve stardust to gemstones contract
-      await stardust.connect(owner).approve(atlantisGemstones.address, ethers.utils.parseEther('1000'));
+      await stardust.connect(owner).approve(atlantisGemstones.address, ethers.parseEther('1000'));
       expect(await stardust.allowance(owner.address, stakingWithLock.address)).to.equal(
-        ethers.utils.parseEther('1000')
+        ethers.parseEther('1000')
       );
     });
     it('should not upgrade if insufficient required gemstones', async function () {

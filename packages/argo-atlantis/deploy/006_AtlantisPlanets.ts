@@ -40,7 +40,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     REVEALED_IPFS_HASH = 'ipfs://bafybeifrdwqiiptmgfkmlbotmm352d5fw5acqpfvyqrnot3ceboevbddgq/';
     REGISTRY_ADDRESS = registry.address;
     WETH = '0xcdFC872c4404389e88d0C02e1788ecC7fa5A88A1';
-    contract = await deploy('AtlantisPlanets', {
+    contract = await deploy('MockAtlantisPlanets', {
       from: deployer,
       log: true,
       args: [OWNER, WHITELIST_SIGNER_ADDRESS, REVEALED_IPFS_HASH, REGISTRY_ADDRESS],
