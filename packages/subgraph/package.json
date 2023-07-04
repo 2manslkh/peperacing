@@ -1,0 +1,18 @@
+{
+    "name": "subgraph",
+    "private": true,
+    "license": "MIT",
+    "scripts": {
+        "format": "prettier --write .",
+        "start": "docker-compose up",
+        "deploy:local:hello_world": "pnpm -F subgraphs/hello_world codegen"
+    },
+    "devDependencies": {
+        "@graphprotocol/graph-cli": "0.51.2",
+        "@graphprotocol/graph-ts": "0.31.0",
+        "lint-staged": "^13.2.3",
+        "matchstick-as": "0.5.2",
+        "mustache": "^4.2.0",
+        "prettier": "^2.8.8"
+    }
+}
