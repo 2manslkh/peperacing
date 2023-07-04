@@ -1,4 +1,7 @@
 import '@nomicfoundation/hardhat-toolbox';
+import '@typechain/hardhat'
+import '@nomicfoundation/hardhat-ethers'
+import '@nomicfoundation/hardhat-chai-matchers'
 import 'hardhat-deploy'
 import 'dotenv/config';
 
@@ -8,7 +11,7 @@ import { task } from 'hardhat/config';
 // https://hardhat.org/guides/create-task.html
 task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
 
-  let accounts = hre.ethers.getSigners()
+  let accounts = await hre.ethers.getSigners()
 
   for (const account of accounts) {
     console.log(account.address);

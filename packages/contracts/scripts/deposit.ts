@@ -6,7 +6,7 @@ async function main() {
 
   const testcontract = await deployments.get('TestContract');
 
-  const contract = await ethers.getContractAt('TestContract', testcontract.address, deployer);
+  const contract = await deployments.getAt('TestContract', testcontract.address, deployer);
 
   const deposit = await contract.deposit({ value: ethers.parseEther('1') });
   console.log("🚀 | main | deposit:", deposit)

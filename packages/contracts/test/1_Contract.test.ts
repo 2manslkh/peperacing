@@ -1,31 +1,38 @@
 import 'dotenv/config';
 
-import { BigNumber, BigNumberish, Contract } from 'ethers';
 import { deployments, ethers } from 'hardhat';
 
-import { EntryPoint } from '../typechain/Contract';
-import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
+import { Signer } from 'ethers';
+import { TestContract } from '../typechain';
+import { expect } from 'chai';
+import { getContract } from '../utils/helper';
 
-let owner: SignerWithAddress;
-let user1: SignerWithAddress;
-let contract: Contract;
+let owner: Signer;
+let user1: Signer;
+let contract: TestContract;
 
 
-async function getContract(contractName: string) {
-  return await ethers.getContractAt(contractName, (await deployments.get(contractName)).address);
-}
-
-describe('Contract', function () {
+describe('TestContract', function () {
   beforeEach(async function () {
     // Get Signers
+
     [owner, user1] = await ethers.getSigners();
 
 
     // Deploy Contracts
-    await deployments.fixture(['Contract']);
+    await deployments.fixture(['TestContract']);
 
 
     // Get Contracts
-    contract = (await getContract('Contract')) as Contract;
+    contract = (await getContract('TestContract')) as TestContract;
   });
+
+  it('should deposit', async function () {
+
+    let depositValue = ethers.parseEther('1');
+
+    await contract.connect(user1).deposit({ value: depositValue });
+    await expect(await contract.balances(await user1.getAddress())).to.equal(depositValue);
+  })
+
 });
