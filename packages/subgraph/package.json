@@ -4,7 +4,7 @@
     "license": "MIT",
     "scripts": {
         "format": "prettier --write .",
-        "start": "docker-compose up",
+        "start": "docker-compose up --detach",
         "deploy:local:hello_world": "pnpm -F subgraphs/hello_world codegen"
     },
     "devDependencies": {

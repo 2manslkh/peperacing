@@ -5,6 +5,7 @@
   "scripts": {
     "node": "pnpm -F contracts start",
     "dev": "pnpm -F svelte-ui dev",
-    "subgraph": "pnpm -F subgraph start"
+    "subgraph": "pnpm -F subgraph start",
+    "deploy-subgraph:hello_world:local": "pnpm -F hello_world deploy:local"
   }
 }
