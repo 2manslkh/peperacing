@@ -1,0 +1,18 @@
+type User @entity {
+  id: ID!
+  balance: BigInt!
+  deposits: [Deposit!]! @derivedFrom(field: "user")
+  withdrawals: [Withdrawal!]! @derivedFrom(field: "user")
+}
+
+type Deposit @entity {
+  id: ID!
+  user: User!
+  amount: BigInt!
+}
+
+type Withdrawal @entity {
+  id: ID!
+  user: User!
+  amount: BigInt!
+}

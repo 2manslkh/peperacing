@@ -1,0 +1,10 @@
+{
+  "name": "argo-mono",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "node": "pnpm -F contracts start",
+    "dev": "pnpm -F svelte-ui dev",
+    "subgraph": "pnpm -F subgraph start"
+  }
+}

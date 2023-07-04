@@ -1,0 +1,33 @@
+specVersion: 0.0.5
+features:
+  - fullTextSearch
+  - nonFatalErrors
+schema:
+  file: ./schema.graphql
+dataSources:
+  - name: TestContract
+    kind: ethereum/contract
+    network: {{ network }}
+    source:
+      address: "{{ TestContract_address }}"
+      abi: TestContract
+      startBlock: {{ TestContract_start_block }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ExpeditionEnded
+        - ExpeditionStarted
+        - RewardsClaimed
+      abis:
+        - name: TestContract
+          file: {{{ abis }}}TestContract.json
+      eventHandlers:
+        - event: Deposited(indexed address,uint256)
+          handler: handleDeposit
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdraw
+      file: ./src/mapping.ts
+
+      

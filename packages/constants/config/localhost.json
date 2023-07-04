@@ -1,0 +1,7 @@
+{
+  "network": "hardhat",
+  "burner_address": "0x0000000000000000000000000000000000000000",
+  "abis": "./node_modules/@argo/constants/abis/",
+  "TestContract_address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "TestContract_start_block": 1
+}
