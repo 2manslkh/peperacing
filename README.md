@@ -52,3 +52,7 @@ Run everything in the root directory
 5. Start the frontend `pnpm dev`
 6. View the frontend: <http://localhost:5173/>
 7. Query the subgraph: [http://localhost:8000/subgraphs/name/argo/hello_world/graphql](http://localhost:8000/subgraphs/name/argo/hello_world/graphql?query=query+User+%7B%0A++users+%7B%0A++++id%0A++++balance%0A++++deposits+%7B%0A++++++id%0A++++++amount%0A++++%7D%0A++++withdrawals+%7B%0A++++++id%0A++++++amount%0A++++%7D%0A++%7D%0A%7D)
+
+## Frontend example
+
+![Demo](docs/frontend-demo.gif)
