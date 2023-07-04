@@ -25,6 +25,8 @@ describe('TestContract', function () {
 
     // Get Contracts
     contract = (await getContract('TestContract')) as TestContract;
+    let balance = await contract.connect(owner).balances(await owner.getAddress());
+
   });
 
   it('should deposit', async function () {

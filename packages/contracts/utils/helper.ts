@@ -3,7 +3,7 @@ import { deployments, ethers } from 'hardhat';
 import csv from 'csv-parser';
 import fs from 'fs';
 
-export async function getContract(contractName: string) {
+export async function getContract(contractName: string): Promise<unknown> {
   return await ethers.getContractAt(contractName, (await deployments.get(contractName)).address);
 }
 
