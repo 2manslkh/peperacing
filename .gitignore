@@ -40,6 +40,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+argo-argopetz/node_modules/
+argo-atlantis/node_modules/
 
 # TypeScript v1 declaration files
 typings/

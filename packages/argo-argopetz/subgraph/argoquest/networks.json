@@ -1,0 +1,8 @@
+{
+  "cronos_testnet": {
+    "Contract": {
+      "address": "0xd3Df91EE04ffcCcE2A2aA43908b66DC043834a59",
+      "startBlock": 10470431
+    }
+  }
+}

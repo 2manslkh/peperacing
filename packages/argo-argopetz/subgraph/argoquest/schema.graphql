@@ -1,0 +1,21 @@
+type Staked @entity {
+  id: ID!
+  user: Bytes!
+  nftId: BigInt!
+  startTime: BigInt!
+}
+
+type Unstaked @entity {
+  id: ID!
+  user: Bytes!
+  nftId: BigInt!
+  unstakeTime: BigInt!
+}
+type Quest @entity {
+  id: ID!
+  tokenId: BigInt!
+  questStartedAt: BigInt!
+  questEditedAt: BigInt
+  questStoppedAt: BigInt
+  crews: [BigInt!]!
+}
