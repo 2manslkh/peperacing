@@ -17,12 +17,12 @@ argo-mono/
 │   ├── collector-page-ui: Argo collector page frontend UI. ❌
 │   ├── argo-petz-ui: Argo atlantis frontend UI. ❌
 │   ├── argo-atlantis: Argo atlantis smart contracts. ❌
-│   ├── argo-petz: Argo petz smart contracts ❌
+│   ├── argo-petz: Argo petz smart contracts ✅
 │   ├── subgraphs: Subgraphs for the argo protocol ✅
 │   │   ├── hello_world: Subgraph that indexes TestContract.sol ✅
 │   │   ├── atlantis: Subgraph for atlantis. ❌
 │   │   ├── atlantis-marketplace: Subgraph for atlantis marketplace. ❌
-│   │   └── argopetz: Subgraph for Argopetz ❌
+│   │   └── argopetz: Subgraph for Argopetz ✅
 │   ├── svelte-ui: Minimal svelte frontend to test the monorepo ✅
 │   └── contracts: Minimal hardhat project to test the monorepo ✅
 ...
