@@ -1,0 +1,52 @@
+specVersion: 0.0.4
+description: A Subgraph for the StarMapCrafting Contract
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: StarMapCrafting
+    network: cronos_testnet
+    source:
+      address: '0xd3Df91EE04ffcCcE2A2aA43908b66DC043834a59'
+      abi: StarMapCrafting
+      startBlock: 10470431 # Replace with the block number where the contract was deployed
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.8
+      language: wasm/assemblyscript
+      entities:
+        - Staked
+        - Unstaked
+      abis:
+        - name: StarMapCrafting
+          file: ./abis/StarMapCrafting.json
+      eventHandlers:
+        - event: StakedNFT(indexed address,indexed uint256,uint256)
+          handler: handleStakedNFT
+        - event: UnstakedNFT(indexed address,indexed uint256,uint256)
+          handler: handleUnstakedNFT
+      file: ./src/starmap-crafting.ts
+  - kind: ethereum/contract
+    name: ArgoQuest
+    network: cronos_testnet
+    source:
+      address: '0x0058D1BD14Eb604C430CCB74e6aA7427A3b28b07'
+      abi: ArgoQuest
+      startBlock: 10468988
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.8
+      language: wasm/assemblyscript
+      entities:
+        - Quest
+      abis:
+        - name: ArgoQuest
+          file: ./abis/ArgoQuest.json
+      eventHandlers:
+        - event: QuestStarted(indexed uint256,uint256,uint256[])
+          handler: handleQuestStarted
+        - event: QuestEdited(indexed uint256,uint256,uint256[],uint256)
+          handler: handleQuestEdited
+        - event: QuestStopped(indexed uint256,uint256,uint256)
+          handler: handleQuestStopped
+      file: ./src/argoquest.ts

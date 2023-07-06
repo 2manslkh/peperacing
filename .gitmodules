@@ -1,3 +1,0 @@
-[submodule "packages/argo-argopetz"]
-	path = packages/argo-argopetz
-	url = https://github.com/argofinance/argo-mono.git
