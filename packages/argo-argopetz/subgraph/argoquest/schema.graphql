@@ -1,19 +1,17 @@
-type Staked @entity {
+type User @entity {
   id: ID!
-  user: Bytes!
-  nftId: BigInt!
-  startTime: BigInt!
+  argoPetz: [Petz!]!
 }
 
-type Unstaked @entity {
+type Petz @entity {
   id: ID!
-  user: Bytes!
-  nftId: BigInt!
-  unstakeTime: BigInt!
+  owner: User!
+  lastStakedTime: BigInt!
+  staking: Boolean!
 }
+
 type Quest @entity {
   id: ID!
-  tokenId: BigInt!
   questStartedAt: BigInt!
   questEditedAt: BigInt
   questStoppedAt: BigInt

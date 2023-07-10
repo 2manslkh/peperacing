@@ -5,12 +5,13 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "./common/SetUtils.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
 /// @title StarMapCrafting
 /// @author Kratos
 /// @notice This contract is used to craft starmaps with Argopetz
 
-contract StarMapCrafting is Ownable {
+contract StarMapCrafting is Ownable, IERC721Receiver {
     using EnumerableSet for EnumerableSet.UintSet;
     using EnumerableSet for EnumerableSet.AddressSet;
     using SetUtils for EnumerableSet.UintSet;
@@ -103,5 +104,19 @@ contract StarMapCrafting is Ownable {
         starmapCraftingTime = _starmapCraftingTime;
         // Emit event
         emit StarmapCraftingTimeSet(_starmapCraftingTime);
+    }
+
+    // Set argopetz
+    function setArgopetz(address _argopetz) external onlyOwner {
+        argopetz = IERC721(_argopetz);
+    }
+
+    function onERC721Received(
+        address,
+        address,
+        uint256,
+        bytes calldata
+    ) external pure override returns (bytes4) {
+        return this.onERC721Received.selector;
     }
 }
