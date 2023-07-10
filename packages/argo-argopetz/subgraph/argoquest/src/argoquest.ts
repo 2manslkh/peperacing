@@ -5,8 +5,6 @@ import { Quest } from '../generated/schema';
 export function handleQuestStarted(event: QuestStarted): void {
   let id = event.params.tokenId.toString();
   let quest = new Quest(id);
-
-  quest.tokenId = event.params.tokenId;
   quest.questStartedAt = event.params.questStartedAt;
   quest.crews = event.params.crews;
   quest.save();

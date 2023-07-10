@@ -1,22 +1,42 @@
 specVersion: 0.0.4
-description: A Subgraph for the StarMapCrafting Contract
+description: A Subgraph for the Atlantis ArgoPetz ecosystem
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
+    name: ArgoPetz
+    network: cronos_testnet
+    source:
+      address: '0x56EC8c71B5D5D6F93d6B628b7FD706ef4da7C0dF'
+      abi: ArgoPetz
+      startBlock: 10576269 # Replace with the block number where the contract was deployed
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - User
+        - Petz
+      abis:
+        - name: ArgoPetz
+          file: ./abis/ArgoPetz.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/argopetz.ts
+  - kind: ethereum/contract
     name: StarMapCrafting
     network: cronos_testnet
     source:
-      address: '0xd3Df91EE04ffcCcE2A2aA43908b66DC043834a59'
+      address: '0xC0B23946C636ba2367ef714bE839DBCe89C506DB'
       abi: StarMapCrafting
-      startBlock: 10470431 # Replace with the block number where the contract was deployed
+      startBlock: 10749994 # Replace with the block number where the contract was deployed
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.8
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Staked
-        - Unstaked
+        - Petz
       abis:
         - name: StarMapCrafting
           file: ./abis/StarMapCrafting.json
@@ -35,7 +55,7 @@ dataSources:
       startBlock: 10468988
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.8
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Quest
