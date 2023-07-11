@@ -190,7 +190,7 @@ module.exports = {
   },
   typechain: {
     outDir: 'typechain',
-    target: 'ethers-v5',
+    target: 'ethers-v6',
   },
   gasReporter: {
     enabled: true,
