@@ -65,6 +65,10 @@ const cleanDna = (_str) => {
 const cleanName = (_str) => {
   let nameWithoutExtension = _str.slice(0, -4);
   var nameWithoutWeight = nameWithoutExtension.split(rarityDelimiter).shift();
+  // If name contains _ then discard everything after it including the _
+  if (nameWithoutWeight.includes("_")) {
+    nameWithoutWeight = nameWithoutWeight.split("_").shift();
+  }
   return nameWithoutWeight;
 };
 
@@ -134,12 +138,12 @@ const addMetadata = (_dna, _edition) => {
     name: `${namePrefix} #${_edition}`,
     description: description,
     image: `${baseUri}/${_edition}.png`,
-    dna: sha1(_dna),
+    // dna: sha1(_dna),
     edition: _edition,
-    date: dateTime,
+    // date: dateTime,
     ...extraMetadata,
     attributes: attributesList,
-    compiler: "HashLips Art Engine",
+    // compiler: "HashLips Art Engine",
   };
   if (network == NETWORK.sol) {
     tempMetadata = {
