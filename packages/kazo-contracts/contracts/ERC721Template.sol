@@ -6,7 +6,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
-import "./interfaces/ILeader.sol";
 
 error InvalidTokenId();
 error NoMoreTokenIds();
@@ -52,7 +51,6 @@ contract ERC721Template is ERC2981, ERC721, Ownable {
         WHITELIST_MAX_MINT = _whitelistMaxMint;
         whitelistMintPrice = _whitelistMintPrice;
         publicMintPrice = _publicMintPrice;
-        treasury = _treasury;
     }
 
     // ---------------
