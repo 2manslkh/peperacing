@@ -27,7 +27,7 @@ export function handleTransfer(event: Transfer): void {
   ) {
     let pet = Petz.load(event.params.id.toString());
     if (pet != null) {
-      pet.owner = event.params.to.toString();
+      pet.owner = event.params.from.toHexString();
       pet.save();
     }
   }
