@@ -6,7 +6,7 @@
 argo-mono/
 ├── README.md
 ├── packages
-│   ├── art-engine: Art engine to create PFP ❌
+│   ├── art-engine: Art engine to create PFP ✅
 │   ├── branding: Argo branding materials. Logos ❌
 │   ├── apps: Whitelisting / Cron Jobs / Non-subgraph Indexing ❌
 │   ├── constants: Deployed contract addresses, automatically updated when contracts are deployed ✅
@@ -16,7 +16,7 @@ argo-mono/
 │   ├── marketplace-ui: Argo marketplace frontend UI. ❌
 │   ├── collector-page-ui: Argo collector page frontend UI. ❌
 │   ├── argo-petz-ui: Argo atlantis frontend UI. ❌
-│   ├── argo-atlantis: Argo atlantis smart contracts. ❌
+│   ├── argo-atlantis: Argo atlantis smart contracts. ✅
 │   ├── argo-petz: Argo petz smart contracts ✅
 │   ├── subgraphs: Subgraphs for the argo protocol ✅
 │   │   ├── hello_world: Subgraph that indexes TestContract.sol ✅
