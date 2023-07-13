@@ -7,9 +7,9 @@ dataSources:
     name: ArgoPetz
     network: cronos_testnet
     source:
-      address: '0x56EC8c71B5D5D6F93d6B628b7FD706ef4da7C0dF'
+      address: '0x0e28992CDE9Ed01c1f1BDDD0e8f083465c129C33'
       abi: ArgoPetz
-      startBlock: 10576269 # Replace with the block number where the contract was deployed
+      startBlock: 10782038 # Replace with the block number where the contract was deployed
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -28,9 +28,9 @@ dataSources:
     name: StarMapCrafting
     network: cronos_testnet
     source:
-      address: '0xC0B23946C636ba2367ef714bE839DBCe89C506DB'
+      address: '0xA96a444f4e6c434fF58F63E6D89a8926F7cA2090'
       abi: StarMapCrafting
-      startBlock: 10749994 # Replace with the block number where the contract was deployed
+      startBlock: 10782090 # Replace with the block number where the contract was deployed
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -50,9 +50,9 @@ dataSources:
     name: ArgoQuest
     network: cronos_testnet
     source:
-      address: '0x0058D1BD14Eb604C430CCB74e6aA7427A3b28b07'
+      address: '0xBF851aD313A72cF90AD94360Fb5E39D4621f89A5'
       abi: ArgoQuest
-      startBlock: 10468988
+      startBlock: 10782083
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

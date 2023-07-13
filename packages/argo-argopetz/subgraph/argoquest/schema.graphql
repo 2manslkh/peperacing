@@ -5,7 +5,7 @@ type User @entity {
 
 type Petz @entity {
   id: ID!
-  owner: User!
+  owner: String!
   lastStakedTime: BigInt!
   staking: Boolean!
 }

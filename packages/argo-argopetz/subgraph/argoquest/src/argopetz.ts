@@ -3,6 +3,8 @@ import { User, Petz } from '../generated/schema';
 import { BigInt } from '@graphprotocol/graph-ts';
 export function handleTransfer(event: Transfer): void {
   const nullAddr = '0x0000000000000000000000000000000000000000';
+  const starmapAddr = '0xA96a444f4e6c434fF58F63E6D89a8926F7cA2090';
+  const argoQuestAddr = '0xBF851aD313A72cF90AD94360Fb5E39D4621f89A5';
   // If the token is being transferred from address 0, it's a mint
   if (event.params.from.toHexString() == nullAddr) {
     let pet = new Petz(event.params.id.toString());
@@ -17,6 +19,15 @@ export function handleTransfer(event: Transfer): void {
     let pet = Petz.load(event.params.id.toString());
     if (pet != null) {
       pet.owner = nullAddr;
+      pet.save();
+    }
+  } else if (
+    event.params.to.toHexString().toLowerCase() == starmapAddr.toLowerCase() ||
+    event.params.to.toHexString().toLowerCase() == argoQuestAddr.toLowerCase()
+  ) {
+    let pet = Petz.load(event.params.id.toString());
+    if (pet != null) {
+      pet.owner = event.params.from.toHexString();
       pet.save();
     }
   }

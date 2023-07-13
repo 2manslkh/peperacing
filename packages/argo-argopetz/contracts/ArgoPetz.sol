@@ -110,7 +110,6 @@ contract ArgoPetz is ERC2981, ERC721, Ownable {
     }
 
     function whitelistMint(
-        address to,
         uint256 _amount,
         bytes calldata nonce,
         bytes calldata signature
@@ -136,14 +135,14 @@ contract ArgoPetz is ERC2981, ERC721, Ownable {
         whitelistMintCount[msg.sender] += _amount;
         for (uint256 i; i < _amount; ) {
             uint256 tokenId = _useRandomAvailableTokenId();
-            _safeMint(to, tokenId);
+            _safeMint(msg.sender, tokenId);
             unchecked {
                 ++i;
             }
         }
     }
 
-    function publicMint(address to, uint256 _amount) external payable {
+    function publicMint(uint256 _amount) external payable {
         // Check if public sale is open
         require(stage == 2, "ArgoPetz: Public Sale Closed!");
         // Check if enough ETH is sent
@@ -159,7 +158,7 @@ contract ArgoPetz is ERC2981, ERC721, Ownable {
         publicMintCount[msg.sender] += _amount;
         for (uint256 i; i < _amount; ) {
             uint256 tokenId = _useRandomAvailableTokenId();
-            _safeMint(to, tokenId);
+            _safeMint(msg.sender, tokenId);
             unchecked {
                 ++i;
             }

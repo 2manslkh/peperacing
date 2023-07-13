@@ -27,8 +27,8 @@ export class GasLogger {
   totalEth: BigNumberish;
 
   constructor() {
-    this.totalGas = ethers.utils.parseEther('0');
-    this.totalEth = ethers.utils.parseEther('0');
+    this.totalGas = ethers.parseEther('0');
+    this.totalEth = ethers.parseEther('0');
   }
 
   addDeployment = (tx: any) => {
@@ -48,11 +48,11 @@ export class GasLogger {
       BigNumber.from(this.totalGas).add(tx.receipt.gasUsed);
     }
     if (tx.receipt.effectiveGasPrice)
-      console.log('⛽ Gas Price: ', ethers.utils.formatUnits(tx.receipt.effectiveGasPrice, 'gwei'), 'gwei');
+      console.log('⛽ Gas Price: ', ethers.formatUnits(tx.receipt.effectiveGasPrice, 'gwei'), 'gwei');
 
     if (tx.receipt.effectiveGasPrice && tx.receipt.gasUsed) {
-      console.log('Ξ Cost: ', ethers.utils.formatEther(tx.effectiveGasPrice.mul(tx.gasUsed)), 'Ξ');
-      console.log('Ξ Cost: ', ethers.utils.formatEther(tx.receipt.effectiveGasPrice.mul(tx.receipt.gasUsed)), 'Ξ');
+      console.log('Ξ Cost: ', ethers.formatEther(tx.effectiveGasPrice.mul(tx.gasUsed)), 'Ξ');
+      console.log('Ξ Cost: ', ethers.formatEther(tx.receipt.effectiveGasPrice.mul(tx.receipt.gasUsed)), 'Ξ');
       BigNumber.from(this.totalEth).add(tx.receipt.effectiveGasPrice.mul(tx.receipt.gasUsed));
     }
     console.log();
@@ -68,8 +68,8 @@ export class GasLogger {
     }
     console.log('✏️  Transaction Type: ', tx.type);
     console.log('⛽ Gas Consumed: ', tx.gasUsed.toString());
-    console.log('⛽ Gas Price: ', ethers.utils.formatUnits(tx.effectiveGasPrice, 'gwei'), 'gwei');
-    console.log('Ξ Cost: ', ethers.utils.formatEther(tx.effectiveGasPrice.mul(tx.gasUsed)), 'Ξ');
+    console.log('⛽ Gas Price: ', ethers.formatUnits(tx.effectiveGasPrice, 'gwei'), 'gwei');
+    console.log('Ξ Cost: ', ethers.formatEther(tx.effectiveGasPrice.mul(tx.gasUsed)), 'Ξ');
 
     BigNumber.from(this.totalGas).add(tx.gasUsed);
     BigNumber.from(this.totalEth).add(tx.effectiveGasPrice.mul(tx.gasUsed));
@@ -99,14 +99,14 @@ export class GasLogger {
     console.log('----- Gas INFO -----');
     console.log('⛽ Gas Consumed: ', tx.receipt.gasUsed.toString());
     console.log('⛽ Gas Price: ', tx.receipt.effectiveGasPrice.toString());
-    console.log('Ξ Cost: ', ethers.utils.formatEther(tx.receipt.effectiveGasPrice.mul(tx.receipt.gasUsed)), 'Ξ');
+    console.log('Ξ Cost: ', ethers.formatEther(tx.receipt.effectiveGasPrice.mul(tx.receipt.gasUsed)), 'Ξ');
     console.log();
   };
 
   printTotal = () => {
     console.log('----- Total Gas INFO -----');
     console.log('⛽ Total Gas Consumed: ', this.totalGas.toString());
-    console.log('Total Ξ Cost: ', ethers.utils.formatEther(this.totalEth), 'Ξ');
+    console.log('Total Ξ Cost: ', ethers.formatEther(this.totalEth), 'Ξ');
     console.log();
   };
 }
