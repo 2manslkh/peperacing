@@ -214,6 +214,11 @@ abstract contract ERC721 {
             ) revert UnsafeRecipient();
         }
     }
+    
+	 function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _ownerOf[tokenId] != address(0);
+    }
+
 }
 
 /// @notice A generic interface for a contract which properly accepts ERC721 tokens.

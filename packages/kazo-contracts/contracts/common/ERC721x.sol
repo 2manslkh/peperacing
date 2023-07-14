@@ -10,9 +10,10 @@ pragma solidity ^0.8.17;
 
 import "./ERC721.sol";
 import "./LockRegistry.sol";
-import "./interfaces/IERC721x.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 contract ERC721x is ERC721, LockRegistry {
+	    using Strings for uint256;
 
 	/*
 	 *     bytes4(keccak256('freeId(uint256,address)')) == 0x94d216d6
@@ -29,6 +30,7 @@ contract ERC721x is ERC721, LockRegistry {
 	 */
 
 	bytes4 private constant _INTERFACE_ID_ERC721x = 0x706e8489;
+	  string public baseURI;
 
 	constructor(string memory _name, string memory _symbol) ERC721(_name, _symbol) {
 	}
@@ -43,7 +45,7 @@ contract ERC721x is ERC721, LockRegistry {
 		ERC721.transferFrom(_from, _to, _tokenId);
 	}
 
-	function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes memory _data) public override virtual {
+	function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes calldata _data) public override virtual {
 		require(isUnlocked(_tokenId), "Token is locked");
 		ERC721.safeTransferFrom(_from, _to, _tokenId, _data);
 	}
@@ -62,4 +64,10 @@ contract ERC721x is ERC721, LockRegistry {
 		require(_exists(_id), "Token !exist");
 		_freeId(_id, _contract);
 	}
+
+	function tokenURI(uint256 _id) public view override virtual returns (string memory) {
+		require(_exists(_id), "Token !exist");
+		return string(abi.encodePacked(baseURI, Strings.toString(_id)));
+	}
+
 }

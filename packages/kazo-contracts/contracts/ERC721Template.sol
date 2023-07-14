@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-import "./common/ERC721.sol";
+import "./common/ERC721x.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
@@ -12,8 +11,7 @@ error NoMoreTokenIds();
 error WithdrawFailed();
 
 // Cred: Elementals contract -> learning from the best!
-contract ERC721Template is ERC2981, ERC721, Ownable {
-    using Strings for uint256;
+contract ERC721Template is ERC721x, ERC2981 {
     using ECDSA for bytes32;
 
     uint16 public immutable MAX_SUPPLY;
@@ -28,7 +26,7 @@ contract ERC721Template is ERC2981, ERC721, Ownable {
     uint256 public whitelistMintPrice;
     uint256 public publicMintPrice;
     uint8 public stage;
-    string public baseURI;
+
 
     constructor(
         string memory _name,
@@ -41,7 +39,7 @@ contract ERC721Template is ERC2981, ERC721, Ownable {
         uint256 _whitelistMaxMint,
         uint256 _whitelistMintPrice,
         uint256 _publicMintPrice
-    ) ERC721(_name, _symbol) {
+    ) ERC721x(_name, _symbol) {
         MAX_SUPPLY = maxSupply_;
         _numAvailableRemainingTokens = maxSupply_;
         setBaseURI(_baseURI);
@@ -215,15 +213,9 @@ contract ERC721Template is ERC2981, ERC721, Ownable {
         }
     }
 
-    // --------
+     // --------
     // Metadata
     // --------
-    function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        if (_ownerOf[tokenId] == address(0)) {
-            revert InvalidTokenId();
-        }
-        return string(abi.encodePacked(baseURI, tokenId.toString()));
-    }
 
     function setBaseURI(string memory _baseURI_) public onlyOwner {
         baseURI = _baseURI_;
@@ -243,7 +235,7 @@ contract ERC721Template is ERC2981, ERC721, Ownable {
     // -------
     // EIP-165
     // -------
-    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC2981) returns (bool) {
+    function supportsInterface(bytes4 interfaceId) public view override(ERC721x, ERC2981) returns (bool) {
         return ERC721.supportsInterface(interfaceId) || ERC2981.supportsInterface(interfaceId);
     }
 }

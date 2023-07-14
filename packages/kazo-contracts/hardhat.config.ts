@@ -118,6 +118,12 @@ module.exports = {
       accounts: [PRIVATE_KEY],
       saveDeployments: true,
     },
+    mantle_testnet: {
+      url: `https://rpc.testnet.mantle.xyz`,
+      chainId: 5001,
+      accounts: [PRIVATE_KEY_TESTNET],
+      saveDeployments: true,
+    },
     cronos_testnet: {
       url: `https://testnet-cronos.w3node.com/0aa9d84a638f2e0baa627443619cd2cb0ef65f5257170c7c8e9ebe39f427366b/api`,
       chainId: 338,
@@ -190,7 +196,7 @@ module.exports = {
   },
   typechain: {
     outDir: 'typechain',
-    target: 'ethers-v5',
+    target: 'ethers-v6',
   },
   gasReporter: {
     enabled: true,

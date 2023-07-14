@@ -4,12 +4,9 @@ pragma solidity ^0.8.18;
 import "./interfaces/ILeader.sol";
 import "./interfaces/IMinion.sol";
 import "./ERC721Template.sol";
+import "./common/DefaultOperatorFilterer.sol";
 
-error InvalidTokenId();
-error NoMoreTokenIds();
-error WithdrawFailed();
-
-contract KAZO is ERC721Template{
+contract Leader is ERC721Template, DefaultOperatorFilterer, ILeader{
     
     event QuestStarted(uint256 indexed tokenId, uint256 questStartedAt, uint256[] crews);
     event QuestEdited(uint256 indexed tokenId, uint256 questStartedAt, uint256[] crews, uint256 questEditedAt);
@@ -62,11 +59,9 @@ contract KAZO is ERC721Template{
         require(receivers.length >= 1, "at least 1 receiver");
         for (uint256 i; i < receivers.length; i++) {
             address receiver = receivers[i];
-            safeMint(receiver, amounts[i]);
+            _safeMint(receiver, amounts[i]);
         }
     }
-
-    // =============== Stake + MARKETPLACE CONTROL ===============
 
     function transferFrom(
         address from,
@@ -84,7 +79,7 @@ contract KAZO is ERC721Template{
         address from,
         address to,
         uint256 tokenId,
-        bytes memory _data
+        bytes calldata _data
     ) public override(ERC721x) onlyAllowedOperator(from) {
         require(
             tokensLastQuestedAt[tokenId] == 0,
@@ -257,9 +252,7 @@ contract KAZO is ERC721Template{
             "not owner of [captainz tokenId]"
         );
         require(tokensLastQuestedAt[tokenId] > 0, "quested not started for [captainz tokenId]");
-        if (address(mvpContract) != address(0) && mvpContract.isCaptainzBoosting(tokenId)) {
-            mvpContract.removeCaptainz(tokenId);
-        }
+
         _resetCrew(tokenId);
 
         uint256 tlqa = tokensLastQuestedAt[tokenId];
@@ -318,26 +311,5 @@ contract KAZO is ERC721Template{
     function setModerator(address addr, bool add) external onlyOwner {
         moderators[addr] = add;
     }
-}
 
-
-
-
-    // --------
-    // EIP-2981
-    // --------
-    function setDefaultRoyalty(address receiver, uint96 feeNumerator) external onlyOwner {
-        _setDefaultRoyalty(receiver, feeNumerator);
-    }
-
-    function setTokenRoyalty(uint256 tokenId, address receiver, uint96 feeNumerator) external onlyOwner {
-        _setTokenRoyalty(tokenId, receiver, feeNumerator);
-    }
-
-    // -------
-    // EIP-165
-    // -------
-    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC2981) returns (bool) {
-        return ERC721.supportsInterface(interfaceId) || ERC2981.supportsInterface(interfaceId);
-    }
 }

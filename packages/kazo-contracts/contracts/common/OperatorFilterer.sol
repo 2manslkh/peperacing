@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {IOperatorFilterRegistry} from "./IOperatorFilterRegistry.sol";
-import {CANONICAL_OPERATOR_FILTER_REGISTRY_ADDRESS} from "./lib/Constants.sol";
+import {CANONICAL_OPERATOR_FILTER_REGISTRY_ADDRESS} from "../lib/Constants.sol";
 /**
  * @title  OperatorFilterer
  * @notice Abstract contract whose constructor automatically registers and optionally subscribes to or copies another
