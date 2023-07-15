@@ -30,7 +30,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     let argoPetz = await deploy('ArgoPetz', {
       from: deployer,
       log: true,
-      args: ['Mock Minion', 'Minion', baseURI, 8888, deployer, signerAddress],
+      args: ['Mock Minion', 'Minion', baseURI, 8888, deployer, signerAddress, 9999, 9999],
     });
   } else if (chainId == '31337') {
     signerAddress = '0x6A952f966c5DcC36A094c8AB141f027fb58F864e';

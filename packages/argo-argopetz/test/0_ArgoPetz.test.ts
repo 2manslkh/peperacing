@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 const { ethers, deployments } = require('hardhat');
 import { ArgoPetz } from '../typechain';
-import { BigNumber } from 'ethers';
 // Dotenv config
 require('dotenv').config();
 
@@ -41,26 +40,9 @@ describe('ArgoPetz', () => {
     );
   });
 
-  it('Should mint tokens in VIP stage', async () => {
-    // Set stage to VIP
-    await argoPetz.setStage(1);
-
-    // Set VIP mint price
-    await argoPetz.setVipMintPrice(ethers.utils.parseEther('0.1'));
-    // Get signature and nonce
-    const { signature, nonce } = await getSignature(user1.address, 1);
-    // Mint tokens for user1
-    await argoPetz
-      .connect(user1)
-      .vipMint(user1.address, 1, nonce, signature, { value: ethers.utils.parseEther('0.1') });
-
-    // Check if token was minted
-    expect(await argoPetz.totalSupply()).to.equal(1);
-  });
-
   it('Should mint tokens in whitelist stage', async () => {
     // Set stage to whitelist
-    await argoPetz.setStage(2);
+    await argoPetz.setStage(1);
 
     // Set whitelist mint price
     await argoPetz.setWhitelistMintPrice(ethers.utils.parseEther('0.2'));
@@ -69,9 +51,7 @@ describe('ArgoPetz', () => {
     const { signature, nonce } = await getSignature(user2.address, 2);
 
     // Mint tokens for user2
-    await argoPetz
-      .connect(user2)
-      .whitelistMint(user2.address, 1, nonce, signature, { value: ethers.utils.parseEther('0.2') });
+    await argoPetz.connect(user2).whitelistMint(1, nonce, signature, { value: ethers.utils.parseEther('0.2') });
 
     // Check if token was minted
     expect(await argoPetz.totalSupply()).to.equal(2);
@@ -85,7 +65,7 @@ describe('ArgoPetz', () => {
     await argoPetz.setPublicMintPrice(ethers.utils.parseEther('0.3'));
 
     // Mint tokens for user1
-    await argoPetz.connect(user1).publicMint(user1.address, 1, { value: ethers.utils.parseEther('0.3') });
+    await argoPetz.connect(user1).publicMint(1, { value: ethers.utils.parseEther('0.3') });
 
     // Check if token was minted
     expect(await argoPetz.totalSupply()).to.equal(3);
@@ -93,7 +73,7 @@ describe('ArgoPetz', () => {
 
   it('Should set and get token URI', async () => {
     // Mint out token
-    await argoPetz.connect(user1).publicMint(user1.address, 17, { value: ethers.utils.parseEther('5.1') });
+    await argoPetz.connect(user1).publicMint(17, { value: ethers.utils.parseEther('5.1') });
     // Get token URI
     const tokenURI = await argoPetz.tokenURI(1);
 

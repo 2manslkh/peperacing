@@ -7,7 +7,7 @@ dataSources:
     name: ArgoPetz
     network: cronos_testnet
     source:
-      address: '0x0e28992CDE9Ed01c1f1BDDD0e8f083465c129C33'
+      address: '0x6303FC2e1e3c8ceEE3098486D22F16d8f57f592e'
       abi: ArgoPetz
       startBlock: 10782038 # Replace with the block number where the contract was deployed
     mapping:
@@ -28,7 +28,7 @@ dataSources:
     name: StarMapCrafting
     network: cronos_testnet
     source:
-      address: '0xA96a444f4e6c434fF58F63E6D89a8926F7cA2090'
+      address: '0xc377748f64a437520D43b4A17446b0fB8423a030'
       abi: StarMapCrafting
       startBlock: 10782090 # Replace with the block number where the contract was deployed
     mapping:
@@ -50,7 +50,7 @@ dataSources:
     name: ArgoQuest
     network: cronos_testnet
     source:
-      address: '0xBF851aD313A72cF90AD94360Fb5E39D4621f89A5'
+      address: '0x05ab185d3c8A5b8E00ae1a5C02487e6d85E9CD1D'
       abi: ArgoQuest
       startBlock: 10782083
     mapping:

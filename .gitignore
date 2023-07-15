@@ -42,6 +42,9 @@ node_modules/
 jspm_packages/
 argo-argopetz/node_modules/
 argo-atlantis/node_modules/
+packges/kazo-contracts/node_modules/
+packages/kazo-contracts/artifacts/
+packages/kazo-contracts/typechain/
 
 # TypeScript v1 declaration files
 typings/

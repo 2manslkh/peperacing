@@ -2,6 +2,7 @@
 pragma solidity ^0.8.18;
 
 import "./common/ERC721.sol";
+import "./common/RandomlyAssigned.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
@@ -12,7 +13,7 @@ error NoMoreTokenIds();
 error WithdrawFailed();
 
 // Cred: Elementals contract -> learning from the best!
-contract ArgoPetz is ERC2981, ERC721, Ownable {
+contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
     using Strings for uint256;
     using ECDSA for bytes32;
 
@@ -20,8 +21,8 @@ contract ArgoPetz is ERC2981, ERC721, Ownable {
     uint16 internal _numAvailableRemainingTokens;
     // Data structure used for Fisher Yates shuffle
     uint16[65536] internal _availableRemainingTokens;
-    uint256 public constant PUBLIC_MAX_MINT = 20;
-    uint256 public constant WHITELIST_MAX_MINT = 5;
+    uint256 public immutable PUBLIC_MAX_MINT;
+    uint256 public immutable WHITELIST_MAX_MINT;
     address public immutable WITHDRAW_ADDRESS;
     address public immutable WHITELIST_SIGNER_ADDRESS;
     mapping(address => uint256) public whitelistMintCount;
@@ -37,13 +38,17 @@ contract ArgoPetz is ERC2981, ERC721, Ownable {
         string memory _baseURI,
         uint16 maxSupply_,
         address withdrawAddress,
-        address _whitelistSignerAddress
-    ) ERC721(_name, _symbol) {
+        address _whitelistSignerAddress,
+        uint256 _whitelistMaxMint,
+        uint256 _publicMaxMint
+    ) ERC721(_name, _symbol) RandomlyAssigned(maxSupply_, 6) {
         MAX_SUPPLY = maxSupply_;
         _numAvailableRemainingTokens = maxSupply_;
         setBaseURI(_baseURI);
         WITHDRAW_ADDRESS = withdrawAddress;
         WHITELIST_SIGNER_ADDRESS = _whitelistSignerAddress;
+        WHITELIST_MAX_MINT = _whitelistMaxMint;
+        PUBLIC_MAX_MINT = _publicMaxMint;
     }
 
     // ---------------
@@ -52,61 +57,6 @@ contract ArgoPetz is ERC2981, ERC721, Ownable {
     function setNameAndSymbol(string calldata _newName, string calldata _newSymbol) external onlyOwner {
         name = _newName;
         symbol = _newSymbol;
-    }
-
-    function _useRandomAvailableTokenId() internal returns (uint256) {
-        uint256 numAvailableRemainingTokens = _numAvailableRemainingTokens;
-        if (numAvailableRemainingTokens == 0) {
-            revert NoMoreTokenIds();
-        }
-
-        uint256 randomNum = _getRandomNum(numAvailableRemainingTokens);
-        uint256 randomIndex = randomNum % numAvailableRemainingTokens;
-        uint256 valAtIndex = _availableRemainingTokens[randomIndex];
-
-        uint256 result;
-        if (valAtIndex == 0) {
-            // This means the index itself is still an available token
-            result = randomIndex;
-        } else {
-            // This means the index itself is not an available token, but the val at that index is.
-            result = valAtIndex;
-        }
-
-        uint256 lastIndex = numAvailableRemainingTokens - 1;
-        if (randomIndex != lastIndex) {
-            // Replace the value at randomIndex, now that it's been used.
-            // Replace it with the data from the last index in the array, since we are going to decrease the array size afterwards.
-            uint256 lastValInArray = _availableRemainingTokens[lastIndex];
-            if (lastValInArray == 0) {
-                // This means the index itself is still an available token
-                // Cast is safe as we know that lastIndex cannot > MAX_SUPPLY, which is a uint16
-                _availableRemainingTokens[randomIndex] = uint16(lastIndex);
-            } else {
-                // This means the index itself is not an available token, but the val at that index is.
-                // Cast is safe as we know that lastValInArray cannot > MAX_SUPPLY, which is a uint16
-                _availableRemainingTokens[randomIndex] = uint16(lastValInArray);
-                delete _availableRemainingTokens[lastIndex];
-            }
-        }
-
-        --_numAvailableRemainingTokens;
-
-        return result;
-    }
-
-    function _getRandomNum(uint256 numAvailableRemainingTokens) internal view returns (uint256) {
-        return
-            uint256(
-                keccak256(
-                    abi.encode(
-                        block.prevrandao,
-                        blockhash(block.number - 1),
-                        address(this),
-                        numAvailableRemainingTokens
-                    )
-                )
-            );
     }
 
     function whitelistMint(
@@ -134,7 +84,7 @@ contract ArgoPetz is ERC2981, ERC721, Ownable {
 
         whitelistMintCount[msg.sender] += _amount;
         for (uint256 i; i < _amount; ) {
-            uint256 tokenId = _useRandomAvailableTokenId();
+            uint256 tokenId = nextToken();
             _safeMint(msg.sender, tokenId);
             unchecked {
                 ++i;
@@ -157,7 +107,7 @@ contract ArgoPetz is ERC2981, ERC721, Ownable {
         );
         publicMintCount[msg.sender] += _amount;
         for (uint256 i; i < _amount; ) {
-            uint256 tokenId = _useRandomAvailableTokenId();
+            uint256 tokenId = nextToken();
             _safeMint(msg.sender, tokenId);
             unchecked {
                 ++i;

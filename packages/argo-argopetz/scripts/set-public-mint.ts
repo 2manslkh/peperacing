@@ -8,11 +8,13 @@ async function main() {
   // Get ArgoPetz
   const argoPetz = (await ethers.getContractAt(
     'ArgoPetz',
-    '0x56EC8c71B5D5D6F93d6B628b7FD706ef4da7C0dF',
+    '0x6303FC2e1e3c8ceEE3098486D22F16d8f57f592e',
     signers[0]
   )) as ArgoPetz;
 
-  await argoPetz.setStage(2);
+  // await argoPetz.setStage(2);
+  // await argoPetz.setPublicMintPrice(ethers.parseEther('0'));
+  //await argoPetz.publicMint(100, { value: ethers.parseEther('0') });
 }
 
 main()
