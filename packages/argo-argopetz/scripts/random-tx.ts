@@ -23,8 +23,8 @@ async function main() {
   //await argoQuest.setCanQuest(true);
   //await argoQuest.startQuest(20, [3759, 3383]);
   // // await argoPetz.setPublicMintPrice(ethers.utils.parseEther('0'));
-  await argoPetz.setStage(2);
-  // // await argoPetz.publicMint(signers[0].address, 10);
+  // await argoPetz.setStage(2);
+  await argoPetz.publicMint(100);
   // // await argoPetz.setApprovalForAll(starmap.address, true);
   // await starmap.stakeNFT([1537, 2577, 3185]);
 }

@@ -18,17 +18,15 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
     using ECDSA for bytes32;
 
     uint16 public immutable MAX_SUPPLY;
-    uint16 internal _numAvailableRemainingTokens;
-    // Data structure used for Fisher Yates shuffle
-    uint16[65536] internal _availableRemainingTokens;
+    uint256 public currentSupply;
     uint256 public immutable PUBLIC_MAX_MINT;
     uint256 public immutable WHITELIST_MAX_MINT;
     address public immutable WITHDRAW_ADDRESS;
     address public immutable WHITELIST_SIGNER_ADDRESS;
     mapping(address => uint256) public whitelistMintCount;
     mapping(address => uint256) public publicMintCount;
-    uint256 public whitelistMintPrice = 1 ether;
-    uint256 public publicMintPrice = 2 ether;
+    uint256 public whitelistMintPrice = 0 ether;
+    uint256 public publicMintPrice = 0 ether;
     uint8 public stage;
     string public baseURI;
 
@@ -43,7 +41,6 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
         uint256 _publicMaxMint
     ) ERC721(_name, _symbol) RandomlyAssigned(maxSupply_, 6) {
         MAX_SUPPLY = maxSupply_;
-        _numAvailableRemainingTokens = maxSupply_;
         setBaseURI(_baseURI);
         WITHDRAW_ADDRESS = withdrawAddress;
         WHITELIST_SIGNER_ADDRESS = _whitelistSignerAddress;
@@ -82,6 +79,8 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
             "ArgoPetz: Wallet has already minted Max Amount for Whitelist Mint!"
         );
 
+        currentSupply+= _amount;
+
         whitelistMintCount[msg.sender] += _amount;
         for (uint256 i; i < _amount; ) {
             uint256 tokenId = nextToken();
@@ -105,6 +104,7 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
             publicMintCount[msg.sender] + _amount <= PUBLIC_MAX_MINT,
             "ArgoPetz: Wallet has already minted Max Amount for Public Mint!"
         );
+        currentSupply+= _amount;
         publicMintCount[msg.sender] += _amount;
         for (uint256 i; i < _amount; ) {
             uint256 tokenId = nextToken();
@@ -152,10 +152,7 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
     // Total Supply
     // ------------
     function totalSupply() public view returns (uint256) {
-        unchecked {
-            // Does not need to account for burns as they aren't supported.
-            return MAX_SUPPLY - _numAvailableRemainingTokens;
-        }
+        return currentSupply;
     }
 
     // --------

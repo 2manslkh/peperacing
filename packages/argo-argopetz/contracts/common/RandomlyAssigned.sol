@@ -36,7 +36,7 @@ abstract contract RandomlyAssigned is WithLimitedSupply {
                 abi.encodePacked(
                     msg.sender,
                     block.coinbase,
-                    block.difficulty,
+                    block.prevrandao,
                     block.gaslimit,
                     block.timestamp
                 )
