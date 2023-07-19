@@ -2,12 +2,12 @@
   "network": "cronos_testnet",
   "burner_address": "0x0000000000000000000000000000000000000000",
   "abis": "./node_modules/@argo/constants/abis/",
-  "ArgoPetz_address": "0x0e28992CDE9Ed01c1f1BDDD0e8f083465c129C33",
-  "ArgoPetz_start_block": 10782038,
-  "ArgoQuest_address": "0xBF851aD313A72cF90AD94360Fb5E39D4621f89A5",
-  "ArgoQuest_start_block": 10782083,
+  "ArgoPetz_address": "0xc0958bDE2Ef9Ac061788036D55f31E18eE6B1270",
+  "ArgoPetz_start_block": 11046906,
+  "ArgoQuest_address": "0x05ab185d3c8A5b8E00ae1a5C02487e6d85E9CD1D",
+  "ArgoQuest_start_block": 10923948,
   "ERC721_address": "0x60F5CEb4b06434E77e335B9140D17814f72De05a",
   "ERC721_start_block": 10468895,
-  "StarMapCrafting_address": "0xA96a444f4e6c434fF58F63E6D89a8926F7cA2090",
-  "StarMapCrafting_start_block": 10782090
+  "StarMapCrafting_address": "0x35D54150eA9437186782b5A3Af98F93b8d4803ce",
+  "StarMapCrafting_start_block": 11046914
 }
