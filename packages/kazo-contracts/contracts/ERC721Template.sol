@@ -140,7 +140,7 @@ contract ERC721Template is ERC721x, ERC2981 {
         whitelistMintCount[msg.sender] += _amount;
         for (uint256 i; i < _amount; ) {
             uint256 tokenId = _useRandomAvailableTokenId();
-            _safeMint(msg.sender, tokenId);
+            _mint(msg.sender, tokenId);
             unchecked {
                 ++i;
             }
@@ -163,7 +163,7 @@ contract ERC721Template is ERC721x, ERC2981 {
         publicMintCount[msg.sender] += _amount;
         for (uint256 i; i < _amount; ) {
             uint256 tokenId = _useRandomAvailableTokenId();
-            _safeMint(msg.sender, tokenId);
+            _mint(msg.sender, tokenId);
             unchecked {
                 ++i;
             }

@@ -84,7 +84,7 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
         whitelistMintCount[msg.sender] += _amount;
         for (uint256 i; i < _amount; ) {
             uint256 tokenId = nextToken();
-            _safeMint(msg.sender, tokenId);
+            _mint(msg.sender, tokenId);
             unchecked {
                 ++i;
             }
@@ -108,7 +108,7 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
         publicMintCount[msg.sender] += _amount;
         for (uint256 i; i < _amount; ) {
             uint256 tokenId = nextToken();
-            _safeMint(msg.sender, tokenId);
+            _mint(msg.sender, tokenId);
             unchecked {
                 ++i;
             }
