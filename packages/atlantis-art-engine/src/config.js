@@ -21,8 +21,8 @@ const layerConfigurations = [
       { name: "Base" },
       { name: "Clothing" },
       { name: "Hand Accessories" },
-      { name: "Head Accessories" },
       { name: "Face" },
+      { name: "Head Accessories" },
     ],
   },
 ];
@@ -72,7 +72,7 @@ const extraMetadata = {};
 
 const rarityDelimiter = "#";
 
-const uniqueDnaTorrance = 10000;
+const uniqueDnaTorrance = 100000;
 
 const preview = {
   thumbPerRow: 5,

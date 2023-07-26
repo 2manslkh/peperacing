@@ -32,7 +32,7 @@ function findArgoPetz(metadata) {
 
     // If both conditions are met, add the edition to the result array
     if (faceIsBlowing && headAccessoryIsHood) {
-      result.push(metadata[i].edition);
+      result.push(metadata[i].id);
     }
   }
 

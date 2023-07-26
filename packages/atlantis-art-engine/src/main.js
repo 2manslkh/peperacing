@@ -1,6 +1,7 @@
 const basePath = process.cwd();
 const { NETWORK } = require(`${basePath}/constants/network.js`);
 const fs = require("fs");
+const { result } = require("lodash");
 const sha1 = require(`${basePath}/node_modules/sha1`);
 const { createCanvas, loadImage } = require(`${basePath}/node_modules/canvas`);
 const buildDir = `${basePath}/build`;
@@ -35,7 +36,7 @@ let hashlipsGiffer = null;
 
 const buildSetup = () => {
   if (fs.existsSync(buildDir)) {
-    fs.rmdirSync(buildDir, { recursive: true });
+    fs.rmSync(buildDir, { recursive: true });
   }
   fs.mkdirSync(buildDir);
   fs.mkdirSync(`${buildDir}/json`);
@@ -139,7 +140,7 @@ const addMetadata = (_dna, _edition) => {
     description: description,
     image: `${baseUri}/${_edition}.png`,
     // dna: sha1(_dna),
-    edition: _edition,
+    id: _edition,
     // date: dateTime,
     ...extraMetadata,
     attributes: attributesList,
@@ -156,7 +157,7 @@ const addMetadata = (_dna, _edition) => {
       image: `${_edition}.png`,
       //Added metadata for solana
       external_url: solanaMetadata.external_url,
-      edition: _edition,
+      id: _edition,
       ...extraMetadata,
       attributes: tempMetadata.attributes,
       properties: {
@@ -283,28 +284,73 @@ const isDnaUnique = (_DnaList = new Set(), _dna = "") => {
   return !_DnaList.has(_filteredDNA);
 };
 
+// Element object to track which elements have been used
+const elementMap = {};
+
 const createDna = (_layers) => {
   let randNum = [];
-  _layers.forEach((layer) => {
+  for (const layer of _layers) {
     var totalWeight = 0;
     layer.elements.forEach((element) => {
       totalWeight += element.weight;
     });
-    // number between 0 - totalWeight
-    let random = Math.floor(Math.random() * totalWeight);
-    for (var i = 0; i < layer.elements.length; i++) {
-      // subtract the current weight from the random weight until we reach a sub zero value.
-      random -= layer.elements[i].weight;
-      if (random < 0) {
-        return randNum.push(
-          `${layer.elements[i].id}:${layer.elements[i].filename}${
-            layer.bypassDNA ? "?bypassDNA=true" : ""
-          }`
-        );
+
+    let elementFound = false;
+
+    // Keep generating a random number until a suitable element is found
+    while (!elementFound) {
+      let random = Math.floor(Math.random() * totalWeight);
+
+      for (var i = 0; i < layer.elements.length; i++) {
+        if (!elementMap[layer.id]) {
+          elementMap[layer.id] = {};
+        }
+        if (!elementMap[layer.id][layer.elements[i].name]) {
+          elementMap[layer.id][layer.elements[i].name] = 0;
+        }
+
+        random -= layer.elements[i].weight;
+        if (random < 0) {
+          if (
+            elementMap[layer.id][layer.elements[i].name] &&
+            elementMap[layer.id][layer.elements[i].name] <
+              layer.elements[i].weight
+          ) {
+            // usable element found, increment usage count and push to randNum
+            elementMap[layer.id][layer.elements[i].name] += 1;
+            randNum.push(
+              `${layer.elements[i].id}:${layer.elements[i].filename}${
+                layer.bypassDNA ? "?bypassDNA=true" : ""
+              }`
+            );
+            elementFound = true;
+            break;
+          } else if (
+            elementMap[layer.id][layer.elements[i].name] &&
+            elementMap[layer.id][layer.elements[i].name] >=
+              layer.elements[i].weight
+          ) {
+            // Skip to the next iteration of the while loop
+            break;
+          } else {
+            // element is being used for the first time
+            elementMap[layer.id][layer.elements[i].name] = 1;
+            randNum.push(
+              `${layer.elements[i].id}:${layer.elements[i].filename}${
+                layer.bypassDNA ? "?bypassDNA=true" : ""
+              }`
+            );
+            elementFound = true;
+            break;
+          }
+        }
       }
     }
-  });
-  return randNum.join(DNA_DELIMITER);
+  }
+
+  let final = randNum.join(DNA_DELIMITER);
+  console.log("Final DNA: ", final);
+  return final;
 };
 
 const writeMetaData = (_data) => {
@@ -312,7 +358,7 @@ const writeMetaData = (_data) => {
 };
 
 const saveMetaDataSingleFile = (_editionCount) => {
-  let metadata = metadataList.find((meta) => meta.edition == _editionCount);
+  let metadata = metadataList.find((meta) => meta.id == _editionCount);
   debugLogs
     ? console.log(
         `Writing metadata for ${_editionCount}: ${JSON.stringify(metadata)}`
@@ -365,9 +411,10 @@ const startCreating = async () => {
     ) {
       let newDna = createDna(layers);
       if (isDnaUnique(dnaList, newDna)) {
-        let results = constructLayerToDna(newDna, layers);
-        let loadedElements = [];
+        let results;
+        results = constructLayerToDna(newDna, layers);
 
+        let loadedElements = [];
         results.forEach((layer) => {
           loadedElements.push(loadLayerImg(layer));
         });

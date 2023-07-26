@@ -10,7 +10,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
-  let signerAddress;
+  let signerAddress = '0x6A952f966c5DcC36A094c8AB141f027fb58F864e';
   let baseURI;
   // Chain Dependent Settings
   if (chainId == '25') {
@@ -18,19 +18,19 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     let argoPetz = await deploy('ArgoPetz', {
       from: deployer,
       log: true,
-      args: ['ArgoPetz', 'ARGOPETZ', baseURI, 6000, deployer, signerAddress],
+      args: ['ArgoPetz', 'ARGOPETZ', baseURI, 8888, deployer, signerAddress, 50],
     });
     return;
   } else if (chainId == '338') {
     console.log('TESTNET DEPLOYMENT...');
     signerAddress = '0x6A952f966c5DcC36A094c8AB141f027fb58F864e';
-    baseURI = 'https://testnet-api.argopetz.com/api/v1/argopetz/';
+    baseURI = 'ipfs://bafybeiftfn2trjds7ncovc7lieviekqdeb2ddhaevf3a22bgjz26pztvsy/';
 
     // Deploy MockArgoPetz
     let argoPetz = await deploy('ArgoPetz', {
       from: deployer,
       log: true,
-      args: ['Mock Minion', 'Minion', baseURI, 8888, deployer, signerAddress, 9999, 9999],
+      args: ['Mock Minion', 'Minion', baseURI, 8888, deployer, signerAddress, 50],
     });
   } else if (chainId == '31337') {
     signerAddress = '0x6A952f966c5DcC36A094c8AB141f027fb58F864e';
@@ -39,7 +39,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     let argoPetz = await deploy('ArgoPetz', {
       from: deployer,
       log: true,
-      args: ['ArgoPetz', 'ARGOPETZ', baseURI, 6000, deployer, signerAddress],
+      args: ['ArgoPetz', 'ARGOPETZ', baseURI, 8888, deployer, signerAddress, 50],
     });
   } else {
     return;

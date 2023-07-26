@@ -122,6 +122,7 @@ module.exports = {
       url: `https://testnet-cronos.w3node.com/0aa9d84a638f2e0baa627443619cd2cb0ef65f5257170c7c8e9ebe39f427366b/api`,
       chainId: 338,
       accounts: [PRIVATE_KEY_TESTNET],
+      gasLimit: 40000000000,
     },
     cronos_mainnet: {
       url: `https://mainnet.cronoslabs.com/v1/55e37d8975113ae7a44603ef8ce460aa/`,

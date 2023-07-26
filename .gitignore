@@ -45,7 +45,13 @@ argo-atlantis/node_modules/
 packges/kazo-contracts/node_modules/
 packages/kazo-contracts/artifacts/
 packages/kazo-contracts/typechain/
-
+packages/atlantis-art-engine/celestial/
+packages/atlantis-art-engine/terrestrial/
+packages/atlantis-art-engine/spirit/
+packages/atlantis-art-engine/galaxy/
+packages/atlantis-art-engine/build/
+packages/atlantis-art-engine/data/
+packages/atlantis-art-engine/src/output/
 # TypeScript v1 declaration files
 typings/
 
