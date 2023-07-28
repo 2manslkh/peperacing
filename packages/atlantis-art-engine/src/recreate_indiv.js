@@ -45,54 +45,20 @@ const recreateNft = async (metadata, layersOrder) => {
   });
 };
 
-function findArgoPetz(metadata) {
-  let result = [];
-
-  // Iterate over each object in the metadata
-  for (let i = 0; i < metadata.length; i++) {
-    const attributes = metadata[i].attributes;
-
-    // Flags for "Face" trait being "Blowing" and "Head Accessories" trait being any type of "Hood"
-    let faceIsBlowing = false;
-    let headAccessoryIsHood = false;
-
-    // Iterate over each attribute
-    for (let j = 0; j < attributes.length; j++) {
-      // Check for "Face" trait
-      if (
-        attributes[j].trait_type === "Face" &&
-        attributes[j].value === "Blowing"
-      ) {
-        faceIsBlowing = true;
-      }
-
-      // Check for "Head Accessories" trait
-      if (
-        attributes[j].trait_type === "Head Accessories" &&
-        attributes[j].value.toLowerCase().includes("hood")
-      ) {
-        headAccessoryIsHood = true;
-      }
-    }
-
-    // If both conditions are met, add the edition to the result array
-    if (faceIsBlowing && headAccessoryIsHood) {
-      console.log("Found Argo Petz: " + metadata[i].id);
-      result.push(metadata[i].id);
-    }
-  }
-
-  return result;
-}
-
 async function main() {
-  let affected = findArgoPetz(metadata);
-  console.log(affected);
+  let affected = [
+    1110, 1226, 1368, 144, 1602, 1742, 1782, 1913, 1962, 2272, 2308, 2404, 2455,
+    2506, 2619, 2622, 2666, 2730, 2749, 285, 2889, 2900, 2967, 2997, 3168, 3245,
+    3255, 330, 3327, 3343, 3351, 3423, 3473, 3714, 3891, 418, 4392, 4407, 4547,
+    4599, 4739, 4772, 5133, 5212, 5295, 5578, 5588, 5785, 5930, 5952, 6121, 620,
+    622, 6267, 6400, 6476, 6498, 6754, 6778, 7058, 7100, 7422, 7429, 7469, 7516,
+    754, 7704, 7843, 7888, 7919, 7950, 7993, 8099, 8302, 8348, 8665, 928, 99,
+  ];
 
   for (let i = 0; i < affected.length; i++) {
     let edition = affected[i];
     console.log("Recreating edition: " + edition);
-    let metadata = require(`../spirit/json/${edition}.json`);
+    let metadata = require(`../build/json/${edition}.json`);
     await recreateNft(metadata, layersOrder);
   }
 }
