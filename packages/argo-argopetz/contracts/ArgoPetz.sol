@@ -105,6 +105,20 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
         }
     }
 
+
+    function devMint(uint256 _amount) external onlyOwner {
+        // Check if mints does not exceed total max supply
+        require(totalSupply() + _amount <= MAX_SUPPLY, "ArgoPetz: Max Supply for Public Mint Reached!");
+        currentSupply+= _amount;
+        for (uint256 i; i < _amount; ) {
+            uint256 tokenId = nextToken();
+            _mint(msg.sender, tokenId);
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
     function whitelistSigned(
         address sender,
         bytes calldata nonce,
