@@ -7,7 +7,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
-import "hardhat/console.sol";
 error InvalidTokenId();
 error NoMoreTokenIds();
 error WithdrawFailed();
@@ -21,6 +20,7 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
     uint256 public immutable WHITELIST_MAX_MINT;
     address public immutable WITHDRAW_ADDRESS;
     address public immutable WHITELIST_SIGNER_ADDRESS;
+    address public immutable INCENTIVE_ADDRESS;
     mapping(address => uint256) public whitelistMintCount;
     uint256 public whitelistMintPrice = 449 ether;
     uint256 public publicMintPrice = 499 ether;
@@ -35,13 +35,15 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
         uint16 maxSupply_,
         address withdrawAddress,
         address _whitelistSignerAddress,
-        uint256 _whitelistMaxMint
+        uint256 _whitelistMaxMint,
+        address _incentiveAddress
     ) ERC721(_name, _symbol) RandomlyAssigned(maxSupply_, 6) {
         MAX_SUPPLY = maxSupply_;
         setBaseURI(_baseURI);
         WITHDRAW_ADDRESS = withdrawAddress;
         WHITELIST_SIGNER_ADDRESS = _whitelistSignerAddress;
         WHITELIST_MAX_MINT = _whitelistMaxMint;
+        INCENTIVE_ADDRESS = _incentiveAddress;
         // Mint first 5 tokens to contract creator
         for (uint256 i = 1; i <= 5; ) {
             _mint(msg.sender, i);
@@ -112,7 +114,7 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
         currentSupply+= _amount;
         for (uint256 i; i < _amount; ) {
             uint256 tokenId = nextToken();
-            _mint(msg.sender, tokenId);
+            _mint(INCENTIVE_ADDRESS, tokenId);
             unchecked {
                 ++i;
             }
@@ -126,7 +128,6 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
         uint8 _stage
     ) private view returns (bool) {
         bytes32 _hash = keccak256(abi.encodePacked(sender, nonce, _stage));
-        console.log("Address: ",ECDSA.toEthSignedMessageHash(_hash).recover(signature));
         return WHITELIST_SIGNER_ADDRESS == ECDSA.toEthSignedMessageHash(_hash).recover(signature);
     }
 

@@ -128,7 +128,7 @@ module.exports = {
       url: `https://mainnet.cronoslabs.com/v1/55e37d8975113ae7a44603ef8ce460aa/`,
       chainId: 25,
       accounts: [PRIVATE_KEY],
-      gasLimit: 1000000000000,
+      blockGasLimit: 10000000,
     },
   },
   solidity: {
