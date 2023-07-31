@@ -12,6 +12,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const chainId = await getChainId();
   let signerAddress = '0x6A952f966c5DcC36A094c8AB141f027fb58F864e';
   let incentiveAddress = '0x31ea6CF75114191C701A4fbf294b69f6f06e0A2b';
+  //let royaltyAddress = '0x31ea6CF75114191C701A4fbf294b69f6f06e0A2b';
   let baseURI;
   // Chain Dependent Settings
   if (chainId == '25') {
@@ -20,8 +21,10 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     let argoPetz = await deploy('ArgoPetz', {
       from: deployer,
       log: true,
-      args: ['Minion', 'Minionz', baseURI, 8888, deployer, signerAddress, 50, incentiveAddress],
+      args: ['ArgoPetz', 'ARGOPETZ', baseURI, 8888, deployer, signerAddress, 50, incentiveAddress],
     });
+
+    //await argoPetz.setDefaultRoyalty(royaltyAddress, 750);
     return;
   } else if (chainId == '338') {
     console.log('TESTNET DEPLOYMENT...');

@@ -30,6 +30,16 @@
         "internalType": "address",
         "name": "_whitelistSignerAddress",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_whitelistMaxMint",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_incentiveAddress",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -48,11 +58,6 @@
   {
     "inputs": [],
     "name": "InvalidTokenId",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "NoMoreTokenIds",
     "type": "error"
   },
   {
@@ -181,12 +186,12 @@
   },
   {
     "inputs": [],
-    "name": "MAX_SUPPLY",
+    "name": "INCENTIVE_ADDRESS",
     "outputs": [
       {
-        "internalType": "uint16",
+        "internalType": "address",
         "name": "",
-        "type": "uint16"
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -194,12 +199,12 @@
   },
   {
     "inputs": [],
-    "name": "PUBLIC_MAX_MINT",
+    "name": "MAX_SUPPLY",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint16",
         "name": "",
-        "type": "uint256"
+        "type": "uint16"
       }
     ],
     "stateMutability": "view",
@@ -263,6 +268,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "availableTokenCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -292,6 +310,32 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "currentSupply",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "devMint",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -385,11 +429,6 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
         "name": "_amount",
         "type": "uint256"
@@ -398,25 +437,6 @@
     "name": "publicMint",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "publicMintCount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -442,13 +462,26 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "_revealedURI",
+        "type": "string"
+      }
+    ],
+    "name": "reveal",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
-        "name": "_tokenId",
+        "name": "tokenId",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "_salePrice",
+        "name": "salePrice",
         "type": "uint256"
       }
     ],
@@ -694,6 +727,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "tokenCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -707,6 +753,19 @@
         "internalType": "string",
         "name": "",
         "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalMaxSupply",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -763,11 +822,6 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
       {
         "internalType": "uint256",
         "name": "_amount",

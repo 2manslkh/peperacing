@@ -44,6 +44,7 @@ contract ArgoPetz is ERC721, ERC2981, RandomlyAssigned, Ownable {
         WHITELIST_SIGNER_ADDRESS = _whitelistSignerAddress;
         WHITELIST_MAX_MINT = _whitelistMaxMint;
         INCENTIVE_ADDRESS = _incentiveAddress;
+        currentSupply+= 5;
         // Mint first 5 tokens to contract creator
         for (uint256 i = 1; i <= 5; ) {
             _mint(msg.sender, i);

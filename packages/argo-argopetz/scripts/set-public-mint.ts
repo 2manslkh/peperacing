@@ -14,14 +14,17 @@ async function main() {
 
   const argoPetz = (await ethers.getContractAt(
     'ArgoPetz',
-    '0xcd745860b54ed31d67136a0ce64feb5fa703352c',
+    '0xd32C596994A07946699cAea4e669C6e284A85958',
     signers[0]
   )) as ArgoPetz;
+  //await argoPetz.setNameAndSymbol('Minion', 'MINIONZ');
   await argoPetz.devMint(50);
-  // await argoPetz.setStage(1);
-  //await argoPetz.setPublicMintPrice(ethers.parseEther('2'));
-  //  await argoPetz.publicMint(300, { value: ethers.parseEther('0') });
-  //await argoPetz.setWhitelistMintPrice(ethers.parseEther('1'));
+  // await argoPetz.setStage(2);
+  // await argoPetz.withdraw();
+  //await argoPetz.reveal('ipfs://bafybeieskh5sgv66tavfcmj4i7oqwnwv3ce5xcuyifh6yvclea7ynjy3oq/');
+  // await argoPetz.setPublicMintPrice(ethers.parseEther('2'));
+  // //  await argoPetz.publicMint(300, { value: ethers.parseEther('0') });
+  // await argoPetz.setWhitelistMintPrice(ethers.parseEther('1'));
   // await argoPetz.setWit
   // let signerAddr = await argoPetz.WHITELIST_SIGNER_ADDRESS();
   // console.log(signerAddr);
@@ -32,7 +35,7 @@ async function main() {
   //   { value: ethers.parseEther('0') }
   // );
   // await argoPetz.setPublicMintPrice(ethers.parseEther('0'));
-  // await argoPetz.publicMint(300, { value: ethers.parseEther('0') });
+  //await argoPetz.publicMint(2, { value: ethers.parseEther('4') });
   // let tx = await argoPetz.tokenURI(8505);
   // console.log(tx);
 }
