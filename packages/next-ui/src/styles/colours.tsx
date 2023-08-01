@@ -1,0 +1,10 @@
+export const PRIMARY = '#000000';
+export const PRIMARY_BORDER = '#333333';
+export const SECONDARY_1 = '#FFFFFF';
+export const SECONDARY_1_SHADOW = '#AAAAAA';
+export const SECONDARY_2 = '#444444';
+export const SECONDARY_2_SHADOW = '#222222';
+export const ACCENT_1 = '#FC0FC0';
+export const ACCENT_2 = '#EB9EB9';
+export const ACCENT_3 = '#FFD700';
+export const GUIDE = '1px solid red';
