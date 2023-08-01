@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 /// @title [CONTRACT_NAME] Mint Contract
 /// @dev Max Supply of 6000 planets
 /// @dev First 12 planets are EPIC planets
-contract MockERC721 is ERC721, Ownable {
+contract Diamonds is ERC721, Ownable {
     using Strings for uint256;
     using ECDSA for bytes32;
 
@@ -143,14 +143,6 @@ contract MockERC721 is ERC721, Ownable {
      * @param _mintAmount Amount that is minted
      */
     function mint(uint256 _mintAmount) external payable onlyEOA {
-        // Check if public sale is open
-        if (stage != 2) revert InvalidStage(stage, 2);
-        publicMintCount[msg.sender] += _mintAmount;
-        // Check if enough ETH is sent
-        if (msg.value != _mintAmount * publicMintPrice)
-            revert InsufficientCRO(msg.value, _mintAmount * publicMintPrice);
-        // Check if mints does not exceed total max supply
-
         for (uint256 i; i < _mintAmount; i++) {
             _mintPlanet();
         }

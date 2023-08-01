@@ -34,8 +34,6 @@ function readDeployments() {
   return out;
 }
 
-readDeployments();
-
 export default defineConfig({
   out: "src/generated.ts",
   contracts: [],

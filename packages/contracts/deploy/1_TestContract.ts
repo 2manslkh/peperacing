@@ -1,7 +1,5 @@
 import 'dotenv/config';
 
-import { ethers } from 'hardhat';
-
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
   const { deployer } = await getNamedAccounts();
@@ -12,12 +10,12 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     log: true,
     args: [],
   });
-  await deploy('MockERC20', {
+  await deploy('Gold', {
     from: deployer,
     log: true,
     args: [],
   });
-  await deploy('MockERC721', {
+  await deploy('Diamonds', {
     from: deployer,
     log: true,
     args: [],

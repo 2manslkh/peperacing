@@ -14,7 +14,7 @@ import path from 'path';
 module.exports = async ({ getNamedAccounts, deployments, getChainId, network }: HardhatRuntimeEnvironment) => {
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
-  let networkName = network.name.replace('_', '-');
+  let networkName = network.name
   if (networkName == 'hardhat') {
     networkName = 'localhost';
   }
@@ -69,32 +69,23 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId, network }: 
   const contractNames = jsonFiles.map((f) => f.replace('.json', ''));
 
   // Create a mapping for contract name to address and block number
-  let addressAndBlockNumbers: any = {};
+  let contracts: any = {};
 
   // Console log a table of the contract's name, address, and block number
-  const entries = await Promise.all(
+  await Promise.all(
     contractNames.map(async (name: string) => {
       const contract = await deployments.get(name);
       name = removeMock(name);
-      addressAndBlockNumbers[`${name}${ADDRESS_SUFFIX}`] = getAddress(contract);
-      addressAndBlockNumbers[`${name}${START_BLOCK_SUFFIX}`] = getBlockNumber(contract);
 
-      // Copy ABI
-      // Check if file exists
-      fs.writeFileSync(
-        path.join(__dirname, '..', '..', 'constants', 'abis', `${name}.json`),
-        JSON.stringify(getAbi(contract))
-      );
-
-      return {
-        name: name,
+      contracts[name] = {
         address: getAddress(contract),
-        blockNumber: getBlockNumber(contract),
-      };
+        start_block: getBlockNumber(contract),
+        abi: getAbi(contract),
+      }
     })
   );
 
-  console.table(entries);
+  console.table(contracts);
 
   // Add Additional Contract Addresses and Block Numbers
   if (chainId == '25') {
@@ -107,6 +98,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId, network }: 
       path.join(__dirname, '..', '..', 'constants', 'config', `${networkName}.json`),
       JSON.stringify({
         network: networkName.replace('-', '_'),
+        chainId: chainId,
         burner_address: '0x0000000000000000000000000000000000000000',
         abis: "./node_modules/@argo/constants/abis/"
       })
@@ -121,7 +113,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId, network }: 
   // Append Address and Block Numbers to config
   const atlantisConfig = {
     ...config,
-    ...addressAndBlockNumbers,
+    contracts
   };
   fs.writeFileSync(
     path.join(__dirname, '..', '..', 'constants', 'config', `${networkName}.json`),
