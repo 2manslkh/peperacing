@@ -47,11 +47,11 @@ Run everything in the root directory
 
 1. Set all of the .env files
 2. Start the blockchain node `pnpm node`
-3. Start the subgraph node `pnpm subgraph`
-4. Deploy the diamondNFT subgraph `pnpm deploy-subgraph:hello_world:local`
-5. Start the frontend `pnpm dev`
-6. View the frontend: <http://localhost:5173/>
-7. Query the subgraph: [http://localhost:8000/subgraphs/name/argo/hello_world/graphql](http://localhost:8000/subgraphs/name/argo/hello_world/graphql?query=query+User+%7B%0A++users+%7B%0A++++id%0A++++balance%0A++++deposits+%7B%0A++++++id%0A++++++amount%0A++++%7D%0A++++withdrawals+%7B%0A++++++id%0A++++++amount%0A++++%7D%0A++%7D%0A%7D)
+3. Start the graph node `pnpm graph`
+4. Deploy the diamondNFT subgraph `pnpm subgraph`
+5. Start the frontend `pnpm dev:next`
+6. View the frontend: <http://localhost:3000/demo>
+7. Query the subgraph: [query](http://localhost:8000/subgraphs/name/argo/diamondsNFT/graphql?query=query+DiamondNFTs+%7B%0A++tokens+%7B%0A++++id%0A++++owner+%7B%0A++++++id%0A++++%7D%0A++%7D%0A%7D)
 
 ## Frontend example
 
