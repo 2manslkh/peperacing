@@ -7,7 +7,17 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
 
-  let contract = await deploy('TestContract', {
+  await deploy('Bank', {
+    from: deployer,
+    log: true,
+    args: [],
+  });
+  await deploy('MockERC20', {
+    from: deployer,
+    log: true,
+    args: [],
+  });
+  await deploy('MockERC721', {
     from: deployer,
     log: true,
     args: [],

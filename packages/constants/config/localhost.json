@@ -3,5 +3,11 @@
   "burner_address": "0x0000000000000000000000000000000000000000",
   "abis": "./node_modules/@argo/constants/abis/",
   "TestContract_address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-  "TestContract_start_block": 1
+  "TestContract_start_block": 1,
+  "Bank_address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "Bank_start_block": 1,
+  "ERC20_address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+  "ERC20_start_block": 2,
+  "ERC721_address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+  "ERC721_start_block": 3
 }
