@@ -82,6 +82,12 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId, network }: 
         start_block: getBlockNumber(contract),
         abi: getAbi(contract),
       }
+
+      // Check if file exists
+      fs.writeFileSync(
+        path.join(__dirname, '..', '..', 'constants', 'abis', `${name}.json`),
+        JSON.stringify(getAbi(contract))
+      );
     })
   );
 
