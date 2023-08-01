@@ -8,6 +8,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { Connected } from '../../components/Connected'
 import { DeployContractButton } from '../../components/Buttons'
 import { MintNFT } from '../../components/MintNFT'
+import { NFTInventory } from '../../components/NFTInventory'
 import { NetworkSwitcher } from '../../components/NetworkSwitcher'
 import { ReadContract } from '../../components/ReadContract'
 import { ReadContracts } from '../../components/ReadContracts'
@@ -35,6 +36,8 @@ export function Page() {
       <SignTypedMessageWidget />
       <hr />
       <MintNFT />
+      <hr />
+      <NFTInventory />
       <hr />
       {/* <FaucetWidget />
       <hr />

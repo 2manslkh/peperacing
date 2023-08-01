@@ -1,35 +1,48 @@
 'use client'
 
-import { useContractWrite, useWaitForTransaction } from 'wagmi'
+import { useEffect, useState } from 'react'
 
-import BaseButton from './Buttons/BaseButton'
-import { BaseError } from 'viem'
-import { stringify } from '../utils/stringify'
-import { useDiamondsMint } from '../generated'
-import { wagmiContractConfig } from './contracts'
+import { getNFTs } from '../utils/graph'
+import styled from 'styled-components'
+
+const InventoryItemContainer = styled.div`
+    display: inline-block;
+    margin: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    img {
+        width: 50px;
+        height: 50px;
+    }
+`
 
 export function NFTInventory() {
-    const { write, data, error, isLoading, isError } = useDiamondsMint();
-    const {
-        data: receipt,
-        isLoading: isPending,
-        isSuccess,
-    } = useWaitForTransaction({ hash: data?.hash })
+
+    const [diamondsList, setDiamondsList] = useState<any>()
+
+    useEffect(() => {
+        getNFTs().then((diamonds) => {
+            setDiamondsList(diamonds?.data.tokens)
+            console.log(diamonds?.data.tokens)
+        })
+    }, [])
 
     return (
         <>
-            <h2>Mint a diamond</h2>
-            <BaseButton buttonText={"MINT DIAMOND"} handleClick={() => write({ args: [BigInt(1)] })} isLoading={isLoading}></BaseButton>
+            <h2>Diamond Inventory</h2>
 
-            {isSuccess && (
-                <>
-                    <pre>Transaction Hash: {data?.hash}</pre>
-                    <pre>
-                        Transaction Receipt: <pre>{stringify(receipt, null, 2)}</pre>
-                    </pre>
-                </>
+            {/* Render each diamond in diamondList */}
+            {diamondsList?.map((diamond: any) => {
+                return (
+                    <InventoryItemContainer key={diamond.id} >
+                        <img src={diamond.uri} />
+                    </InventoryItemContainer>
+
+                )
+            }
             )}
-            {isError && <pre style={{ color: "red" }}>{(error as BaseError)?.shortMessage}</pre>}
+            <pre></pre>
         </>
     )
 }
