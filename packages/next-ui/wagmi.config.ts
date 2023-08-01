@@ -14,12 +14,10 @@ function readDeployments(): ContractConfig<number, undefined>[] {
   folders.forEach((file) => {
     const json = JSON.parse(fs.readFileSync(`./node_modules/@argo/constants/config/${file}`).toString());
 
-    console.log("🚀 | folders.forEach | json:", json)
 
     // Iterate through 'contracts' object and create a ContractConfig for each contract
     try {
       Object.keys(json.contracts).forEach((contractName) => {
-        console.log("🚀 | Object.keys | contractName:", contractName)
 
         // Check if object key exists in out
         if (!out[contractName]) {
@@ -42,7 +40,6 @@ function readDeployments(): ContractConfig<number, undefined>[] {
     }
 
   });
-  console.log(out)
 
   // loop through out and create a ContractConfig for each contract
   let contracts: ContractConfig<number, undefined>[] = []
