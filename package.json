@@ -7,6 +7,7 @@
     "dev": "pnpm -F svelte-ui dev",
     "dev:next": "pnpm -F next-ui dev",
     "graph": "pnpm -F subgraph start",
+    "graph:reset": "pnpm -F subgraph reset",
     "subgraph": "pnpm -F diamonds-nft deploy:local"
   }
 }

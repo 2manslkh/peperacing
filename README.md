@@ -71,4 +71,4 @@ Run everything in the root directory
 
 `ERRO the genesis block hash for chain ______ has changed from...`
 
-Delete `./packages/subgraph/data` folder.
+`pnpm graph:reset` - deletes the ./data/postgres folder and restarts the graph node
