@@ -4,8 +4,9 @@
     "license": "MIT",
     "scripts": {
         "format": "prettier --write .",
-        "start": "docker-compose up --detach",
-        "deploy:local:hello_world": "pnpm -F subgraphs/hello_world codegen"
+        "start": "docker-compose down && docker-compose up --detach",
+        "deploy:local:hello_world": "pnpm -F subgraphs/hello_world codegen",
+        "reset": "rm -rf ./data/postgres && docker-compose down && docker-compose up --detach"
     },
     "devDependencies": {
         "@graphprotocol/graph-cli": "0.51.2",

@@ -1,0 +1,32 @@
+specVersion: 0.0.5
+features:
+  - fullTextSearch
+  - nonFatalErrors
+schema:
+  file: ./schema.graphql
+dataSources:
+  - name: Diamonds
+    kind: ethereum/contract
+    network: hardhat
+    source:
+      address: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+      abi: Diamonds
+      startBlock: 3
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Token
+        - Owner
+        - Contract
+        - Transfer
+      abis:
+        - name: Diamonds
+          file: ./node_modules/@argo/constants/abis/Diamonds.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
+
+      

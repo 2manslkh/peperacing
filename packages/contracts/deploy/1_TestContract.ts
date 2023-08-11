@@ -1,13 +1,21 @@
 import 'dotenv/config';
 
-import { ethers } from 'hardhat';
-
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
 
-  let contract = await deploy('TestContract', {
+  await deploy('Bank', {
+    from: deployer,
+    log: true,
+    args: [],
+  });
+  await deploy('Gold', {
+    from: deployer,
+    log: true,
+    args: [],
+  });
+  await deploy('Diamonds', {
     from: deployer,
     log: true,
     args: [],

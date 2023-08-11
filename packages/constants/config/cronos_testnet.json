@@ -1,5 +1,6 @@
 {
   "network": "cronos_testnet",
+  "chainId": "338",
   "burner_address": "0x0000000000000000000000000000000000000000",
   "abis": "./node_modules/@argo/constants/abis/",
   "ArgoPetz_address": "0x681BaC6cBc89D4bb6AA4cBcB7a31bFA944cA7A10",

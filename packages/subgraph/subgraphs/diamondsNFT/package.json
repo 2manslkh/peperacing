@@ -1,0 +1,22 @@
+{
+  "name": "diamonds-nft",
+  "version": "1.0.0",
+  "description": "diamondsNFT Subgraph",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "create:local": "graph create --node http://localhost:8020/ argo/diamondsNFT",
+    "remove:local": "graph remove --node http://localhost:8020/ argo/diamondsNFT",
+    "deploy:local": "graph create --node http://localhost:8020/ argo/diamondsNFT && mustache ./node_modules/@argo/constants/config/localhost.json template.yaml > subgraph.yaml && graph codegen && graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 argo/diamondsNFT -l v0.0.1",
+    "prepare:local": "mustache ./node_modules/@argo/constants/config/localhost.json template.yaml > subgraph.yaml && graph codegen",
+    "test": "graph test"
+  },
+  "dependencies": {
+    "@argo/constants": "workspace:^"
+  },
+  "devDependencies": {
+    "mustache": "^4.2.0",
+    "matchstick-as": "^0.5.2"
+  }
+}
