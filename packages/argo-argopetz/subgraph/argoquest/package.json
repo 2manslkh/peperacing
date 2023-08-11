@@ -9,7 +9,8 @@
     "remove-local": "graph remove --node http://localhost:8020/ argoquest",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 argoquest",
     "deploy-test": "graph codegen && graph build && graph create --node https://backuptest.argofinance.money/upload argo/argopetz && graph deploy --ipfs https://ipfs.argofinance.money/ --node https://backuptest.argofinance.money/upload argo/argopetz -l v1.0.0",
-    "deploy-prod": "graph codegen && graph build && graph create --node https://backup.argofinance.money/upload argo/petz && graph deploy --ipfs https://ipfs.argofinance.money/ --node https://backup.argofinance.money/upload argo/argopetz -l v1.0.0",
+    "deploy-prod-backup": "graph codegen && graph build && graph create --node https://backup.argofinance.money/upload argo/petz && graph deploy --ipfs https://ipfs.argofinance.money/ --node https://backup.argofinance.money/upload argo/argopetz -l v1.0.0",
+    "deploy-prod": "graph codegen && graph build && graph create --node https://graph.argofinance.money/upload argo/petz && graph deploy --ipfs https://testnet.argofinance.money/ --node https://graph.argofinance.money/upload argo/petz -l v1.0.0",
     "test": "graph test"
   },
   "dependencies": {

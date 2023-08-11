@@ -9,8 +9,8 @@ var metadata = JSON.parse(
 // Function to replace 'NewUriToReplace' in image URI
 function replaceUri(item) {
   item.image = item.image.replace(
-    "NewUriToReplace",
-    "bafybeibgbzqb5scz2p53ru5g2ago36qiad3hyn7v44psvhckz4pniwor3i"
+    "bafybeic2txcz4sgitlyoeas3scntszrp63dpznf5c5evjdb5whpb5hbozy",
+    "bafybeihxngrk7bor4dxao2elal3eb66slhijxiipxlvdmdpuiahpqlbpju"
   );
   return item;
 }
@@ -22,7 +22,7 @@ var updatedMetadata = metadata.map(replaceUri);
 var updatedMetadataJson = JSON.stringify(updatedMetadata, null, 2);
 
 // Write the updatedMetadataJson back to 'metadata.json' or to a new file if you prefer
-//fs.writeFileSync("./_metadata.json", updatedMetadataJson);
+fs.writeFileSync("./_metadata.json", updatedMetadataJson);
 
 console.log("Metadata updated!");
 
@@ -79,6 +79,6 @@ Object.entries(traitOccurrences).forEach(([traitType, traits]) => {
 });
 
 // Write the rarityJson to 'rarity.json'
-//fs.writeFileSync("./rarity.json", rarityJson);
+fs.writeFileSync("./rarity.json", rarityJson);
 
 console.log("Rarity data has been generated!");

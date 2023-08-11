@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { createCanvas, loadImage } = require("canvas");
-const metadata = require("../spirit/json/_metadata.json");
+const metadata = require("../build/json/_metadata.json");
 
 const layersOrder = [
   { name: "Archetype" },
@@ -86,13 +86,13 @@ function findArgoPetz(metadata) {
 }
 
 async function main() {
-  let affected = findArgoPetz(metadata);
-  console.log(affected);
-
+  // let affected = findArgoPetz(metadata);
+  // console.log(affected);
+  let affected = [8889];
   for (let i = 0; i < affected.length; i++) {
     let edition = affected[i];
     console.log("Recreating edition: " + edition);
-    let metadata = require(`../spirit/json/${edition}.json`);
+    let metadata = require(`../build/json/${edition}.json`);
     await recreateNft(metadata, layersOrder);
   }
 }
