@@ -135,11 +135,23 @@ module.exports = {
       accounts: [PRIVATE_KEY],
       gasLimit: 1000000000000,
     },
+    base_mainnet: {
+      url: 'https://mainnet.base.org',
+      chainId: 8453,
+      accounts: [PRIVATE_KEY],
+      gasPrice: 1000000000,
+    },
+    base_goerli: {
+      url: 'https://goerli.base.org',
+      chainId: 84531,
+      accounts: [PRIVATE_KEY],
+      gasPrice: 1000000000,
+    },
   },
   solidity: {
     compilers: [
       {
-        version: '0.8.18',
+        version: '0.8.19',
         settings: {
           optimizer: {
             enabled: true,
@@ -147,7 +159,7 @@ module.exports = {
         },
       },
       {
-        version: '0.8.11',
+        version: '0.8.18',
         settings: {
           optimizer: {
             enabled: true,
@@ -181,7 +193,19 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: {
+      base_mainnet: process.env.BASESCAN_API_KEY,
+    },
+    customChains: [
+      {
+        network: 'base_mainnet',
+        chainId: 8453,
+        urls: {
+          apiURL: 'https://api.basescan.org/api',
+          browserURL: 'https://basescan.org',
+        },
+      },
+    ],
   },
   paths: {
     sources: './contracts',
