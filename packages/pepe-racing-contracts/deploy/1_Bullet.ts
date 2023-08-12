@@ -5,22 +5,11 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
 
-  await deploy('Bank', {
+  let bulletGame = await deploy('BulletGame', {
     from: deployer,
     log: true,
     args: [],
   });
-  await deploy('Gold', {
-    from: deployer,
-    log: true,
-    args: [],
-  });
-  await deploy('Diamonds', {
-    from: deployer,
-    log: true,
-    args: [],
-  });
-
 
 };
 
