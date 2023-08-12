@@ -1,0 +1,111 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IContract.sol\":\"IContract\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=node_modules/@openzeppelin/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"]},\"sources\":{\"contracts/interfaces/IContract.sol\":{\"keccak256\":\"0x5388e598d93c7f1d209c46140bfc063e14664d12060473f177d0d93a6ba8c73e\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://55b934644441a41e4312e15b67b6f3eec5904c4d8bd7eecddf1c4f1dfed14cc5\",\"dweb:/ipfs/QmS3zUUVeWgdeovLvFb5cDRon7yevzQxPSkUyPCmhFG9r4\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":@openzeppelin/=node_modules/@openzeppelin/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":forge-std/=lib/forge-std/src/",
+        ":hardhat-deploy/=node_modules/hardhat-deploy/",
+        ":hardhat/=node_modules/hardhat/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/interfaces/IContract.sol": "IContract"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "contracts/interfaces/IContract.sol": {
+        "keccak256": "0x5388e598d93c7f1d209c46140bfc063e14664d12060473f177d0d93a6ba8c73e",
+        "urls": [
+          "bzz-raw://55b934644441a41e4312e15b67b6f3eec5904c4d8bd7eecddf1c4f1dfed14cc5",
+          "dweb:/ipfs/QmS3zUUVeWgdeovLvFb5cDRon7yevzQxPSkUyPCmhFG9r4"
+        ],
+        "license": "GPL-3.0"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/interfaces/IContract.sol",
+    "id": 29,
+    "exportedSymbols": {
+      "IContract": [
+        28
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "36:50:1",
+    "nodes": [
+      {
+        "id": 27,
+        "nodeType": "PragmaDirective",
+        "src": "36:24:1",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".12"
+        ]
+      },
+      {
+        "id": 28,
+        "nodeType": "ContractDefinition",
+        "src": "62:24:1",
+        "nodes": [],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IContract",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          28
+        ],
+        "name": "IContract",
+        "nameLocation": "72:9:1",
+        "scope": 29,
+        "usedErrors": []
+      }
+    ],
+    "license": "GPL-3.0"
+  },
+  "id": 1
+}

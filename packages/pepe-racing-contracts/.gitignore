@@ -1,0 +1,16 @@
+node_modules
+.env
+coverage
+coverage.json
+typechain
+build
+generated
+#Hardhat files
+cache
+artifacts
+data
+./data/gemstone_requirements.csv
+deployments/localhost
+
+
+.DS_Store
