@@ -6,12 +6,9 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi';
 import {
-  arbitrum,
-  hardhat,
-  mainnet,
-  optimism,
-  polygon,
-  zora,
+  cronos,
+  cronosTestnet,
+  hardhat
 } from 'wagmi/chains';
 
 import { alchemyProvider } from 'wagmi/providers/alchemy';
@@ -19,7 +16,7 @@ import { publicProvider } from 'wagmi/providers/public';
 
 const walletConnectProjectId = '398e7f27d039fdf8e2fabe8d75af5b69'
 export const { chains, publicClient } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, zora, hardhat],
+  [cronos, cronosTestnet, hardhat],
   [
     // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
     publicProvider()
