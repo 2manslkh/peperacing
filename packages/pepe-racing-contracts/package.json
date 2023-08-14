@@ -11,21 +11,24 @@
     "deploy:optimism_testnet": "hardhat deploy --network optimism_testnet",
     "deploy:taiko_testnet": "hardhat deploy --network taiko_testnet",
     "deploy:gnosis": "hardhat deploy --network gnosis",
-    "wallet": "hardhat new:wallet"
+    "wallet": "hardhat new:wallet",
+    "verify": "npx hardhat etherscan-verify --network goerli --api-url https://api-goerli.etherscan.io"
   },
   "author": "2manslkh",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@argo/constants": "workspace:^",
     "@openzeppelin/contracts": "^4.9.2",
     "@openzeppelin/contracts-upgradeable": "^4.9.2",
     "@typechain/hardhat": "^8.0.0",
+    "@uniswap/v2-periphery": "^1.1.0-beta.0",
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.3.1",
     "ethers": "^6.6.2",
     "hardhat": "^2.17.0",
     "hardhat-deploy": "^0.11.34",
-    "hardhat-gas-reporter": "^1.0.9"
+    "hardhat-gas-reporter": "^1.0.9",
+    "solmate": "^6.2.0"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",

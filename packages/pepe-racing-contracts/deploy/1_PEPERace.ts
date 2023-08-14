@@ -5,12 +5,11 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
 
-  let bulletGame = await deploy('BulletGame', {
+  let game = await deploy('PEPERace', {
     from: deployer,
     log: true,
-    args: [],
+    args: [deployer, deployer, deployer],
   });
-
 };
 
-module.exports.tags = ['TestContract'];
+module.exports.tags = ['PEPERace'];

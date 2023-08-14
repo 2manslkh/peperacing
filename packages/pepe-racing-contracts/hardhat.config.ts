@@ -1,17 +1,16 @@
 import '@nomicfoundation/hardhat-toolbox';
-import '@typechain/hardhat'
-import '@nomicfoundation/hardhat-ethers'
-import '@nomicfoundation/hardhat-chai-matchers'
-import 'hardhat-deploy'
+import '@typechain/hardhat';
+import '@nomicfoundation/hardhat-ethers';
+import '@nomicfoundation/hardhat-chai-matchers';
+import 'hardhat-deploy';
 import 'dotenv/config';
 
-import { ethers } from 'ethers'
+import { ethers } from 'ethers';
 import { task } from 'hardhat/config';
 
 // https://hardhat.org/guides/create-task.html
 task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
-
-  let accounts = await hre.ethers.getSigners()
+  let accounts = await hre.ethers.getSigners();
 
   for (const account of accounts) {
     console.log(account.address);
@@ -26,7 +25,7 @@ task('new:wallet', 'Generate New Wallet', async (taskArgs, hre) => {
 });
 
 let ACCOUNT;
-let useMnemonic = true;
+let useMnemonic = false;
 
 // Setup Default Values
 let PRIVATE_KEY;
@@ -82,14 +81,14 @@ module.exports = {
     },
     hardhat: {
       // TODO: Add snapshot block
-      forking: {
-        url: process.env.ALCHEMY_PROVIDER_MAINNET,
-        block: 1789750,
-      },
-      blockGasLimit: 10000000000,
-      mining: {
-        auto: true,
-      },
+      // forking: {
+      //   url: process.env.ALCHEMY_PROVIDER_MAINNET,
+      //   block: 1789750,
+      // },
+      // blockGasLimit: 10000000000,
+      // mining: {
+      //   auto: true,
+      // },
       // accounts: 'test test test test test test test test test test test junk',
     },
     mainnet: {
@@ -105,7 +104,7 @@ module.exports = {
       saveDeployments: true,
     },
     goerli: {
-      url: `https://rpc.ankr.com/eth_goerli`,
+      url: `https://eth-goerli.g.alchemy.com/v2/ScRP1SpUCCa41B6Ef5m3dWmog0vcviZJ`,
       chainId: 5,
       accounts: ACCOUNT,
       saveDeployments: true,
