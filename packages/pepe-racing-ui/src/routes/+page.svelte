@@ -36,7 +36,6 @@
 <svelte:window bind:innerWidth={screenSize} />
 
 <SectionContainer id="main">
-  <pepe-underlay bind:this={backgroundEl} />
   <VerticalStack>
     <title><span style="color: #049C5F">PepeRace</span></title>
     <description
@@ -50,6 +49,8 @@
 
 <!-- THE GAME SECTION -->
 <SectionContainer id="the-game">
+  <pepe-underlay />
+
   <VerticalStack>
     <section-title>The Game</section-title>
     <HorizontalStack>
@@ -84,6 +85,9 @@
 </SectionContainer>
 
 <SectionContainer id="how-to-bet">
+  <pepe-underlay />
+  <background />
+
   <VerticalStack>
     <section-title>How To Bet</section-title>
     <HorizontalStack>
@@ -110,6 +114,8 @@
 </SectionContainer>
 
 <SectionContainer id="token">
+  <pepe-underlay />
+
   <VerticalStack>
     <section-title>$PPRACE</section-title>
     <game-rule>
@@ -207,6 +213,20 @@
     padding-bottom: 2rem;
   }
 
+  background {
+    position: absolute;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+      to bottom,
+      #049c5f26,
+      #049c5f26 5px,
+      transparent 5px,
+      transparent 10px
+    );
+    z-index: -1;
+  }
   pepe-underlay {
     background: url("../public/images/pepe-ascii.png") no-repeat center center fixed;
     position: absolute;

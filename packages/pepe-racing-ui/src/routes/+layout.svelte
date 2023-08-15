@@ -31,6 +31,7 @@
 
 <!-- Header -->
 
+<pepe-underlay />
 <main>
   <MaxWidthContainer>
     <background />
@@ -75,7 +76,7 @@
     position: absolute;
     top: 0px;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background: repeating-linear-gradient(
       to bottom,
       #049c5f26,
@@ -84,5 +85,15 @@
       transparent 10px
     );
     z-index: -1;
+  }
+
+  pepe-underlay {
+    background: url("../public/images/pepe-ascii.png") no-repeat center center fixed;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: 0px;
+    opacity: 0.7;
+    z-index: -2;
   }
 </style>
