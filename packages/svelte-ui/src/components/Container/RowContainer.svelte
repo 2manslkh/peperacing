@@ -9,11 +9,9 @@
   @import "../../styles/colours";
   container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-
-    gap: 1rem;
-    word-break: break-all;
+    gap: 32px;
   }
 </style>
