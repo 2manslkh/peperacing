@@ -121,6 +121,12 @@
         <img src={DextoolsButton} alt="dextools-button" />
       </HorizontalStack>
     {/if}
+    {#if screenSize < breakpoints.large}
+      <div>
+        <img src={UniswapButton} alt="uniswap-button" width="150px" />
+        <img src={DextoolsButton} alt="dextools-button" width="150px" />
+      </div>
+    {/if}
   </VerticalStack>
 </SectionContainer>
 
