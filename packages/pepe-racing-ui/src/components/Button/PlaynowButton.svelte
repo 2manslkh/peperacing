@@ -6,10 +6,12 @@
   export let buttonText = "INSERT_TEXT";
 </script>
 
-<button on:click={handleClick}>
-  <button-text>{buttonText}</button-text>
-  <img src={TelegramLogo} alt="telegram-logo" width="30px" height="25px" />
-</button>
+<a href="https://t.me/peperacing_bot" target="_blank">
+  <button on:click={handleClick}>
+    <button-text>{buttonText}</button-text>
+    <img src={TelegramLogo} alt="telegram-logo" width="30px" height="25px" />
+  </button>
+</a>
 
 <style lang="scss">
   @import "../../styles/colours";
@@ -24,6 +26,7 @@
       box-shadow: 0 0 5px $primary_border;
     }
   }
+
   button {
     /* Buttons */
 

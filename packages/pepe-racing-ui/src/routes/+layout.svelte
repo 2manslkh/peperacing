@@ -34,9 +34,9 @@
 
 <pepe-underlay />
 <main>
-  <MaxWidthContainer>
-    <slot />
-  </MaxWidthContainer>
+  <!-- <MaxWidthContainer> -->
+  <slot />
+  <!-- </MaxWidthContainer> -->
 </main>
 
 <footer>
@@ -68,6 +68,7 @@
     color: $primary;
     border: none;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     word-break: break-all;
