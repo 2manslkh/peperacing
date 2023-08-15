@@ -367,18 +367,6 @@ importers:
       '@vitejs/plugin-basic-ssl':
         specifier: ^1.0.1
         version: 1.0.1(vite@4.3.9)
-      '@wagmi/cli':
-        specifier: ^1.0.2
-        version: 1.0.2(@wagmi/core@1.0.7)(typescript@5.1.6)
-      '@wagmi/core':
-        specifier: 1.0.7
-        version: 1.0.7(react@18.2.0)(typescript@5.1.6)(viem@0.3.37)
-      '@web3modal/ethereum':
-        specifier: ^2.4.1
-        version: 2.4.1(@wagmi/core@1.0.7)(viem@0.3.37)
-      '@web3modal/html':
-        specifier: ^2.4.1
-        version: 2.4.1(react@18.2.0)
       abitype:
         specifier: ^0.8.4
         version: 0.8.4(typescript@5.1.6)
@@ -388,9 +376,6 @@ importers:
       svelte-loading-spinners:
         specifier: ^0.3.4
         version: 0.3.4
-      viem:
-        specifier: ^0.3.37
-        version: 0.3.37(typescript@5.1.6)(zod@3.21.4)
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^2.1.0

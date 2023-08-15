@@ -1,10 +1,7 @@
 <script lang="ts">
-  import type { Web3Modal } from "@web3modal/html";
-
   // variables
   import Logo from "../../public/images/Logo.svg";
   import TwitterLogo from "../../public/images/twitter.png";
-  import { web3Modal } from "../../stores";
   import { breakpoints } from "../../styles/breakpoints";
   import TextContainer from "../Container/TextContainer.svelte";
   import PlaynowButton from "../Button/PlaynowButton.svelte";
@@ -12,16 +9,11 @@
 
   let screenSize: number;
   let modalOpen = false;
-  let _web3Modal: Web3Modal;
 
   function toggleModal() {
     modalOpen = !modalOpen;
     console.log(modalOpen);
   }
-
-  web3Modal.subscribe((value) => {
-    _web3Modal = value;
-  });
 </script>
 
 <svelte:window bind:innerWidth={screenSize} />
@@ -56,13 +48,6 @@
       <img src={TwitterLogo} alt="twitter" width="30px" height="25px" />
       <PlaynowButton buttonText="PLAY NOW" />
     </RowContainer>
-
-    {#if _web3Modal}
-      <w3m-wrapper>
-        <w3m-network-switch style="" />
-        <w3m-core-button balance="hide" icon="hide" />
-      </w3m-wrapper>
-    {/if}
   {/if}
 </header-wrapper>
 
