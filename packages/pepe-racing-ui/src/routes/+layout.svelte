@@ -5,7 +5,6 @@
   import "@fontsource/courier-prime/700.css"; // Defaults to weight 400.
   import "@fontsource/figtree/400.css"; // Defaults to weight 400.
   import "@fontsource/figtree/700.css"; // Defaults to weight 400.
-  import WalletConnect from "../components/Web3/WalletConnect.svelte";
 
   import TopNavBar from "../components/TopNavBar/TopNavBar.svelte";
   import { onMount } from "svelte";

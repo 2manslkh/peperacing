@@ -40,13 +40,8 @@
 		"@picocss/pico": "^1.5.10",
 		"@types/pako": "^2.0.0",
 		"@vitejs/plugin-basic-ssl": "^1.0.1",
-		"@wagmi/cli": "^1.0.2",
-		"@wagmi/core": "1.0.7",
 		"abitype": "^0.8.4",
-		"@web3modal/ethereum": "^2.4.1",
-		"@web3modal/html": "^2.4.1",
 		"apexcharts": "^3.40.0",
-		"svelte-loading-spinners": "^0.3.4",
-		"viem": "^0.3.37"
+		"svelte-loading-spinners": "^0.3.4"
 	}
 }
