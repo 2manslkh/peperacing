@@ -35,7 +35,6 @@
 <pepe-underlay />
 <main>
   <MaxWidthContainer>
-    <background />
     <slot />
   </MaxWidthContainer>
 </main>
@@ -77,8 +76,9 @@
 
   background {
     position: absolute;
+    display: flex;
     top: 0px;
-    width: 100vw;
+    width: 100%;
     height: 100%;
     background: repeating-linear-gradient(
       to bottom,

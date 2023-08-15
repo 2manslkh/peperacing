@@ -22,7 +22,7 @@
 
 <svelte:window bind:innerWidth={screenSize} />
 
-<SectionContainer id="main">
+<SectionContainer id="main" stripes={true}>
   <VerticalStack>
     <title><span style="color: #049C5F">PepeRace</span></title>
     <description
@@ -72,9 +72,8 @@
   </VerticalStack>
 </SectionContainer>
 
-<SectionContainer id="how-to-bet">
+<SectionContainer id="how-to-bet" stripes={true}>
   <pepe-underlay />
-  <background />
 
   <VerticalStack>
     <section-title>How To Bet</section-title>
@@ -248,8 +247,9 @@
 
   background {
     position: absolute;
-    left: 0px;
-    width: 100vw;
+    display: flex;
+    top: 0px;
+    width: 100%;
     height: 100vh;
     background: repeating-linear-gradient(
       to bottom,
