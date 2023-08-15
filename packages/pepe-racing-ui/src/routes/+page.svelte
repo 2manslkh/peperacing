@@ -14,6 +14,7 @@
   import GitbookButton from "../public/images/gitbook-button.png";
 
   import TextContainer from "../components/Container/TextContainer.svelte";
+  import ContractContainer from "../components/Container/ContractContainer.svelte";
 
   let backgroundEl: any;
   let screenSize: number;
@@ -43,6 +44,7 @@
       Race Bot <br /> Bet on your winning
       <span style="color: #049C5F">PePe</span>
     </description>
+    <div style="height: 24px;" />
     <PlaynowButton buttonText="PLAY NOW" />
   </VerticalStack>
 </SectionContainer>
@@ -125,7 +127,7 @@
     <pepe-token-wrapper>
       <img src={PPTOKEN} alt="pepetoken" style="width: 100%; height: 100%; object-fit: cover;" />
     </pepe-token-wrapper>
-    <TextContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</TextContainer>
+    <ContractContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</ContractContainer>
     <HorizontalStack>
       <img src={UniswapButton} alt="uniswap-button" />
       <img src={DextoolsButton} alt="dextools-button" />
@@ -136,6 +138,33 @@
     <TextContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</TextContainer> -->
   </VerticalStack>
 </SectionContainer>
+
+<HorizontalStack>
+  <VerticalStack>
+    <subtitle>Taxes</subtitle>
+    <TextContainer>
+      <description>
+        5% Buy Tax<br />5% Sell Tax<br />X% XXX<br />Y% XXX<br />Z% XXX
+      </description>
+    </TextContainer>
+  </VerticalStack>
+  <VerticalStack>
+    <subtitle>Race Prize Breakdown</subtitle>
+    <TextContainer>
+      <description>
+        90% split amongst winners<br /> 5% burn <br />5% rev share
+      </description>
+    </TextContainer>
+  </VerticalStack>
+</HorizontalStack>
+
+<info-container>
+  <subtitle>Contracts</subtitle>
+  <ContractContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</ContractContainer>
+  <ContractContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</ContractContainer>
+  <ContractContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</ContractContainer>
+  <ContractContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</ContractContainer>
+</info-container>
 
 <style lang="scss">
   @import "../styles/colours";
@@ -168,8 +197,23 @@
     line-height: normal;
   }
 
+  subtitle {
+    width: auto;
+
+    display: flex;
+    align-items: center;
+
+    color: $secondary_1;
+    text-shadow: 0px 0px 36px $secondary_1;
+    font-size: 2em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
   description {
     max-width: 440px;
+    width: 440px;
 
     align-items: center;
     text-align: center;
@@ -180,13 +224,14 @@
     font-weight: 400;
     line-height: 32px;
     word-break: normal;
-    padding-bottom: 2rem;
   }
 
   game-rule {
-    align-items: center;
+    align-items: left;
     text-align: left;
     max-width: 440px;
+    align-self: left;
+    align-content: left;
 
     color: $primary;
     font-size: 1em;
@@ -235,5 +280,16 @@
     right: 0px;
     opacity: 0.5;
     z-index: -1;
+  }
+  info-container {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: top;
+    justify-content: center;
+    padding: 2rem;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
   }
 </style>

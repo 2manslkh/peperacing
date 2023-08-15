@@ -10,7 +10,7 @@
   container {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: top;
     justify-content: center;
 
     width: 100%;
