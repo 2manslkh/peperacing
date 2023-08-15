@@ -1,10 +1,7 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import PlaynowButton from "../components/Button/PlaynowButton.svelte";
   import SectionContainer from "../components/Container/SectionContainer.svelte";
-  import SearchBox from "../components/Input/SearchBox.svelte";
   import VerticalStack from "../components/Stack/VerticalStack.svelte";
-  import Table from "../components/Table/Table.svelte";
   import HorizontalStack from "../components/Stack/HorizontalStack.svelte";
 
   import Screenshot_1 from "../public/images/screenshot-1.png";
@@ -12,6 +9,7 @@
   import UniswapButton from "../public/images/uniswap-button.png";
   import DextoolsButton from "../public/images/dextools-button.png";
   import GitbookButton from "../public/images/gitbook-button.png";
+  import { breakpoints } from "../styles/breakpoints";
 
   import TextContainer from "../components/Container/TextContainer.svelte";
   import ContractContainer from "../components/Container/ContractContainer.svelte";
@@ -42,13 +40,15 @@
   <VerticalStack>
     <section-title>The Game</section-title>
     <HorizontalStack>
-      <img
-        src={Screenshot_1}
-        alt="screenshot"
-        style="border-radius: 5px;
+      {#if screenSize >= breakpoints.large}
+        <img
+          src={Screenshot_1}
+          alt="screenshot"
+          style="border-radius: 5px;
         border: 2px solid #049C5F;
         box-shadow: 0px 0px 6px 0px #049C5F"
-      />
+        />
+      {/if}
       <VerticalStack>
         <game-rule>
           1. <span style="color: #049C5F">PepeRace</span> starts every 5 minutes, with 4 PePes in
@@ -89,13 +89,15 @@
         </game-rule>
         <PlaynowButton buttonText="PLAY NOW" />
       </VerticalStack>
-      <img
-        src={Screenshot_1}
-        alt="screenshot"
-        style="border-radius: 5px;
+      {#if screenSize >= breakpoints.large}
+        <img
+          src={Screenshot_1}
+          alt="screenshot"
+          style="border-radius: 5px;
   border: 2px solid #049C5F;
   box-shadow: 0px 0px 6px 0px #049C5F"
-      />
+        />
+      {/if}
     </HorizontalStack>
   </VerticalStack>
 </SectionContainer>
@@ -113,35 +115,56 @@
       <img src={PPTOKEN} alt="pepetoken" style="width: 100%; height: 100%; object-fit: cover;" />
     </pepe-token-wrapper>
     <ContractContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</ContractContainer>
-    <HorizontalStack>
-      <img src={UniswapButton} alt="uniswap-button" />
-      <img src={DextoolsButton} alt="dextools-button" />
-    </HorizontalStack>
-    <!-- <img src={GitbookButton} alt="gitbook-button" /> -->
-    <!-- <TextContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</TextContainer>
-    <TextContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</TextContainer>
-    <TextContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</TextContainer> -->
+    {#if screenSize >= breakpoints.large}
+      <HorizontalStack>
+        <img src={UniswapButton} alt="uniswap-button" />
+        <img src={DextoolsButton} alt="dextools-button" />
+      </HorizontalStack>
+    {/if}
   </VerticalStack>
 </SectionContainer>
 
-<HorizontalStack>
+{#if screenSize >= breakpoints.large}
+  <HorizontalStack>
+    <VerticalStack>
+      <subtitle>Taxes</subtitle>
+      <TextContainer>
+        <description>
+          5% Buy Tax<br />5% Sell Tax<br />X% XXX<br />Y% XXX<br />Z% XXX
+        </description>
+      </TextContainer>
+    </VerticalStack>
+    <VerticalStack>
+      <subtitle>Race Prize Breakdown</subtitle>
+      <TextContainer>
+        <description>
+          90% split amongst winners<br /> 5% burn <br />5% rev share
+        </description>
+      </TextContainer>
+    </VerticalStack>
+  </HorizontalStack>
+{/if}
+
+{#if screenSize < breakpoints.large}
   <VerticalStack>
-    <subtitle>Taxes</subtitle>
-    <TextContainer>
-      <description>
-        5% Buy Tax<br />5% Sell Tax<br />X% XXX<br />Y% XXX<br />Z% XXX
-      </description>
-    </TextContainer>
+    <VerticalStack>
+      <subtitle>Taxes</subtitle>
+      <TextContainer>
+        <description>
+          5% Buy Tax<br />5% Sell Tax<br />X% XXX<br />Y% XXX<br />Z% XXX
+        </description>
+      </TextContainer>
+    </VerticalStack>
+    <VerticalStack>
+      <subtitle>Race Prize Breakdown</subtitle>
+      <TextContainer>
+        <description>
+          90% split amongst winners<br /> 5% burn <br />5% rev share
+        </description>
+      </TextContainer>
+    </VerticalStack>
   </VerticalStack>
-  <VerticalStack>
-    <subtitle>Race Prize Breakdown</subtitle>
-    <TextContainer>
-      <description>
-        90% split amongst winners<br /> 5% burn <br />5% rev share
-      </description>
-    </TextContainer>
-  </VerticalStack>
-</HorizontalStack>
+{/if}
 
 <info-container>
   <subtitle>Contracts</subtitle>
@@ -155,6 +178,7 @@
 
 <style lang="scss">
   @import "../styles/colours";
+  @import "../styles/breakpoints.scss";
 
   title {
     width: auto;
@@ -227,6 +251,30 @@
     line-height: 32px;
     word-break: normal;
     text-shadow: 0px 0px 36px $secondary_1;
+    padding: 1rem;
+  }
+
+  @media (max-width: $large) {
+    title {
+      font-size: 4.5rem;
+    }
+
+    section-title {
+      font-size: 2.5rem;
+    }
+
+    subtitle {
+      font-size: 1.5rem;
+    }
+
+    description {
+      font-size: 1rem;
+      width: 300px;
+    }
+
+    game-rule {
+      font-size: 1rem;
+    }
   }
 
   @keyframes spinCoin {

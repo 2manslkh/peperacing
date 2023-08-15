@@ -23,11 +23,6 @@
 <svelte:window bind:innerWidth={screenSize} />
 
 <header-wrapper>
-  {#if screenSize < breakpoints.large}
-    <header-logo>
-      <img src={Logo} alt="logo" width="50px" height="50px" />
-    </header-logo>
-  {/if}
   {#if screenSize >= breakpoints.large}
     <RowContainer>
       <header-logo>
