@@ -1,24 +1,18 @@
 <script lang="ts">
-  import { signMessage, type SignMessageArgs } from "@wagmi/core";
-  import { signature } from "../../stores";
-  export let handleClick: () => void = async () => {
-    let args: SignMessageArgs = {
-      message: "Hello World",
-    };
-
-    const _signature = await signMessage(args);
-    signature.set(_signature);
+  import TelegramLogo from "../../public/images/telegram.png";
+  export let handleClick: () => void = () => {
+    console.log("Unassigned Button");
   };
-  export let buttonText = "SIGN MESSAGE";
+  export let buttonText = "INSERT_TEXT";
 </script>
 
 <button on:click={handleClick}>
   <button-text>{buttonText}</button-text>
+  <img src={TelegramLogo} alt="telegram-logo" width="30px" height="25px" />
 </button>
 
 <style lang="scss">
   @import "../../styles/colours";
-
   button {
     /* Buttons */
 
@@ -33,30 +27,34 @@
     padding: 10px 16px;
     gap: 8px;
 
-    width: 100%;
-    height: 40px;
+    width: 200px;
+    height: 52px;
 
-    background: $primary_border;
-    border: 0px;
-    border-bottom: 4px solid $primary;
+    background: none;
     border-radius: 10px;
-
+    border: 3px solid $primary_border;
+    box-shadow: 0px 0px 5px 0px $primary_border, 0px 0px 10px 0px $primary_border,
+      0px 0px 30px 0px $primary_border;
     /* Inside auto layout */
   }
 
   button:active {
-    background: $secondary_2;
+    background: $secondary_1;
     border: 0px;
-    border-bottom: 4px solid $primary;
-    border-radius: 10px;
   }
+  button:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border: 0px;
+  }
+
   button-text {
     /* NEXT */
-
+    font-family: "Modeseven";
+    text-align: center;
+    font-size: 20px;
     font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 21px;
+    font-weight: 400;
+    line-height: normal;
     /* identical to box height */
 
     display: flex;

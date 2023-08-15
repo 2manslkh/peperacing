@@ -8,12 +8,8 @@
 <style lang="scss">
   @import "../../styles/colours";
   container {
+    height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-
-    gap: 1rem;
-    word-break: break-all;
   }
 </style>
