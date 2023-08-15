@@ -34,7 +34,7 @@
         <img src={Logo} alt="logo" width="192px" />
         <!-- <header-title>PROJECT_NAME</header-title> -->
       </header-logo>
-      <TextContainer>
+      <TextContainer backgroundColor="rgb(0,0,0,0.5)">
         <header-tabs>
           <header-item>
             <a href="#the-game" on:click|preventDefault={scrollToSection}>The Game</a>

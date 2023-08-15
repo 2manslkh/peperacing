@@ -1,7 +1,8 @@
 <script lang="ts">
+  export let backgroundColor = "transparent";
 </script>
 
-<container>
+<container style={`background: ${backgroundColor}`}>
   <slot />
 </container>
 
