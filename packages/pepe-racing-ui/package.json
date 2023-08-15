@@ -2,9 +2,6 @@
 	"name": "svelte-ui",
 	"private": true,
 	"type": "module",
-	"engines": {
-		"node": ">=16.0.0"
-	},
 	"scripts": {
 		"dev": "vite dev --host 0.0.0.0",
 		"build": "vite build",
