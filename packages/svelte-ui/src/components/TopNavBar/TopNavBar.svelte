@@ -2,13 +2,9 @@
   import type { Web3Modal } from "@web3modal/html";
 
   // variables
-  import Logo from "../../public/images/Logo.svg";
-  import TwitterLogo from "../../public/images/twitter.png";
+  import Logo from "../../public/images/Logo.png";
   import { web3Modal } from "../../stores";
   import { breakpoints } from "../../styles/breakpoints";
-  import TextContainer from "../Container/TextContainer.svelte";
-  import PlaynowButton from "../Button/PlaynowButton.svelte";
-  import RowContainer from "../Container/RowContainer.svelte";
 
   let screenSize: number;
   let modalOpen = false;
@@ -33,30 +29,18 @@
     </header-logo>
   {/if}
   {#if screenSize >= breakpoints.large}
-    <RowContainer>
-      <header-logo>
-        <img src={Logo} alt="logo" width="192px" />
-        <!-- <header-title>PROJECT_NAME</header-title> -->
-      </header-logo>
-      <TextContainer>
-        <header-tabs>
-          <header-item>
-            <a href="#the-game">The Game</a>
-          </header-item>
-          <header-item>
-            <a href="#how-to-bet">How To Bet</a>
-          </header-item>
-          <header-item>
-            <a href="#token">$PPRACE</a>
-          </header-item>
-        </header-tabs>
-      </TextContainer>
-    </RowContainer>
-    <RowContainer>
-      <img src={TwitterLogo} alt="twitter" width="30px" height="25px" />
-      <PlaynowButton buttonText="PLAY NOW" />
-    </RowContainer>
-
+    <header-logo>
+      <img src={Logo} alt="logo" width="50px" height="50px" />
+      <header-title>PROJECT_NAME</header-title>
+    </header-logo>
+    <header-tabs>
+      <header-item>
+        <a href="/">Home</a>
+      </header-item>
+      <header-item>
+        <a href="/demo">Demo</a>
+      </header-item>
+    </header-tabs>
     {#if _web3Modal}
       <w3m-wrapper>
         <w3m-network-switch style="" />
@@ -69,14 +53,6 @@
 <style lang="scss">
   @import "../../styles/colours";
   @import "../../styles/breakpoints";
-  a {
-    text-decoration: none; /* Removes underline */
-    color: $white; /* Inherits color from its parent */
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
   header-logo {
     /* Auto layout */
 
@@ -92,9 +68,10 @@
     align-items: center;
 
     width: 100%;
-    max-width: 1440px;
+    max-width: 1200px;
     gap: auto;
-    padding: 32px;
+    height: 100px;
+    padding: 0px 16px;
 
     @media screen and (max-width: $large) {
       flex-direction: column;
@@ -120,6 +97,7 @@
 
     /* Inside auto layout */
 
+    font-family: "Poppins";
     font-style: normal;
     font-weight: 600;
     font-size: 2rem;
@@ -136,29 +114,28 @@
     justify-content: center;
     align-items: center;
     padding: 0px;
-    gap: 40px;
+    gap: 56px;
 
     width: auto;
+    height: 36px;
 
     /* Inside auto layout */
-    color: $background;
+
+    color: $primary;
+    font-family: "Poppins";
     font-size: 1rem;
     font-weight: 400;
   }
 
   a {
-    color: none;
+    color: #6f6f6f;
     text-decoration: none;
   }
 
   a:active {
     color: black;
     background-color: transparent;
-  }
-
-  a:hover {
-    color: $secondary_1;
-    background-color: transparent;
+    text-decoration: underline;
   }
 
   w3m-wrapper {

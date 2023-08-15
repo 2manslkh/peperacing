@@ -50,6 +50,7 @@
 
   title {
     width: auto;
+    font-family: "Poppins";
     font-style: normal;
     font-weight: 700;
     font-size: 1rem;
@@ -63,6 +64,7 @@
   description {
     width: auto;
 
+    font-family: "Poppins";
     font-style: normal;
     font-weight: 400;
     font-size: 1rem;

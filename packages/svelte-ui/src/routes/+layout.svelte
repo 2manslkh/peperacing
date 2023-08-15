@@ -22,9 +22,9 @@
 </script>
 
 <!-- Comment to Disable WEB3 (Requires VITE_WEB3MODAL_PROJECT_ID to work) -->
-<!-- {#if projectId}
+{#if projectId}
   <WalletConnect {projectId} />
-{/if} -->
+{/if}
 
 <header>
   <TopNavBar />
@@ -38,44 +38,36 @@
   </MaxWidthContainer>
 </main>
 
-<!-- <footer /> -->
+<footer />
+
+<BottomNav />
 
 <style lang="scss">
   @import "../styles/colours";
 
   @font-face {
-    font-family: "ModeSeven";
-    src: url("../public/fonts/modeseven-font/Modeseven-L3n5.ttf");
+    font-family: "Figtree";
+    src: url("../public/fonts/Figtree/Figtree-VariableFont_wght.ttf");
   }
 
   header {
-    background: transparent;
-    font-family: "ModeSeven";
-    position: absolute;
+    background: $secondary_1_shadow;
+    font-family: "Figtree";
     display: flex;
-    align-self: center;
     align-items: center;
     justify-content: center;
-    z-index: 1;
-    width: 100%;
   }
 
   main {
-    font-family: "ModeSeven";
-    background: repeating-linear-gradient(
-      to bottom,
-      #049c5f26,
-      #049c5f26 5px,
-      transparent 5px,
-      transparent 10px
-    );
+    font-family: "Figtree";
+    background: $secondary_1;
     color: $primary;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     word-break: break-all;
-    width: 100%;
+    padding: 16px;
   }
 
   footer {
