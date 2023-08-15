@@ -13,6 +13,17 @@
 
 <style lang="scss">
   @import "../../styles/colours";
+  @keyframes glowing {
+    0% {
+      box-shadow: 0 0 5px $primary_border;
+    }
+    50% {
+      box-shadow: 0 0 20px $primary_border, 0 0 30px $primary_border;
+    }
+    100% {
+      box-shadow: 0 0 5px $primary_border;
+    }
+  }
   button {
     /* Buttons */
 
@@ -36,6 +47,8 @@
     box-shadow: 0px 0px 5px 0px $primary_border, 0px 0px 10px 0px $primary_border,
       0px 0px 30px 0px $primary_border;
     /* Inside auto layout */
+    animation: glowing 1.5s infinite alternate;
+
     cursor: pointer;
   }
 

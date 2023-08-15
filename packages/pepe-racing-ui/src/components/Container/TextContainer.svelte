@@ -14,7 +14,6 @@
     gap: 40px;
     border-radius: 5px;
     border: 2px solid $primary_border;
-    box-shadow: 0px 0px 5px 0px $primary_border, 0px 0px 10px 0px $primary_border,
-      0px 0px 15px 0px $primary_border, 0px 0px 20px 0px $primary_border;
+    box-shadow: 0px 0px 5px 0px $primary_border;
   }
 </style>
