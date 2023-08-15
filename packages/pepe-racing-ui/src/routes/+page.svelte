@@ -18,20 +18,6 @@
 
   let backgroundEl: any;
   let screenSize: number;
-
-  function handleScroll() {
-    let scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    backgroundEl.style.opacity = 1 - scrollPercentage;
-  }
-
-  onMount(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      // Cleanup the event listener on component destruction
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
 </script>
 
 <svelte:window bind:innerWidth={screenSize} />
