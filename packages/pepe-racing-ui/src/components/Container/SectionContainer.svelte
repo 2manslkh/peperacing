@@ -1,7 +1,8 @@
 <script lang="ts">
+  export let id = "";
 </script>
 
-<container>
+<container {id}>
   <slot />
 </container>
 

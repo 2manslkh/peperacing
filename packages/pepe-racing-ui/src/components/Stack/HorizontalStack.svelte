@@ -15,7 +15,7 @@
 
     width: 100%;
 
-    gap: 1rem;
+    gap: 5rem;
     word-break: break-all;
   }
 </style>

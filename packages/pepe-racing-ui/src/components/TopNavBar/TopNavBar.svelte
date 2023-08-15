@@ -10,9 +10,13 @@
   let screenSize: number;
   let modalOpen = false;
 
-  function toggleModal() {
-    modalOpen = !modalOpen;
-    console.log(modalOpen);
+  function scrollToSection({ target }: any) {
+    const el = document.querySelector(target.getAttribute("href"));
+    if (!el) return;
+
+    el.scrollIntoView({
+      behavior: "smooth",
+    });
   }
 </script>
 
@@ -33,13 +37,13 @@
       <TextContainer>
         <header-tabs>
           <header-item>
-            <a href="#the-game">The Game</a>
+            <a href="#the-game" on:click|preventDefault={scrollToSection}>The Game</a>
           </header-item>
           <header-item>
-            <a href="#how-to-bet">How To Bet</a>
+            <a href="#how-to-bet" on:click|preventDefault={scrollToSection}>How To Bet</a>
           </header-item>
           <header-item>
-            <a href="#token">$PPRACE</a>
+            <a href="#token" on:click|preventDefault={scrollToSection}>$PPRACE</a>
           </header-item>
         </header-tabs>
       </TextContainer>

@@ -33,6 +33,7 @@
 
 <main>
   <MaxWidthContainer>
+    <background />
     <slot />
   </MaxWidthContainer>
 </main>
@@ -61,13 +62,6 @@
 
   main {
     font-family: "ModeSeven";
-    background: repeating-linear-gradient(
-      to bottom,
-      #049c5f26,
-      #049c5f26 5px,
-      transparent 5px,
-      transparent 10px
-    );
     color: $primary;
     border: none;
     display: flex;
@@ -75,5 +69,20 @@
     justify-content: center;
     word-break: break-all;
     width: 100%;
+  }
+
+  background {
+    position: absolute;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(
+      to bottom,
+      #049c5f26,
+      #049c5f26 5px,
+      transparent 5px,
+      transparent 10px
+    );
+    z-index: -1;
   }
 </style>
