@@ -10,6 +10,7 @@
   import { onMount } from "svelte";
   import BottomNav from "../components/BottomNav/BottomNav.svelte";
   import MaxWidthContainer from "../components/Container/MaxWidthContainer.svelte";
+  import Footer from "../components/Footer/Footer.svelte";
 
   const projectId = import.meta.env.VITE_WEB3MODAL_PROJECT_ID;
   // Throw Error if no projectId is set
@@ -39,7 +40,9 @@
   </MaxWidthContainer>
 </main>
 
-<!-- <footer /> -->
+<footer>
+  <Footer />
+</footer>
 
 <style lang="scss">
   @import "../styles/colours";
@@ -95,5 +98,11 @@
     right: 0px;
     opacity: 0.7;
     z-index: -2;
+  }
+
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>

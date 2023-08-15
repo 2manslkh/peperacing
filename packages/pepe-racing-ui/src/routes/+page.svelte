@@ -166,6 +166,8 @@
   <ContractContainer>$PPRACE: 0X123EASESDSSJDIO212AE1JH2K1E</ContractContainer>
 </info-container>
 
+<PlaynowButton buttonText="PLAY NOW" />
+
 <style lang="scss">
   @import "../styles/colours";
 
