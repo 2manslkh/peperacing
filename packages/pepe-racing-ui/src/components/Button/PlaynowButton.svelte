@@ -36,6 +36,7 @@
     box-shadow: 0px 0px 5px 0px $primary_border, 0px 0px 10px 0px $primary_border,
       0px 0px 30px 0px $primary_border;
     /* Inside auto layout */
+    cursor: pointer;
   }
 
   button:active {
