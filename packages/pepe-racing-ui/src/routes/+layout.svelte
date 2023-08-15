@@ -76,8 +76,4 @@
     word-break: break-all;
     width: 100%;
   }
-
-  footer {
-    height: 100px;
-  }
 </style>

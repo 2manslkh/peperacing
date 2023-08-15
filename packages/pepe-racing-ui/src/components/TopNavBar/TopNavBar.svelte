@@ -90,26 +90,6 @@
       height: 100px;
     }
   }
-  header-title {
-    /* Auto layout */
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px;
-    gap: 8px;
-
-    width: auto;
-    height: 100px;
-
-    /* Inside auto layout */
-
-    font-style: normal;
-    font-weight: 600;
-    font-size: 2rem;
-    line-height: 36px;
-  }
 
   header-tabs {
     /* Frame 2 */
@@ -144,13 +124,5 @@
   a:hover {
     color: $secondary_1;
     background-color: transparent;
-  }
-
-  w3m-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
   }
 </style>

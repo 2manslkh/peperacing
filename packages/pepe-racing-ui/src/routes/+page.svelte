@@ -50,14 +50,6 @@
     padding-bottom: 2rem;
   }
 
-  pepe {
-    color: $secondary_1;
-    font-size: calc(0.5em + 1vw);
-    font-style: normal;
-    font-weight: 400;
-    line-height: 32px;
-    text-shadow: 0px 0px 36.28799819946289px $secondary_1;
-  }
   pepe-underlay {
     background: url("../public/images/pepe-ascii.png") no-repeat center center fixed;
     position: absolute;
