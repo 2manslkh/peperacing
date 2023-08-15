@@ -52,7 +52,7 @@
   header {
     background: transparent;
     font-family: "ModeSeven";
-    position: absolute;
+    position: fixed;
     display: flex;
     align-self: center;
     align-items: center;
