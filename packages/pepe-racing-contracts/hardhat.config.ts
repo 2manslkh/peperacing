@@ -25,7 +25,7 @@ task('new:wallet', 'Generate New Wallet', async (taskArgs, hre) => {
 });
 
 let ACCOUNT;
-let useMnemonic = false;
+let useMnemonic = true;
 
 // Setup Default Values
 let PRIVATE_KEY;
@@ -115,7 +115,7 @@ module.exports = {
       accounts: ACCOUNT,
     },
     mumbai: {
-      url: 'https://matic-mumbai.chainstacklabs.com',
+      url: 'https://endpoints.omniatech.io/v1/matic/mumbai/public',
       chainId: 80001,
       accounts: ACCOUNT,
       saveDeployments: true,
@@ -200,7 +200,7 @@ module.exports = {
       saveDeployments: true,
     },
     sepolia: {
-      url: 'https://rpc.sepolia.org',
+      url: 'https://ethereum-sepolia.blockpi.network/v1/rpc/public',
       chainId: 11155111,
       accounts: ACCOUNT,
       saveDeployments: true,
