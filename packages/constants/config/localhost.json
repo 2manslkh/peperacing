@@ -4,12 +4,28 @@
   "burner_address": "0x0000000000000000000000000000000000000000",
   "abis": "./node_modules/@argo/constants/abis/",
   "contracts": {
-    "BulletGame": {
+    "PEPERace": {
       "address": "0xD5bFeBDce5c91413E41cc7B24C8402c59A344f7c",
-      "start_block": 17897909,
+      "start_block": 17903552,
       "abi": [
         {
-          "inputs": [],
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_myWallet",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "_marketingWallet",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "_revenueWallet",
+              "type": "address"
+            }
+          ],
           "stateMutability": "nonpayable",
           "type": "constructor"
         },
@@ -489,14 +505,7 @@
         },
         {
           "inputs": [],
-          "name": "renounceOwnership",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "revenueWallet",
+          "name": "racingContract",
           "outputs": [
             {
               "internalType": "address",
@@ -509,7 +518,14 @@
         },
         {
           "inputs": [],
-          "name": "rouletteContract",
+          "name": "renounceOwnership",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "revenueWallet",
           "outputs": [
             {
               "internalType": "address",
@@ -576,11 +592,11 @@
           "inputs": [
             {
               "internalType": "address",
-              "name": "wallet",
+              "name": "a",
               "type": "address"
             }
           ],
-          "name": "setRevenueWallet",
+          "name": "setRacingContract",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
@@ -589,11 +605,11 @@
           "inputs": [
             {
               "internalType": "address",
-              "name": "a",
+              "name": "wallet",
               "type": "address"
             }
           ],
-          "name": "setRouletteContract",
+          "name": "setRevenueWallet",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
@@ -703,9 +719,9 @@
         }
       ]
     },
-    "TelegramRussianRoulette": {
+    "TelegramPEPERace": {
       "address": "0x77AD263Cd578045105FBFC88A477CAd808d39Cf6",
-      "start_block": 17897910,
+      "start_block": 17903553,
       "abi": [
         {
           "inputs": [
@@ -733,6 +749,16 @@
               "internalType": "address",
               "name": "_revenueWallet",
               "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_minRaceLength",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_maxRaceLength",
+              "type": "uint256"
             }
           ],
           "stateMutability": "nonpayable",
@@ -932,7 +958,7 @@
           "name": "bettingToken",
           "outputs": [
             {
-              "internalType": "contract BulletGame",
+              "internalType": "contract IERC20",
               "name": "",
               "type": "address"
             }
@@ -988,7 +1014,7 @@
           "outputs": [
             {
               "internalType": "uint256",
-              "name": "revolverSize",
+              "name": "raceLength",
               "type": "uint256"
             },
             {
@@ -998,7 +1024,7 @@
             },
             {
               "internalType": "bytes32",
-              "name": "hashedBulletChamberIndex",
+              "name": "hashedSuit",
               "type": "bytes32"
             },
             {
@@ -1036,6 +1062,32 @@
         },
         {
           "inputs": [],
+          "name": "maxRaceLength",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "minRaceLength",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
           "name": "minimumBet",
           "outputs": [
             {
@@ -1056,7 +1108,7 @@
             },
             {
               "internalType": "uint256",
-              "name": "_revolverSize",
+              "name": "_raceLength",
               "type": "uint256"
             },
             {
@@ -1066,7 +1118,7 @@
             },
             {
               "internalType": "bytes32",
-              "name": "_hashedBulletChamberIndex",
+              "name": "_hashedSuit",
               "type": "bytes32"
             },
             {
