@@ -5,7 +5,7 @@ import { ethers } from 'ethers';
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
   const { deployer } = await getNamedAccounts();
-  console.log("🚀 | module.exports= | deployer:", deployer)
+  console.log('🚀 | module.exports= | deployer:', deployer);
   const chainId = await getChainId();
   // let pepeToken = await deployments.get('PEPERace');
   let controller = '0x6DE01c3DB3AC8ceC90d7516ADE520e0F0Fdc6525';
@@ -19,7 +19,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     from: deployer,
     contract: 'TelegramPEPERace',
     log: true,
-    args: [mockToken.address, 1000, 900, deployer, 5, 30, controller], //TODO: @0xKratos Fix this
+    args: [mockToken.address, 1000, 5, deployer, 5, 30, controller], //TODO: @0xKratos Fix this
   });
   console.log('🚀 | module.exports= | TelegramPEPERace:', tgPEPERace.address);
   // Get PEPERace contract

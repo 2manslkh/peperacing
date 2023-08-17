@@ -8,6 +8,7 @@ interface IERC20 {
     function burn(uint256 amount) external;
 }
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "hardhat/console.sol";
 contract TelegramPEPERace is Ownable {
     enum Suit {
     Spades,
@@ -140,9 +141,13 @@ contract TelegramPEPERace is Ownable {
         }
     }
 
+    console.log("Winners total bet: %s", winnersTotalBet);
+    console.log("Losers total bet: %s", losersTotalBet);
     // Deduct 10% for treasury
     uint256 treasuryAmount = (losersTotalBet * treasuryBps) / 100;
+    console.log("Treasury amount: %s", treasuryAmount);
     uint256 availableForWinners = losersTotalBet - treasuryAmount;
+    console.log("Available for winners: %s", availableForWinners);
 
     bool treasurySent = bettingToken.transfer(treasury, treasuryAmount);
     require(treasurySent, "Transfer to treasury failed");
