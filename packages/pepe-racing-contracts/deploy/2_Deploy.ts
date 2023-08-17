@@ -20,7 +20,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   });
   console.log('🚀 | module.exports= | TelegramPEPERace:', tgPEPERace.address);
   // Get PEPERace contract
-  let pepeRace = await ethers.getContractAt('PEPERace', pepeToken.address);
+  let pepeRace = await ethers.getContractAt('PEPERace', mockToken.address);
   // Set TelegramPEPERace contract
   let tx = await pepeRace.setRacingContract(tgPEPERace.address);
 };
