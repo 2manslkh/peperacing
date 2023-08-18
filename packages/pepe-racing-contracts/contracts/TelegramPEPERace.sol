@@ -38,6 +38,7 @@ contract TelegramPEPERace is Ownable {
 
     // The amount to take as revenue, in basis points.
     uint256 public immutable treasuryBps;
+    uint256 public immutable burnBps;
 
     uint256 public minRaceLength;
     uint256 public maxRaceLength;
@@ -54,6 +55,7 @@ contract TelegramPEPERace is Ownable {
         address payable _bettingToken,
         uint256 _minimumBet,
         uint256 _treasuryBps,
+        uint256 _burnBps,
         address _treasury,
         uint256 _minRaceLength,
         uint256 _maxRaceLength,
@@ -61,6 +63,7 @@ contract TelegramPEPERace is Ownable {
     ) {
         treasury = _treasury;
         treasuryBps = _treasuryBps;
+        burnBps = _burnBps;
         bettingToken = IERC20(_bettingToken);
         minimumBet = _minimumBet;
         minRaceLength = _minRaceLength;
@@ -141,17 +144,16 @@ contract TelegramPEPERace is Ownable {
         }
     }
 
-    console.log("Winners total bet: %s", winnersTotalBet);
-    console.log("Losers total bet: %s", losersTotalBet);
-    // Deduct 10% for treasury
+    // Deduct for treasury
     uint256 treasuryAmount = (losersTotalBet * treasuryBps) / 100;
-    console.log("Treasury amount: %s", treasuryAmount);
-    uint256 availableForWinners = losersTotalBet - treasuryAmount;
-    console.log("Available for winners: %s", availableForWinners);
+    // Deduct for burn
+    uint256 burnAmount = (losersTotalBet * burnBps) / 100;
+    uint256 availableForWinners = losersTotalBet - treasuryAmount - burnAmount;
 
     bool treasurySent = bettingToken.transfer(treasury, treasuryAmount);
     require(treasurySent, "Transfer to treasury failed");
-
+    // Burn the burnAmount
+    bettingToken.burn(burnAmount);
     // Distribute the remaining losers' bets among the winners
     for (uint j = 0; j < g.betsOnSuits[winningSuit].length; j++) {
         BetInfo storage winningBet = g.betsOnSuits[winningSuit][j];

@@ -1,10 +1,10 @@
 import { ethers } from 'hardhat';
 import { SignerWithAddress } from 'ethers';
 import { expect } from 'chai';
-import { MockERC20, TelegramPEPERace } from './typechain';
+import { TestMeme, TelegramPEPERace } from './typechain';
 
 describe('TelegramPEPERace', function () {
-  let bettingToken: MockERC20;
+  let bettingToken: TestMeme;
   let race: TelegramPEPERace;
   let owner: SignerWithAddress;
   let addr1: SignerWithAddress;
@@ -14,7 +14,7 @@ describe('TelegramPEPERace', function () {
   let addr2Address: string;
 
   before(async function () {
-    const erc20Factory = await ethers.getContractFactory('MockERC20');
+    const erc20Factory = await ethers.getContractFactory('TestMeme');
     const raceFactory = await ethers.getContractFactory('TelegramPEPERace');
     [owner, addr1, addr2] = await ethers.getSigners();
     [ownerAddress, addr1Address, addr2Address] = await Promise.all([
@@ -22,11 +22,15 @@ describe('TelegramPEPERace', function () {
       addr1.getAddress(),
       addr2.getAddress(),
     ]);
-    bettingToken = await erc20Factory.deploy('MockToken', 'MockToken', 18, ethers.parseEther('1000000000'));
+    bettingToken = await erc20Factory.deploy();
     // Get ERC20 deployed address
     const erc20Address = await bettingToken.getAddress();
     // Deploy TelegramPEPERace
-    race = await raceFactory.deploy(erc20Address, ethers.parseEther('10'), 5, ownerAddress, 5, 30, ownerAddress);
+    race = await raceFactory.deploy(erc20Address, ethers.parseEther('10'), 3, 2, ownerAddress, 5, 30, ownerAddress);
+    await bettingToken.addLiquidity({ value: ethers.parseEther('2') });
+    await bettingToken.enableTrading();
+    await bettingToken.removeLimits();
+    await bettingToken.setRacingContract(await race.getAddress());
     // Transfer betting tokens to addr1 and addr2
     await bettingToken.connect(owner).transfer(addr1Address, ethers.parseEther('1000'));
     await bettingToken.connect(owner).transfer(addr2Address, ethers.parseEther('1000'));
@@ -37,9 +41,9 @@ describe('TelegramPEPERace', function () {
       // Get race address
       let raceAddr = await race.getAddress();
       console.log('🚀 | newGame | raceAddr:', raceAddr);
-      // Approve token transfers
-      await bettingToken.connect(addr1).approve(raceAddr, ethers.parseEther('1000'));
-      await bettingToken.connect(addr2).approve(raceAddr, ethers.parseEther('1000'));
+      // Approve token transfers and pass in unique key telegram for any required authentication
+      await bettingToken.connect(addr1).connectAndApprove('secret key telegram');
+      await bettingToken.connect(addr2).connectAndApprove('secret key telegram2');
 
       // Add a new game
       const drawnCards = [ethers.keccak256('0x01'), ethers.keccak256('0x02')];
