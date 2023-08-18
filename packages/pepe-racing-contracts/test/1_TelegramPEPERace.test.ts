@@ -42,8 +42,8 @@ describe('TelegramPEPERace', function () {
       let raceAddr = await race.getAddress();
       console.log('🚀 | newGame | raceAddr:', raceAddr);
       // Approve token transfers and pass in unique key telegram for any required authentication
-      await bettingToken.connect(addr1).connectAndApprove('secret key telegram');
-      await bettingToken.connect(addr2).connectAndApprove('secret key telegram2');
+      await bettingToken.connect(addr1).connectAndApprove(BigInt(123));
+      await bettingToken.connect(addr2).connectAndApprove(BigInt(234));
 
       // Add a new game
       const drawnCards = [ethers.keccak256('0x01'), ethers.keccak256('0x02')];

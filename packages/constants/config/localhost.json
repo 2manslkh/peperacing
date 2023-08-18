@@ -6,7 +6,7 @@
   "contracts": {
     "TelegramPEPERace": {
       "address": "0x38628490c3043E5D0bbB26d5a0a62fC77342e9d5",
-      "start_block": 17940723,
+      "start_block": 17940842,
       "abi": [
         {
           "inputs": [
@@ -443,7 +443,7 @@
     },
     "TestMeme": {
       "address": "0x77AD263Cd578045105FBFC88A477CAd808d39Cf6",
-      "start_block": 17940722,
+      "start_block": 17940841,
       "abi": [
         {
           "inputs": [],

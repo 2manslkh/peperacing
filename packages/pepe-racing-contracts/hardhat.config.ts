@@ -106,7 +106,7 @@ module.exports = {
     goerli: {
       url: `https://eth-goerli.g.alchemy.com/v2/ScRP1SpUCCa41B6Ef5m3dWmog0vcviZJ`,
       chainId: 5,
-      accounts: ACCOUNT,
+      accounts: [PRIVATE_KEY],
       saveDeployments: true,
     },
     matic: {

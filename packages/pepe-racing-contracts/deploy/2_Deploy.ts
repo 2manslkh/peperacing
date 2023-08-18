@@ -18,7 +18,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     from: deployer,
     contract: 'TelegramPEPERace',
     log: true,
-    args: [pepeToken.address, ethers.parseEther('10'), 3, 2, deployer, 5, 30, controller],
+    args: [pepeToken.address, ethers.parseEther('0.2'), 3, 2, deployer, 5, 30, controller],
   });
   console.log('🚀 | module.exports= | TelegramPEPERace:', tgPEPERace.address);
 
