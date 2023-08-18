@@ -1,10 +1,12 @@
 import 'dotenv/config';
 
-import { ethers } from 'ethers';
+import { ethers, parseEther } from 'ethers';
 
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
-  const { deployer } = await getNamedAccounts();
+  const { deployer, user_1, user_2 } = await getNamedAccounts();
+  console.log("🚀 | module.exports= | user_2:", user_2)
+  console.log("🚀 | module.exports= | user_1:", user_1)
   console.log('🚀 | module.exports= | deployer:', deployer);
   const chainId = await getChainId();
   // let pepeToken = await deployments.get('PEPERace');
@@ -33,6 +35,34 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   //   'setRacingContract',
   //   tgPEPERace.address
   // );
+
+  await execute(
+    'MockERC20',
+    { from: deployer, log: true },
+    'mint',
+    user_1, parseEther('1000000000')
+  );
+
+  await execute(
+    'MockERC20',
+    { from: deployer, log: true },
+    'mint',
+    user_2, parseEther('1000000000')
+  );
+
+  await execute(
+    'MockERC20',
+    { from: user_1, log: true },
+    'approve',
+    tgPEPERace.address, parseEther('1000000000')
+  );
+
+  await execute(
+    'MockERC20',
+    { from: user_2, log: true },
+    'approve',
+    tgPEPERace.address, parseEther('1000000000')
+  );
 };
 
 module.exports.tags = ['Racing'];

@@ -255,6 +255,12 @@ module.exports = {
     treasury: {
       default: 1, // here this will by default take the second account as treasury
     },
+    user_1: {
+      default: 2, // here this will by default take the second account as treasury
+    },
+    user_2: {
+      default: 3, // here this will by default take the second account as treasury
+    },
   },
   etherscan: {
     apiKey: {
