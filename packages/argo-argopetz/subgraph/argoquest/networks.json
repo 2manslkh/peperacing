@@ -1,8 +1,16 @@
 {
   "cronos_testnet": {
-    "Contract": {
-      "address": "0xd3Df91EE04ffcCcE2A2aA43908b66DC043834a59",
-      "startBlock": 10470431
-    }
+    "ArgoPetz_address": "0x681BaC6cBc89D4bb6AA4cBcB7a31bFA944cA7A10",
+    "ArgoPetz_start_block": 11437379,
+    "ArgoQuest_address": "0x61303936E734cd87DDBBC5B677B7b3097b91a11d",
+    "ArgoQuest_start_block": 12282422,
+    "ERC721_address": "0x60F5CEb4b06434E77e335B9140D17814f72De05a",
+    "ERC721_start_block": 10468895,
+    "StarMapCrafting_address": "0x8F4d41ce93AaE82Ab62444Db3D079549aEB993B3",
+    "StarMapCrafting_start_block": 11570806
+  },
+  "cronos_mainnet": {
+    "ArgoPetz_address": "0xd32C596994A07946699cAea4e669C6e284A85958",
+    "ArgoPetz_start_block": 9509296
   }
 }

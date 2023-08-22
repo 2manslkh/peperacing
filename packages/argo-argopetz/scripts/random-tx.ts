@@ -15,18 +15,13 @@ async function main() {
   const starmap: StarMapCrafting = (await getContract('StarMapCrafting')) as StarMapCrafting;
   const argoQuest: ArgoQuest = (await getContract('ArgoQuest')) as ArgoQuest;
   const argonauts: MockERC721 = (await getContract('MockERC721')) as MockERC721;
-
-  // await argonauts.mint(20);
-  // await argonauts.setApprovalForAll(getAddress('ArgoQuest'), true);
-  // await argoPetz.setApprovalForAll(getAddress('ArgoQuest'), true);
-  // await argoQuest.setArgopetz(getAddress('ArgoPetz'));
+  let argoQuestAddr = await argoQuest.getAddress();
+  //await argoPetz.setPublicMintPrice(ethers.parseEther('0'));
+  // await argoPetz.publicMint(10, { value: ethers.parseEther('0') });
   //await argoQuest.setCanQuest(true);
-  //await argoQuest.startQuest(20, [3759, 3383]);
-  // // await argoPetz.setPublicMintPrice(ethers.utils.parseEther('0'));
-  // await argoPetz.setStage(2);
-  await argoPetz.publicMint(100);
-  // // await argoPetz.setApprovalForAll(starmap.address, true);
-  // await starmap.stakeNFT([1537, 2577, 3185]);
+  // await argonauts.setApprovalForAll(argoQuestAddr, true);
+  // await argoPetz.setApprovalForAll(argoQuestAddr, true);
+  await argoQuest.startQuest(1, [2954, 3657, 4589, 5069]);
 }
 
 main()

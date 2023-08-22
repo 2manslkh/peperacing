@@ -17,6 +17,8 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   // Chain Dependent Settings
   if (chainId == '25') {
     console.log('MAINNET DEPLOYMENT...(Skipping Mock)');
+    argonauts = '0xa996aD2b9f240F78b063E47F552037658c4563d1';
+
     return;
   } else if (chainId == '338') {
     console.log('TESTNET DEPLOYMENT...');

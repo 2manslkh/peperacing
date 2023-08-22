@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { Contract } from 'ethers';
 import { Deployment } from 'hardhat-deploy/types';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
-import { ethers } from 'hardhat';
+import yaml from 'js-yaml';
 import fs from 'fs';
 import path from 'path';
 
@@ -134,10 +134,90 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId, network }: 
       path.join(__dirname, '..', '..', 'constants', 'config', `${networkName}.json`),
       JSON.stringify({
         network: networkName.replace('-', '_'),
-        burner_address: '0x0000000000000000000000000000000000000000',
       })
     );
   }
+
+  // Read config file from ../subgraph/argoquest/networks.json
+  /* Assuming networks.json looks like this:
+  {
+  "cronos_testnet": { "ArgoPetz": {}, "StarMapCrafting": {}, "ArgoQuest": {} },
+  "cronos_mainnet": {
+    "ArgoPetz": {},
+    "StarMapCrafting": {},
+    "ArgoQuest": {}
+  }
+}
+  */
+
+  const networks = JSON.parse(
+    fs.readFileSync(path.join(__dirname, '..', 'subgraph', 'argoquest', 'networks.json'), 'utf8')
+  );
+
+  // Append Address and Block Numbers to config
+  const atlantisNetworks = {
+    ...networks,
+    [networkName]: addressAndBlockNumbers,
+  };
+  fs.writeFileSync(
+    path.join(__dirname, '..', 'subgraph', 'argoquest', 'networks.json'),
+    JSON.stringify(atlantisNetworks, null, 2)
+  );
+
+  // Write abis to abi folder
+
+  // Check if folder exists
+  if (!fs.existsSync(path.join(__dirname, '..', 'subgraph', 'argoquest', 'abis'))) {
+    fs.mkdirSync(path.join(__dirname, '..', 'subgraph', 'argoquest', 'abis'));
+  }
+  // Write abis from deployments folder to subgraph/argoquest/abis
+  jsonFiles.forEach((f) => {
+    // Check if file exists
+    if (!fs.existsSync(path.join(__dirname, '..', 'subgraph', 'argoquest', 'abis', f))) {
+      fs.writeFileSync(
+        path.join(__dirname, '..', 'subgraph', 'argoquest', 'abis', f),
+        JSON.stringify(
+          JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'deployments', networkName, f), 'utf8')).abi
+        )
+      );
+    }
+  });
+
+  const yamlFilePath = path.join(__dirname, '..', 'subgraph', 'argoquest', 'subgraph.yaml');
+  const subgraphYaml: string = fs.readFileSync(yamlFilePath, 'utf8');
+  const doc: any = yaml.load(subgraphYaml);
+
+  interface AddressAndBlockNumber {
+    address: string;
+    startBlock: string;
+  }
+
+  const addressAndBlockNumbers2: Record<string, AddressAndBlockNumber> = {
+    ArgoPetz: {
+      address: addressAndBlockNumbers['ArgoPetz_address'],
+      startBlock: addressAndBlockNumbers['ArgoPetz_start_block'],
+    },
+    StarMapCrafting: {
+      address: addressAndBlockNumbers['StarMapCrafting_address'],
+      startBlock: addressAndBlockNumbers['StarMapCrafting_start_block'],
+    },
+    ArgoQuest: {
+      address: addressAndBlockNumbers['ArgoQuest_address'],
+      startBlock: addressAndBlockNumbers['ArgoQuest_start_block'],
+    },
+  };
+
+  // Update values in the YAML
+  doc.dataSources.forEach((dataSource: any) => {
+    const name = dataSource.name;
+    if (addressAndBlockNumbers2[name]) {
+      dataSource.source.address = addressAndBlockNumbers2[name].address;
+      dataSource.source.startBlock = addressAndBlockNumbers2[name].startBlock;
+    }
+  });
+
+  // Write the updated YAML back to the file
+  fs.writeFileSync(yamlFilePath, yaml.dump(doc));
 };
 
 module.exports.tags = ['Setter'];

@@ -3,8 +3,11 @@ import { User, Petz } from '../generated/schema';
 import { BigInt } from '@graphprotocol/graph-ts';
 export function handleTransfer(event: Transfer): void {
   const nullAddr = '0x0000000000000000000000000000000000000000';
+  // Get starmap and argoquest addresses from networks.json
+
   const starmapAddr = '0x8F4d41ce93AaE82Ab62444Db3D079549aEB993B3';
-  const argoQuestAddr = '0x05ab185d3c8A5b8E00ae1a5C02487e6d85E9CD1D';
+  const argoQuestAddr = '0x61303936E734cd87DDBBC5B677B7b3097b91a11d';
+
   // If the token is being transferred from address 0, it's a mint
   if (event.params.from.toHexString() == nullAddr) {
     let pet = new Petz(event.params.id.toString());

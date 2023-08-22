@@ -9,17 +9,16 @@ import "hardhat/console.sol";
 contract ArgoQuest is ERC721Holder, Ownable {
     IERC721 public argonauts;
     IERC721 public argopetz;
-
-    uint8 public maxCrews = 3;
+    bool public canQuest;
+    uint8 public maxCrews = 5;
     // Track ownership of argonauts
     mapping(uint256 => address) public argonautsOwners;
     // Track ownership of argopetz
     mapping(uint256 => address) public argopetzOwners;
-    bool public canQuest;
     mapping(uint256 => uint256) public tokensLastQuestedAt; // argonaut tokenId => timestamp
     mapping(uint256 => uint256[]) public questCrews; // argonaut tokenId => argopetz tokenIds
     mapping(uint256 => uint256[]) public argopetzCrew; // argopetz tokenId => argonaut tokenId [array of 1 uint256]
-    uint256 public constant MAX_SUPPLY = 8888;
+    uint256 private constant MAX_SUPPLY = 8888;
     event QuestStarted(uint256 indexed tokenId, uint256 questStartedAt, uint256[] crews);
     event QuestEdited(uint256 indexed tokenId, uint256 questStartedAt, uint256[] crews, uint256 questEditedAt);
     event QuestStopped(uint256 indexed tokenId, uint256 questStartedAt, uint256 questStoppedAt);
@@ -228,5 +227,9 @@ contract ArgoQuest is ERC721Holder, Ownable {
 
     function setArgonauts(address addr) external onlyOwner {
         argonauts = IERC721(addr);
+    }
+
+    function setMaxQuest(uint8 n) external onlyOwner {
+        maxCrews = n;
     }
 }
