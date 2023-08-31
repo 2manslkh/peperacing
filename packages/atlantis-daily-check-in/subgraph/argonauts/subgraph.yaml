@@ -1,0 +1,27 @@
+specVersion: 0.0.4
+description: A Subgraph to track Argonauts
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Argonauts
+    network: cronos
+    source:
+      address: '0xa996aD2b9f240F78b063E47F552037658c4563d1'
+      abi: Argonauts
+      startBlock: 4038050
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - User
+        - Argonauts
+      abis:
+        - name: Argonauts
+          file: ./abis/Argonauts.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/argonauts.ts
+  

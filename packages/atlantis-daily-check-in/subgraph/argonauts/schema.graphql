@@ -1,0 +1,10 @@
+type User @entity {
+  id: ID!
+  argonauts: [Argonauts!]! @derivedFrom(field: "owner")
+}
+
+type Argonauts @entity {
+  id: ID!
+  owner: User!
+  staking: Boolean!
+}

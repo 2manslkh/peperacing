@@ -52,6 +52,9 @@ packages/atlantis-art-engine/galaxy/
 packages/atlantis-art-engine/build/
 packages/atlantis-art-engine/data/
 packages/atlantis-art-engine/src/output/
+packages/atlantis-daily-check-in/backend/typechain/
+packages/atlantis-daily-check-in/blockchain/artifacts/
+packages/atlantis-daily-check-in/blockchain/typechain-types/
 # TypeScript v1 declaration files
 typings/
 
