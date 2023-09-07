@@ -15,7 +15,12 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   // Chain Dependent Settings
   if (chainId == '25') {
     console.log('MAINNET DEPLOYMENT...(Skipping Mock)');
-    return;
+    // Deploy StarmapCrafting
+    let smCrafting = await deploy('StarMapCrafting', {
+      from: deployer,
+      log: true,
+      args: [argoPetz.address],
+    });
   } else if (chainId == '338') {
     console.log('TESTNET DEPLOYMENT...');
 

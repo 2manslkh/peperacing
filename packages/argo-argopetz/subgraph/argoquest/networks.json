@@ -11,6 +11,8 @@
   },
   "cronos_mainnet": {
     "ArgoPetz_address": "0xd32C596994A07946699cAea4e669C6e284A85958",
-    "ArgoPetz_start_block": 9509296
+    "ArgoPetz_start_block": 9509296,
+    "StarMapCrafting_address": "0xE48C9E09119D8Dce47A66975CE441e49f407def2",
+    "StarMapCrafting_start_block": 10045556
   }
 }

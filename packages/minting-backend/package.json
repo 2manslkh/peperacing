@@ -26,6 +26,7 @@
     "nodemon": "^2.0.15"
   },
   "devDependencies": {
+    "googleapis": "^126.0.1",
     "jest": "^27.3.1",
     "request": "^2.88.2",
     "supertest": "^6.1.6"

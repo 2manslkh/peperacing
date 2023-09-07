@@ -5,7 +5,7 @@ export function handleTransfer(event: Transfer): void {
   const nullAddr = '0x0000000000000000000000000000000000000000';
   // Get starmap and argoquest addresses from networks.json
 
-  const starmapAddr = '0x8F4d41ce93AaE82Ab62444Db3D079549aEB993B3';
+  const starmapAddr = '0xE48C9E09119D8Dce47A66975CE441e49f407def2';
   const argoQuestAddr = '0x61303936E734cd87DDBBC5B677B7b3097b91a11d';
 
   // If the token is being transferred from address 0, it's a mint
@@ -47,12 +47,12 @@ export function handleTransfer(event: Transfer): void {
   let user = User.load(event.params.to.toHex());
   if (user == null) {
     user = new User(event.params.to.toHex());
-    user.argoPetz = [];
+    // user.argoPetz = [];
   }
 
-  let petArray = user.argoPetz;
-  petArray.push(event.params.id.toString());
-  user.argoPetz = petArray;
+  // let petArray = user.argoPetz;
+  // petArray.push(event.params.id.toString());
+  // user.argoPetz = petArray;
 
   user.save();
 }

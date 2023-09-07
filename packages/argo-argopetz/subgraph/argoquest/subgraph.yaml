@@ -5,11 +5,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: ArgoPetz
-    network: cronos_testnet
+    network: cronos
     source:
-      address: '0x681BaC6cBc89D4bb6AA4cBcB7a31bFA944cA7A10'
+      address: '0xd32C596994A07946699cAea4e669C6e284A85958'
       abi: ArgoPetz
-      startBlock: 11437379
+      startBlock: 9509296
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -26,11 +26,11 @@ dataSources:
       file: ./src/argopetz.ts
   - kind: ethereum/contract
     name: StarMapCrafting
-    network: cronos_testnet
+    network: cronos
     source:
-      address: '0x8F4d41ce93AaE82Ab62444Db3D079549aEB993B3'
+      address: '0xE48C9E09119D8Dce47A66975CE441e49f407def2'
       abi: StarMapCrafting
-      startBlock: 11570806
+      startBlock: 10045556
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -46,27 +46,25 @@ dataSources:
         - event: UnstakedNFT(indexed address,indexed uint256,uint256)
           handler: handleUnstakedNFT
       file: ./src/starmap-crafting.ts
-  - kind: ethereum/contract
-    name: ArgoQuest
-    network: cronos_testnet
-    source:
-      address: '0x61303936E734cd87DDBBC5B677B7b3097b91a11d'
-      abi: ArgoQuest
-      startBlock: 12282422
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Quest
-      abis:
-        - name: ArgoQuest
-          file: ./abis/ArgoQuest.json
-      eventHandlers:
-        - event: QuestStarted(indexed uint256,uint256,uint256[])
-          handler: handleQuestStarted
-        - event: QuestEdited(indexed uint256,uint256,uint256[],uint256)
-          handler: handleQuestEdited
-        - event: QuestStopped(indexed uint256,uint256,uint256)
-          handler: handleQuestStopped
-      file: ./src/argoquest.ts
+  # - kind: ethereum/contract
+  #   name: ArgoQuest
+  #   network: cronos_testnet
+  #   source:
+  #     abi: ArgoQuest
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.7
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - Quest
+  #     abis:
+  #       - name: ArgoQuest
+  #         file: ./abis/ArgoQuest.json
+  #     eventHandlers:
+  #       - event: QuestStarted(indexed uint256,uint256,uint256[])
+  #         handler: handleQuestStarted
+  #       - event: QuestEdited(indexed uint256,uint256,uint256[],uint256)
+  #         handler: handleQuestEdited
+  #       - event: QuestStopped(indexed uint256,uint256,uint256)
+  #         handler: handleQuestStopped
+  #     file: ./src/argoquest.ts

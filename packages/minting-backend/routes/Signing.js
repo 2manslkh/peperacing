@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const { getWhitelistSignatureAkiverse } = require("../controllers/Signing");
+const { getWhitelistSignature } = require("../controllers/Signing");
 
-router.route("/akiverse/sign").post(getWhitelistSignatureAkiverse);
+router.route("/sign").post(getWhitelistSignature);
 
 module.exports = router;

@@ -5,7 +5,7 @@ export function handleStakedNFT(event: StakedNFT): void {
   let user = User.load(event.params.user.toHex());
   if (user == null) {
     user = new User(event.params.user.toHex());
-    user.argoPetz = [];
+    // user.argoPetz = [];
   }
 
   let pet = Petz.load(event.params.nftId.toString());
@@ -19,9 +19,9 @@ export function handleStakedNFT(event: StakedNFT): void {
     pet.staking = true;
   }
 
-  let userPetz = user.argoPetz;
-  userPetz.push(pet.id);
-  user.argoPetz = userPetz;
+  // let userPetz = user.argoPetz;
+  // userPetz.push(pet.id);
+  // user.argoPetz = userPetz;
 
   user.save();
   pet.save();
