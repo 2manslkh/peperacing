@@ -195,6 +195,7 @@ module.exports = {
   etherscan: {
     apiKey: {
       base_mainnet: process.env.BASESCAN_API_KEY,
+      base_goerli: process.env.BASESCAN_API_KEY,
     },
     customChains: [
       {
@@ -203,6 +204,14 @@ module.exports = {
         urls: {
           apiURL: 'https://api.basescan.org/api',
           browserURL: 'https://basescan.org',
+        },
+      },
+      {
+        network: 'base_goerli',
+        chainId: 84531,
+        urls: {
+          apiURL: 'https://api-goerli.basescan.org/api',
+          browserURL: 'https://goerli.basescan.org',
         },
       },
     ],
