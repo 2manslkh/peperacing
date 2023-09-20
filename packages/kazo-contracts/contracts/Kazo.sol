@@ -3,9 +3,7 @@ pragma solidity 0.8.19;
 
 import "./ERC721Template.sol";
 
-contract Minion is ERC721Template {
-    /// @notice Address of the incentive contract
-    address public incentiveAddress;
+contract Kazo is ERC721Template {
     /// @notice Price for whitelist mint
     uint256 public whitelistMintPrice;
     /// @notice Max amount of whitelist mint
@@ -33,14 +31,15 @@ contract Minion is ERC721Template {
         uint16 maxSupply_,
         address withdrawAddress,
         address _whitelistSignerAddress,
+        address _incentiveAddress,
         uint16 _whitelistMaxMint,
         uint256 _whitelistMintPrice,
         uint256 _publicMintPrice,
-        address _incentiveAddress
+        uint96 _feeNumerator
     ) ERC721Template(_name, _symbol, _baseURI, maxSupply_, withdrawAddress, _whitelistSignerAddress, _publicMintPrice) {
         whitelistMintPrice = _whitelistMintPrice;
         whitelistMaxMint = _whitelistMaxMint;
-        incentiveAddress = _incentiveAddress;
+        _setDefaultRoyalty(_incentiveAddress, _feeNumerator);
     }
 
     /**
@@ -59,6 +58,19 @@ contract Minion is ERC721Template {
         // Increase whitelist mint count
         whitelistMintCount[msg.sender] += uint16(_amount);
         _mintWithSignature(_amount, _nonce, _signature, whitelistMintPrice);
+    }
+
+    /**
+     * @dev Free mint
+     * @param _nonce Nonce to prevent replay attacks
+     * @param _signature Signature from backend signed by signer address if user is whitelisted
+     */
+    function freeMint(bytes calldata _nonce, bytes calldata _signature) external payable onlyStage(1) {
+        // Check if already free minted
+        require(!hasMinted[msg.sender], "Already minted!");
+        // Set has minted to true
+        hasMinted[msg.sender] = true;
+        _mintWithSignature(1, _nonce, _signature, 0);
     }
 
     /**

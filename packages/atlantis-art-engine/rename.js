@@ -3,7 +3,7 @@ const csv = require("csv-parser");
 
 const layersDir = "./layers";
 const dataDir = "./data";
-const csvFile = `${dataDir}/terrestrial.csv`;
+const csvFile = `${dataDir}/kazo.csv`;
 
 fs.createReadStream(csvFile)
   .pipe(
@@ -15,14 +15,14 @@ fs.createReadStream(csvFile)
     const [name, number] = Object.values(row)[0].split("#");
 
     [
-      "Archetype",
+      "Back Accessories",
       "Background",
-      "Aura",
       "Base",
       "Clothing",
-      "Face",
-      "Hand Accessories",
+      "Eyes",
+      "Face Accessories",
       "Head Accessories",
+      "Mouth",
     ].forEach((layer) => {
       const layerDir = `${layersDir}/${layer}`;
 

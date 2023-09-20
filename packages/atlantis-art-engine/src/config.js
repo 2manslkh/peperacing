@@ -5,24 +5,23 @@ const { NETWORK } = require(`${basePath}/constants/network.js`);
 const network = NETWORK.eth;
 
 // General metadata for Ethereum
-const namePrefix = "ArgoPetz";
-const description =
-  "ArgoPetz is a collection of 8,888 unique utility-enabled characters and are partners to the Argonauts collection on the Cronos chain. Each ArgoPetz holder gets access to utility across the entire Argo ecosystem, lucrative rewards, airdrops, and will be a key asset in future Argo developments.";
+const namePrefix = "Kazo";
+const description = "";
 const baseUri = "ipfs://NewUriToReplace";
 
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
   {
-    growEditionSizeTo: 8558,
+    growEditionSizeTo: 1000,
     layersOrder: [
-      { name: "Archetype" },
       { name: "Background" },
-      { name: "Aura" },
+      { name: "Back Accessories" },
       { name: "Base" },
       { name: "Clothing" },
-      { name: "Hand Accessories" },
-      { name: "Face" },
+      { name: "Face Accessories" },
+      { name: "Eyes" },
       { name: "Head Accessories" },
+      { name: "Mouth" },
     ],
   },
 ];

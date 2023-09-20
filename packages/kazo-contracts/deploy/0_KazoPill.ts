@@ -1,7 +1,6 @@
 import 'dotenv/config';
 
 import { ethers } from 'hardhat';
-import { Leader } from '../typechain';
 
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
@@ -31,7 +30,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     let kazoPill = await deploy('KazoPill', {
       from: deployer,
       log: true,
-      args: ['Test', 'Test Symbol'],
+      args: ['KAZO Pill', 'PILL', ethers.parseEther('0.0005'), 1, deployer],
     });
   } else {
     return;

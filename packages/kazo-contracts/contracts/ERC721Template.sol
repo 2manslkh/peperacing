@@ -1,64 +1,139 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.18;
+pragma solidity 0.8.19;
 
-import "./common/ERC721x.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "solady/src/tokens/ERC721.sol";
+import "solady/src/auth/Ownable.sol";
+import "solady/src/utils/LibString.sol";
+import "solady/src/utils/ECDSA.sol";
 import "@openzeppelin/contracts/token/common/ERC2981.sol";
-import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
-error InvalidTokenId();
-error NoMoreTokenIds();
-error WithdrawFailed();
-
-// Cred: Elementals contract -> learning from the best!
-contract ERC721Template is ERC721x, ERC2981 {
+contract ERC721Template is ERC721, ERC2981, Ownable {
+    using LibString for uint256;
     using ECDSA for bytes32;
-
-    uint16 public immutable MAX_SUPPLY;
-    uint16 internal _numAvailableRemainingTokens;
-    uint16[65536] internal _availableRemainingTokens;
-    uint256 public immutable PUBLIC_MAX_MINT;
-    uint256 public immutable WHITELIST_MAX_MINT;
-    address public immutable WITHDRAW_ADDRESS;
-    address public immutable WHITELIST_SIGNER_ADDRESS;
-    mapping(address => uint256) public whitelistMintCount;
-    mapping(address => uint256) public publicMintCount;
-    uint256 public whitelistMintPrice;
-    uint256 public publicMintPrice;
+    /// @notice Error codes
+    error InvalidTokenId();
+    error NoMoreTokenIds();
+    error WithdrawFailed();
+    /// @notice Address to withdraw ETH to
+    address public withdrawAddress;
+    /// @notice Backend signer address - used to check if user is whitelisted
+    address public whitelistSignerAddress;
+    /// @notice Current stage
     uint8 public stage;
-
+    /// @notice Max supply of tokens
+    uint16 public immutable MAX_SUPPLY;
+    /// @notice Number of available remaining tokens
+    uint16 internal _numAvailableRemainingTokens;
+    /// @notice Array of available remaining tokens
+    uint16[65536] internal _availableRemainingTokens;
+    /// @notice Public mint price
+    uint256 public publicMintPrice;
+    /// @notice Base URI of token metadata
+    string public baseURI;
+    /// @notice Name of token
+    string internal _name;
+    /// @notice Symbol of token
+    string internal _symbol;
 
     constructor(
-        string memory _name,
-        string memory _symbol,
+        string memory name_,
+        string memory symbol_,
         string memory _baseURI,
         uint16 maxSupply_,
-        address withdrawAddress,
+        address _withdrawAddress,
         address _whitelistSignerAddress,
-        uint256 _publicMaxMint,
-        uint256 _whitelistMaxMint,
-        uint256 _whitelistMintPrice,
         uint256 _publicMintPrice
-    ) ERC721x(_name, _symbol) {
+    ) {
+        // Set max supply
         MAX_SUPPLY = maxSupply_;
+        // Set available remaining tokens
         _numAvailableRemainingTokens = maxSupply_;
-        setBaseURI(_baseURI);
-        WITHDRAW_ADDRESS = withdrawAddress;
-        WHITELIST_SIGNER_ADDRESS = _whitelistSignerAddress;
-        PUBLIC_MAX_MINT = _publicMaxMint;
-        WHITELIST_MAX_MINT = _whitelistMaxMint;
-        whitelistMintPrice = _whitelistMintPrice;
+        // Set address to withdraw ETH to
+        withdrawAddress = _withdrawAddress;
+        // Set backend signer address
+        whitelistSignerAddress = _whitelistSignerAddress;
+        // Set public mint price
+        publicMintPrice = _publicMintPrice;
+        // Set name and symbol
+        _name = name_;
+        _symbol = symbol_;
+        // Set base URI
+        baseURI = _baseURI;
+    }
+
+    /**
+     * @notice Used to set royalty fees for all tokens, according to EIP-2981
+     * @param _receiver Address to receive royalties
+     * @param _feeNumerator Fee numerator, in basis points
+     */
+    function setDefaultRoyalty(address _receiver, uint96 _feeNumerator) external onlyOwner {
+        _setDefaultRoyalty(_receiver, _feeNumerator);
+    }
+
+    /**
+     * @notice Used to set royalty fees for a specific token, according to EIP-2981
+     * @param _tokenId Token ID
+     * @param _receiver Address to receive royalties
+     * @param _feeNumerator Fee numerator, in basis points
+     */
+
+    function setTokenRoyalty(uint256 _tokenId, address _receiver, uint96 _feeNumerator) external onlyOwner {
+        _setTokenRoyalty(_tokenId, _receiver, _feeNumerator);
+    }
+
+    /**
+     * @dev Sets the mint price for public mint
+     * @param _publicMintPrice New public mint price
+     */
+    function setPublicMintPrice(uint256 _publicMintPrice) external onlyOwner {
         publicMintPrice = _publicMintPrice;
     }
 
-    // ---------------
-    // Name and symbol
-    // ---------------
-    function setNameAndSymbol(string calldata _newName, string calldata _newSymbol) external onlyOwner {
-        name = _newName;
-        symbol = _newSymbol;
+    /**
+     * @dev Sets the stage
+     * @param _newStage New stage
+     */
+    function setStage(uint8 _newStage) external onlyOwner {
+        stage = _newStage;
     }
 
+    /**
+     * @dev Sets the backend whitelist signer address
+     * @param _newSigner New signer address
+     */
+    function setWhitelistSignerAddress(address _newSigner) external onlyOwner {
+        whitelistSignerAddress = _newSigner;
+    }
+
+    /**
+     * @dev Sets the withdraw address which mint funds are sent to
+     * @param _newWithdrawAddress New withdraw address
+     */
+    function setWithdrawAddress(address _newWithdrawAddress) external onlyOwner {
+        withdrawAddress = _newWithdrawAddress;
+    }
+
+    /**
+     * @dev Set base URI for token metadata
+     * @param _baseURI_ New base URI
+     */
+    function setBaseURI(string memory _baseURI_) public onlyOwner {
+        baseURI = _baseURI_;
+    }
+
+    /**
+     * @dev Withdraws ETH from contract to withdraw address
+     */
+    function withdraw() external {
+        (bool sent, ) = withdrawAddress.call{ value: address(this).balance }("");
+        if (!sent) {
+            revert WithdrawFailed();
+        }
+    }
+
+    /**
+     * @dev Returns a random available token ID, used in pseudo random token Id generation
+     */
     function _useRandomAvailableTokenId() internal returns (uint256) {
         uint256 numAvailableRemainingTokens = _numAvailableRemainingTokens;
         if (numAvailableRemainingTokens == 0) {
@@ -97,9 +172,14 @@ contract ERC721Template is ERC721x, ERC2981 {
 
         --_numAvailableRemainingTokens;
 
-        return result;
+        return result + 1;
     }
 
+    /**
+     * @dev Returns a pseudo random number
+     * @param numAvailableRemainingTokens Number of available remaining tokens
+     * @return Pseudo random number
+     */
     function _getRandomNum(uint256 numAvailableRemainingTokens) internal view returns (uint256) {
         return
             uint256(
@@ -114,98 +194,104 @@ contract ERC721Template is ERC721x, ERC2981 {
             );
     }
 
-    function whitelistMint(
+    /**
+     * @dev Mint tokens with signature
+     * @param _amount Amount of tokens to mint
+     * @param nonce Nonce to prevent replay attacks
+     * @param signature Signature from backend signed by signer address if user is whitelisted
+     * @param _mintPrice Mint price
+     */
+    function _mintWithSignature(
         uint256 _amount,
         bytes calldata nonce,
-        bytes calldata signature
-    ) external payable {
+        bytes calldata signature,
+        uint256 _mintPrice
+    ) internal {
         // Check if user is whitelisted
-        require(whitelistSigned(msg.sender, nonce, signature, stage), "Invalid Signature!");
-
-        // Check if whitelist sale is open
-        require(stage == 1, "Whitelist Mint is not open");
+        require(_whitelistSigned(msg.sender, nonce, signature, stage), "Invalid Signature!");
 
         // Check if enough ETH is sent
-        require(msg.value == _amount * whitelistMintPrice, "Insufficient ETH!");
+        require(msg.value == _amount * _mintPrice, "Insufficient ETH!");
 
         // Check if mints does not exceed MAX_SUPPLY
         require(totalSupply() + _amount <= MAX_SUPPLY, "Exceeded Max Supply!");
 
-        // Check if mints does not exceed max wallet allowance for public sale
-        require(
-            whitelistMintCount[msg.sender] + _amount <= WHITELIST_MAX_MINT,
-            "Wallet has already minted Max Amount for Whitelist Mint!"
-        );
-
-        whitelistMintCount[msg.sender] += _amount;
-        for (uint256 i; i < _amount; ) {
-            uint256 tokenId = _useRandomAvailableTokenId();
-            _mint(msg.sender, tokenId);
-            unchecked {
-                ++i;
-            }
-        }
+        _mintWithRandomness(_amount);
     }
 
-    function publicMint(uint256 _amount) external payable {
-        // Check if public sale is open
-        require(stage == 2, "Public Sale Closed!");
+    /**
+     * @dev Mint tokens with public mint
+     * @param _amount Amount of tokens to mint
+     */
+    function _publicMint(uint256 _amount) internal {
         // Check if enough ETH is sent
         require(msg.value == _amount * publicMintPrice, "Insufficient ETH");
 
-        // Check if mints does not exceed total max supply
-        require(totalSupply() + _amount <= MAX_SUPPLY, "Max Supply Reached!");
-        // Check if mints does not exceed max wallet allowance for public sale
-        require(
-            publicMintCount[msg.sender] + _amount <= PUBLIC_MAX_MINT,
-            "Wallet has already minted Max Amount for Public Mint!"
-        );
-        publicMintCount[msg.sender] += _amount;
+        // Check if mints does not exceed MAX_SUPPLY
+        require(totalSupply() + _amount <= MAX_SUPPLY, "Exceeded Max Supply!");
+
+        _mintWithRandomness(_amount);
+    }
+
+    /**
+     * @dev Mint tokens with pseudo random token ID
+     * @param _amount Amount of tokens to mint
+     */
+    function _mintWithRandomness(uint256 _amount) internal {
         for (uint256 i; i < _amount; ) {
             uint256 tokenId = _useRandomAvailableTokenId();
-            _mint(msg.sender, tokenId);
+            super._mint(msg.sender, tokenId);
             unchecked {
                 ++i;
             }
         }
     }
 
-    function whitelistSigned(
+    /**
+     * @dev Authenticate if user is whitelisted
+     * @param sender Sender address
+     * @param nonce Nonce to prevent replay attacks
+     * @param signature Signature from backend signed by signer address if user is whitelisted
+     * @param _stage Stage to check if user is whitelisted for
+     * @return True if user is whitelisted
+     */
+    function _whitelistSigned(
         address sender,
         bytes calldata nonce,
         bytes calldata signature,
         uint8 _stage
-    ) private view returns (bool) {
+    ) internal view returns (bool) {
         bytes32 _hash = keccak256(abi.encodePacked(sender, nonce, _stage));
-        return WHITELIST_SIGNER_ADDRESS == ECDSA.toEthSignedMessageHash(_hash).recover(signature);
+        return whitelistSignerAddress == ECDSA.toEthSignedMessageHash(_hash).recover(signature);
     }
 
-    function withdraw() external {
-        (bool sent, ) = WITHDRAW_ADDRESS.call{ value: address(this).balance }("");
-        if (!sent) {
-            revert WithdrawFailed();
-        }
+    /**
+     * @dev Function to adhere to EIP-2981
+     */
+    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC2981) returns (bool) {
+        return ERC721.supportsInterface(interfaceId) || ERC2981.supportsInterface(interfaceId);
     }
 
-    // ------------
-    // Mint
-    // ------------
-
-    function setPublicMintPrice(uint256 _publicMintPrice) public onlyOwner {
-        publicMintPrice = _publicMintPrice;
+    /**
+     * @dev Returns the name of the token collection
+     * @return Name of the token collection
+     */
+    function name() public view override returns (string memory) {
+        return _name;
     }
 
-    function setWhitelistMintPrice(uint256 _whitelistMintPrice) public onlyOwner {
-        whitelistMintPrice = _whitelistMintPrice;
+    /**
+     * @dev Returns the symbol of the token collection
+     * @return Symbol of the token collection
+     */
+    function symbol() public view override returns (string memory) {
+        return _symbol;
     }
 
-    function setStage(uint8 _newStage) public onlyOwner {
-        stage = _newStage;
-    }
-
-    // ------------
-    // Total Supply
-    // ------------
+    /**
+     * @dev Total supply of tokens
+     * @return Total supply of tokens
+     */
     function totalSupply() public view returns (uint256) {
         unchecked {
             // Does not need to account for burns as they aren't supported.
@@ -213,29 +299,15 @@ contract ERC721Template is ERC721x, ERC2981 {
         }
     }
 
-     // --------
-    // Metadata
-    // --------
-
-    function setBaseURI(string memory _baseURI_) public onlyOwner {
-        baseURI = _baseURI_;
-    }
-
-    // --------
-    // EIP-2981
-    // --------
-    function setDefaultRoyalty(address receiver, uint96 feeNumerator) external onlyOwner {
-        _setDefaultRoyalty(receiver, feeNumerator);
-    }
-
-    function setTokenRoyalty(uint256 tokenId, address receiver, uint96 feeNumerator) external onlyOwner {
-        _setTokenRoyalty(tokenId, receiver, feeNumerator);
-    }
-
-    // -------
-    // EIP-165
-    // -------
-    function supportsInterface(bytes4 interfaceId) public view override(ERC721x, ERC2981) returns (bool) {
-        return ERC721.supportsInterface(interfaceId) || ERC2981.supportsInterface(interfaceId);
+    /**
+     * @dev Return the metadata URI for a token
+     * @param tokenId Token ID
+     * @return Metadata URI for token
+     */
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        if (_ownerOf(tokenId) == address(0)) {
+            revert InvalidTokenId();
+        }
+        return string(abi.encodePacked(baseURI, tokenId.toString(), ".json"));
     }
 }

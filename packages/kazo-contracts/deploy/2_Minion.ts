@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 import { ethers } from 'hardhat';
-import { Leader } from '../typechain';
+import { Minion } from '../typechain';
 
 module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
   const { deploy, read, execute } = deployments;
@@ -30,8 +30,8 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
         1000,
         deployer,
         signerAddress,
-        10000,
-        20,
+        deployer,
+        50,
         ethers.parseEther('0.01'),
         ethers.parseEther('0.02'),
       ],

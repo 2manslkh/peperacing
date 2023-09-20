@@ -1,0 +1,19 @@
+type User @entity {
+  id: ID!
+  argoPetz: [Petz!]! @derivedFrom(field: "owner")
+}
+
+type Petz @entity {
+  id: ID!
+  owner: User!
+  lastStakedTime: BigInt!
+  staking: Boolean!
+}
+
+type Quest @entity {
+  id: ID!
+  questStartedAt: BigInt!
+  questEditedAt: BigInt
+  questStoppedAt: BigInt
+  crews: [BigInt!]!
+}

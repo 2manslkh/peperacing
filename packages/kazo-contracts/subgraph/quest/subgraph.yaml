@@ -1,0 +1,70 @@
+specVersion: 0.0.4
+description: A Subgraph for the Atlantis ArgoPetz ecosystem
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ArgoPetz
+    network: cronos
+    source:
+      address: '0xd32C596994A07946699cAea4e669C6e284A85958'
+      abi: ArgoPetz
+      startBlock: 9509296
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - User
+        - Petz
+      abis:
+        - name: ArgoPetz
+          file: ./abis/ArgoPetz.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/argopetz.ts
+  - kind: ethereum/contract
+    name: StarMapCrafting
+    network: cronos
+    source:
+      address: '0xE48C9E09119D8Dce47A66975CE441e49f407def2'
+      abi: StarMapCrafting
+      startBlock: 10045556
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Petz
+      abis:
+        - name: StarMapCrafting
+          file: ./abis/StarMapCrafting.json
+      eventHandlers:
+        - event: StakedNFT(indexed address,indexed uint256,uint256)
+          handler: handleStakedNFT
+        - event: UnstakedNFT(indexed address,indexed uint256,uint256)
+          handler: handleUnstakedNFT
+      file: ./src/starmap-crafting.ts
+  # - kind: ethereum/contract
+  #   name: ArgoQuest
+  #   network: cronos_testnet
+  #   source:
+  #     abi: ArgoQuest
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.7
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - Quest
+  #     abis:
+  #       - name: ArgoQuest
+  #         file: ./abis/ArgoQuest.json
+  #     eventHandlers:
+  #       - event: QuestStarted(indexed uint256,uint256,uint256[])
+  #         handler: handleQuestStarted
+  #       - event: QuestEdited(indexed uint256,uint256,uint256[],uint256)
+  #         handler: handleQuestEdited
+  #       - event: QuestStopped(indexed uint256,uint256,uint256)
+  #         handler: handleQuestStopped
+  #     file: ./src/argoquest.ts
