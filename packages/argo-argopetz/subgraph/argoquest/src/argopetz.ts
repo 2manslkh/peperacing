@@ -5,7 +5,7 @@ export function handleTransfer(event: Transfer): void {
   const nullAddr = '0x0000000000000000000000000000000000000000';
   // Get starmap and argoquest addresses from networks.json
 
-  const starmapAddr = '0xE48C9E09119D8Dce47A66975CE441e49f407def2';
+  const starmapAddr = '0xEd2719B371b100e351d9a2Cfa9062AdE036e3be1';
   const argoQuestAddr = '0x61303936E734cd87DDBBC5B677B7b3097b91a11d';
 
   // If the token is being transferred from address 0, it's a mint

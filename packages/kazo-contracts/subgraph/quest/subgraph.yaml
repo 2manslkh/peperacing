@@ -1,15 +1,15 @@
 specVersion: 0.0.4
-description: A Subgraph for the Atlantis ArgoPetz ecosystem
+description: A subgraph for Kazo ecosystem
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: ArgoPetz
-    network: cronos
+    name: Kazo
+    network: base-testnet
     source:
-      address: '0xd32C596994A07946699cAea4e669C6e284A85958'
-      abi: ArgoPetz
-      startBlock: 9509296
+      address: '0x671308A7069711B4e0a9B3886e68D986C05a49Bd'
+      abi: Kazo
+      startBlock: 10082496
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -18,19 +18,19 @@ dataSources:
         - User
         - Petz
       abis:
-        - name: ArgoPetz
-          file: ./abis/ArgoPetz.json
+        - name: Kazo
+          file: ./abis/Kazo.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/argopetz.ts
+      file: ./src/kazo.ts
   - kind: ethereum/contract
-    name: StarMapCrafting
-    network: cronos
+    name: KazoStaking
+    network: base-testnet
     source:
-      address: '0xE48C9E09119D8Dce47A66975CE441e49f407def2'
-      abi: StarMapCrafting
-      startBlock: 10045556
+      address: '0x3B58116f657a24bDf5A37aa5ffe458d9A5D9A719'
+      abi: KazoStaking
+      startBlock: 10262887
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -38,33 +38,11 @@ dataSources:
       entities:
         - Petz
       abis:
-        - name: StarMapCrafting
-          file: ./abis/StarMapCrafting.json
+        - name: KazoStaking
+          file: ./abis/KazoStaking.json
       eventHandlers:
         - event: StakedNFT(indexed address,indexed uint256,uint256)
           handler: handleStakedNFT
         - event: UnstakedNFT(indexed address,indexed uint256,uint256)
           handler: handleUnstakedNFT
-      file: ./src/starmap-crafting.ts
-  # - kind: ethereum/contract
-  #   name: ArgoQuest
-  #   network: cronos_testnet
-  #   source:
-  #     abi: ArgoQuest
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.7
-  #     language: wasm/assemblyscript
-  #     entities:
-  #       - Quest
-  #     abis:
-  #       - name: ArgoQuest
-  #         file: ./abis/ArgoQuest.json
-  #     eventHandlers:
-  #       - event: QuestStarted(indexed uint256,uint256,uint256[])
-  #         handler: handleQuestStarted
-  #       - event: QuestEdited(indexed uint256,uint256,uint256[],uint256)
-  #         handler: handleQuestEdited
-  #       - event: QuestStopped(indexed uint256,uint256,uint256)
-  #         handler: handleQuestStopped
-  #     file: ./src/argoquest.ts
+      file: ./src/kazo-staking.ts

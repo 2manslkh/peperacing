@@ -1,5 +1,5 @@
 import { BigInt } from '@graphprotocol/graph-ts';
-import { ArgoQuest, QuestStarted, QuestEdited, QuestStopped } from '../generated/ArgoQuest/ArgoQuest';
+import { Quest, QuestStarted, QuestEdited, QuestStopped } from '../generated/Questing/Questing';
 import { Quest } from '../generated/schema';
 
 export function handleQuestStarted(event: QuestStarted): void {

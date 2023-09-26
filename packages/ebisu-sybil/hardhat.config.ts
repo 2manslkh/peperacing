@@ -118,17 +118,33 @@ module.exports = {
       accounts: [PRIVATE_KEY],
       saveDeployments: true,
     },
+    mantle_testnet: {
+      url: `https://rpc.testnet.mantle.xyz`,
+      chainId: 5001,
+      accounts: [PRIVATE_KEY_TESTNET],
+      saveDeployments: true,
+    },
     cronos_testnet: {
       url: `https://testnet-cronos.w3node.com/0aa9d84a638f2e0baa627443619cd2cb0ef65f5257170c7c8e9ebe39f427366b/api`,
       chainId: 338,
       accounts: [PRIVATE_KEY_TESTNET],
-      gasLimit: 40000000000,
     },
     cronos_mainnet: {
       url: `https://mainnet.cronoslabs.com/v1/55e37d8975113ae7a44603ef8ce460aa/`,
       chainId: 25,
       accounts: [PRIVATE_KEY],
-      blockGasLimit: 10000000,
+      gasLimit: 1000000000000,
+    },
+    base_mainnet: {
+      url: 'https://mainnet.base.org',
+      chainId: 8453,
+      accounts: [PRIVATE_KEY],
+      gasPrice: 1000000000,
+    },
+    base_goerli: {
+      url: 'https://goerli.base.org',
+      chainId: 84531,
+      accounts: [PRIVATE_KEY],
     },
   },
   solidity: {
@@ -144,14 +160,6 @@ module.exports = {
       },
       {
         version: '0.8.18',
-        settings: {
-          optimizer: {
-            enabled: true,
-          },
-        },
-      },
-      {
-        version: '0.8.11',
         settings: {
           optimizer: {
             enabled: true,
@@ -185,7 +193,28 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: {
+      base_mainnet: process.env.BASESCAN_API_KEY,
+      base_goerli: process.env.BASESCAN_API_KEY,
+    },
+    customChains: [
+      {
+        network: 'base_mainnet',
+        chainId: 8453,
+        urls: {
+          apiURL: 'https://api.basescan.org/api',
+          browserURL: 'https://basescan.org',
+        },
+      },
+      {
+        network: 'base_goerli',
+        chainId: 84531,
+        urls: {
+          apiURL: 'https://api-goerli.basescan.org/api',
+          browserURL: 'https://goerli.basescan.org',
+        },
+      },
+    ],
   },
   paths: {
     sources: './contracts',

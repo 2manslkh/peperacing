@@ -7,15 +7,11 @@ import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "./common/SetUtils.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
-/// @title StarMapCrafting
-/// @author Kratos
-/// @notice This contract is used to craft starmaps with Argopetz
+/// @title KazoStaking contract
 
-contract StarMapCrafting is Ownable, IERC721Receiver {
+contract KazoStaking is Ownable, IERC721Receiver {
     using EnumerableSet for EnumerableSet.UintSet;
-    using EnumerableSet for EnumerableSet.AddressSet;
     using SetUtils for EnumerableSet.UintSet;
-    using SetUtils for EnumerableSet.AddressSet;
 
     /// @notice Mapping of (user) => (EnumerableSet of NFT tokenIds) Number of NFTs staked for each user
     mapping(address => EnumerableSet.UintSet) internal userStakedNFTs;
@@ -26,11 +22,11 @@ contract StarMapCrafting is Ownable, IERC721Receiver {
     /// @notice Event emitted when an NFT is unstaked
     event UnstakedNFT(address indexed user, uint256 indexed nftId, uint256 unstakeTime);
 
-    IERC721 public argopetz;
+    IERC721 public kazo;
 
-    constructor(address _argopetz) {
-        // Set the Argopetz token address
-        argopetz = IERC721(_argopetz);
+    constructor(address _kazo) {
+        // Set the Kazo token address
+        kazo = IERC721(_kazo);
     }
 
     /**
@@ -44,7 +40,7 @@ contract StarMapCrafting is Ownable, IERC721Receiver {
             // Add staked NFT to the stakedNFTs mapping
             userStakedNFTs[msg.sender].add(_nftIds[i]);
             // Transfer the NFT to this contract
-            argopetz.safeTransferFrom(msg.sender, address(this), _nftIds[i]);
+            kazo.safeTransferFrom(msg.sender, address(this), _nftIds[i]);
             // Emit the StakedNFT event
             emit StakedNFT(msg.sender, _nftIds[i], block.timestamp);
             unchecked {
@@ -64,7 +60,7 @@ contract StarMapCrafting is Ownable, IERC721Receiver {
             // Remove the NFT from the stakedNFTs mapping
             userStakedNFTs[msg.sender].remove(_nftIds[i]);
             // Transfer the NFT back to the user
-            argopetz.safeTransferFrom(address(this), msg.sender, _nftIds[i]);
+            kazo.safeTransferFrom(address(this), msg.sender, _nftIds[i]);
             emit UnstakedNFT(msg.sender, _nftIds[i], block.timestamp);
             unchecked {
                 ++i;
@@ -90,9 +86,12 @@ contract StarMapCrafting is Ownable, IERC721Receiver {
         return userStakedNFTs[_user].toArray();
     }
 
-    // Set argopetz
-    function setArgopetz(address _argopetz) external onlyOwner {
-        argopetz = IERC721(_argopetz);
+    /**
+     * @dev Set the NFT contract address
+     * @param _nftAddress The address of the NFT contract
+     */
+    function setStakingNFT(address _nftAddress) external onlyOwner {
+        kazo = IERC721(_nftAddress);
     }
 
     function onERC721Received(address, address, uint256, bytes calldata) external pure override returns (bytes4) {

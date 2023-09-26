@@ -874,8 +874,8 @@
       ]
     },
     "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\Kazo.sol": {
-      "lastModificationDate": 1695212783298,
-      "contentHash": "c99c9e397eea7ca4d3b2a163da461d58",
+      "lastModificationDate": 1695718749682,
+      "contentHash": "25dbd6043d78382fd053df59c09d2cc5",
       "sourceName": "contracts/Kazo.sol",
       "solcConfig": {
         "version": "0.8.19",
@@ -1084,6 +1084,54 @@
         "^0.8.13"
       ],
       "artifacts": []
+    },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\KazoStaking.sol": {
+      "lastModificationDate": 1695611652616,
+      "contentHash": "18ed0ceef517af11043a2d8fe208b463",
+      "sourceName": "contracts/KazoStaking.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/utils/structs/EnumerableSet.sol",
+        "./common/SetUtils.sol",
+        "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol"
+      ],
+      "versionPragmas": [
+        "0.8.19"
+      ],
+      "artifacts": [
+        "KazoStaking"
+      ]
     }
   }
 }

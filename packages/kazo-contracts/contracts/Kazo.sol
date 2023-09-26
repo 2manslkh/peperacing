@@ -40,6 +40,7 @@ contract Kazo is ERC721Template {
         whitelistMintPrice = _whitelistMintPrice;
         whitelistMaxMint = _whitelistMaxMint;
         _setDefaultRoyalty(_incentiveAddress, _feeNumerator);
+        _initializeOwner(msg.sender);
     }
 
     /**
@@ -88,5 +89,13 @@ contract Kazo is ERC721Template {
     function reveal(string memory _baseURI) external onlyOwner {
         revealed = true;
         setBaseURI(_baseURI);
+    }
+
+    /*
+     * @dev Set the whitelist mint price
+     * @param _whitelistMintPrice New whitelist mint price
+     */
+    function setWhitelistMintPrice(uint256 _whitelistMintPrice) external onlyOwner {
+        whitelistMintPrice = _whitelistMintPrice;
     }
 }

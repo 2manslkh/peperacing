@@ -28,9 +28,9 @@ dataSources:
     name: StarMapCrafting
     network: cronos
     source:
-      address: '0xE48C9E09119D8Dce47A66975CE441e49f407def2'
+      address: '0xEd2719B371b100e351d9a2Cfa9062AdE036e3be1'
       abi: StarMapCrafting
-      startBlock: 10045556
+      startBlock: 10356725
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -46,25 +46,3 @@ dataSources:
         - event: UnstakedNFT(indexed address,indexed uint256,uint256)
           handler: handleUnstakedNFT
       file: ./src/starmap-crafting.ts
-  # - kind: ethereum/contract
-  #   name: ArgoQuest
-  #   network: cronos_testnet
-  #   source:
-  #     abi: ArgoQuest
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.7
-  #     language: wasm/assemblyscript
-  #     entities:
-  #       - Quest
-  #     abis:
-  #       - name: ArgoQuest
-  #         file: ./abis/ArgoQuest.json
-  #     eventHandlers:
-  #       - event: QuestStarted(indexed uint256,uint256,uint256[])
-  #         handler: handleQuestStarted
-  #       - event: QuestEdited(indexed uint256,uint256,uint256[],uint256)
-  #         handler: handleQuestEdited
-  #       - event: QuestStopped(indexed uint256,uint256,uint256)
-  #         handler: handleQuestStopped
-  #     file: ./src/argoquest.ts

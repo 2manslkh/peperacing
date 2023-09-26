@@ -1,0 +1,11 @@
+{
+  "network": "base_goerli",
+  "burner_address": "0x0000000000000000000000000000000000000000",
+  "abis": "./node_modules/@argo/constants/abis/",
+  "Kazo_address": "0x671308A7069711B4e0a9B3886e68D986C05a49Bd",
+  "Kazo_start_block": 10082496,
+  "KazoPill_address": "0x41150f92EA2ca3D8B5DfA153B88F859ba95Ac992",
+  "KazoPill_start_block": 8283381,
+  "KazoStaking_address": "0x3B58116f657a24bDf5A37aa5ffe458d9A5D9A719",
+  "KazoStaking_start_block": 10262887
+}
