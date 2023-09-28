@@ -1,6 +1,6 @@
 type User @entity {
   id: ID!
-  argoPetz: [Kazo!]! @derivedFrom(field: "owner")
+  kazo: [Kazo!]! @derivedFrom(field: "owner")
 }
 
 type Kazo @entity {

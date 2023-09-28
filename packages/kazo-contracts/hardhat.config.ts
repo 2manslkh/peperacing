@@ -145,6 +145,7 @@ module.exports = {
       url: 'https://goerli.base.org',
       chainId: 84531,
       accounts: [PRIVATE_KEY],
+      gasPrice: 1000000000,
     },
   },
   solidity: {
