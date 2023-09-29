@@ -1,10 +1,17 @@
 import { ethers } from 'ethers';
-
+require('dotenv').config();
 async function signMessage() {
-  const privateKey = '0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
+  const privateKey = process.env.PRIVATE_KEY_TESTNET;
   const wallet = new ethers.Wallet(privateKey);
 
-  const message = 'Hello, Ethereum!';
+  const message = `Welcome to Ebisu's Bay!
+
+Click to sign in and accept the Ebisu's Bay Terms of Service: https://app.ebisusbay.com/terms-of-service.html
+
+This request will not trigger a blockchain transaction or cost any gas fees.
+
+Wallet address:
+${wallet.address}`;
 
   const signedMessage = await wallet.signMessage(message);
 

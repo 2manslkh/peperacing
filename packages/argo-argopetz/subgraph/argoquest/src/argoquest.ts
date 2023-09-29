@@ -7,6 +7,7 @@ export function handleQuestStarted(event: QuestStarted): void {
   let quest = new Quest(id);
   quest.questStartedAt = event.params.questStartedAt;
   quest.crews = event.params.crews;
+  quest.owner = event.params.owner.toHexString();
   quest.save();
 }
 

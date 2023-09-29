@@ -6,6 +6,10 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ArgoQuest is ERC721Holder, Ownable {
+    struct QuestInfo {
+        uint256 tokenId;
+        uint256[] argopetzTokenIds;
+    }
     IERC721 public argonauts;
     IERC721 public argopetz;
     bool public canQuest;
@@ -18,20 +22,19 @@ contract ArgoQuest is ERC721Holder, Ownable {
     mapping(uint256 => uint256[]) public questCrews; // argonaut tokenId => argopetz tokenIds
     mapping(uint256 => uint256[]) public argopetzCrew; // argopetz tokenId => argonaut tokenId [array of 1 uint256]
     uint256 private constant MAX_SUPPLY = 8888;
-    event QuestStarted(uint256 indexed tokenId, uint256 questStartedAt, uint256[] crews);
-    event QuestEdited(uint256 indexed tokenId, uint256 questStartedAt, uint256[] crews, uint256 questEditedAt);
-    event QuestStopped(uint256 indexed tokenId, uint256 questStartedAt, uint256 questStoppedAt);
+    event QuestStarted(address owner, uint256 indexed tokenId, uint256 questStartedAt, uint256[] crews);
+    event QuestEdited(
+        address owner,
+        uint256 indexed tokenId,
+        uint256 questStartedAt,
+        uint256[] crews,
+        uint256 questEditedAt
+    );
+    event QuestStopped(address owner, uint256 indexed tokenId, uint256 questStartedAt, uint256 questStoppedAt);
 
     constructor(address _argonauts, address _argopetz) {
         argonauts = IERC721(_argonauts);
         argopetz = IERC721(_argopetz);
-    }
-
-    // =============== Questing ===============
-
-    struct QuestInfo {
-        uint256 tokenId;
-        uint256[] argopetzTokenIds;
     }
 
     function batchStartQuest(QuestInfo[] calldata questInfos) external {
@@ -66,7 +69,7 @@ contract ArgoQuest is ERC721Holder, Ownable {
             require(argopetzTokenIds.length <= maxCrews, "too many crews [argopetzTokenIds]");
 
             _addCrew(tokenId, argopetzTokenIds);
-            emit QuestEdited(tokenId, tokensLastQuestedAt[tokenId], argopetzTokenIds, block.timestamp);
+            emit QuestEdited(msg.sender, tokenId, tokensLastQuestedAt[tokenId], argopetzTokenIds, block.timestamp);
             unchecked {
                 ++i;
             }
@@ -92,7 +95,7 @@ contract ArgoQuest is ERC721Holder, Ownable {
 
         tokensLastQuestedAt[tokenId] = block.timestamp;
 
-        emit QuestStarted(tokenId, block.timestamp, argopetzTokenIds);
+        emit QuestStarted(msg.sender, tokenId, block.timestamp, argopetzTokenIds);
     }
 
     function editQuest(uint256 tokenId, uint256[] calldata argopetzTokenIds) public {
@@ -104,7 +107,7 @@ contract ArgoQuest is ERC721Holder, Ownable {
         _resetCrew(tokenId);
         _addCrew(tokenId, argopetzTokenIds);
 
-        emit QuestEdited(tokenId, tokensLastQuestedAt[tokenId], argopetzTokenIds, block.timestamp);
+        emit QuestEdited(msg.sender, tokenId, tokensLastQuestedAt[tokenId], argopetzTokenIds, block.timestamp);
     }
 
     function _addCrew(uint256 tokenId, uint256[] calldata argopetzTokenIds) private {
@@ -200,7 +203,7 @@ contract ArgoQuest is ERC721Holder, Ownable {
 
         uint256 tlqa = tokensLastQuestedAt[tokenId];
         tokensLastQuestedAt[tokenId] = 0;
-        emit QuestStopped(tokenId, tlqa, block.timestamp);
+        emit QuestStopped(msg.sender, tokenId, tlqa, block.timestamp);
     }
 
     function isArgopetzQuesting(uint256 tokenId) external view returns (bool) {

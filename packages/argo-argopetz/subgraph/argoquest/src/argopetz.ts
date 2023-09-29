@@ -47,12 +47,7 @@ export function handleTransfer(event: Transfer): void {
   let user = User.load(event.params.to.toHex());
   if (user == null) {
     user = new User(event.params.to.toHex());
-    // user.argoPetz = [];
   }
-
-  // let petArray = user.argoPetz;
-  // petArray.push(event.params.id.toString());
-  // user.argoPetz = petArray;
 
   user.save();
 }

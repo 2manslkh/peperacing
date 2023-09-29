@@ -4,8 +4,6 @@ import 'dotenv/config';
 import '@nomiclabs/hardhat-ethers';
 import { task } from 'hardhat/config';
 
-// import '@graphprotocol/hardhat-graph';
-
 let ethers = require('ethers');
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -65,65 +63,6 @@ module.exports = {
         auto: true,
       },
     },
-    mainnet: {
-      url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
-      chainId: 1,
-      accounts: [PRIVATE_KEY],
-      saveDeployments: true,
-    },
-    rinkeby: {
-      url: `https://rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
-      chainId: 4,
-      accounts: [PRIVATE_KEY],
-      saveDeployments: true,
-    },
-    goerli: {
-      url: `https://goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
-      chainId: 5,
-      accounts: [PRIVATE_KEY_TESTNET],
-      saveDeployments: true,
-    },
-    matic: {
-      url: 'https://polygon-rpc.com/',
-      chainId: 137,
-      accounts: [PRIVATE_KEY],
-    },
-    mumbai: {
-      url: 'https://rpc-mumbai.matic.today',
-      chainId: 80001,
-      accounts: [PRIVATE_KEY],
-      saveDeployments: true,
-    },
-    optimism_mainnet: {
-      url: 'https://mainnet.optimism.io',
-      chainId: 10,
-      accounts: [PRIVATE_KEY],
-      saveDeployments: true,
-    },
-    optimism_testnet: {
-      url: 'https://kovan.optimism.io',
-      chainId: 69,
-      accounts: [PRIVATE_KEY],
-      saveDeployments: true,
-    },
-    arbitrum_mainnet: {
-      url: 'https://arb1.arbitrum.io/rpc',
-      chainId: 42161,
-      accounts: [PRIVATE_KEY],
-      saveDeployments: true,
-    },
-    arbitrum_testnet: {
-      url: 'https://rinkeby.arbitrum.io/rpc',
-      chainId: 421611,
-      accounts: [PRIVATE_KEY],
-      saveDeployments: true,
-    },
-    mantle_testnet: {
-      url: `https://rpc.testnet.mantle.xyz`,
-      chainId: 5001,
-      accounts: [PRIVATE_KEY_TESTNET],
-      saveDeployments: true,
-    },
     cronos_testnet: {
       url: `https://testnet-cronos.w3node.com/0aa9d84a638f2e0baa627443619cd2cb0ef65f5257170c7c8e9ebe39f427366b/api`,
       chainId: 338,
@@ -134,17 +73,6 @@ module.exports = {
       chainId: 25,
       accounts: [PRIVATE_KEY],
       gasLimit: 1000000000000,
-    },
-    base_mainnet: {
-      url: 'https://mainnet.base.org',
-      chainId: 8453,
-      accounts: [PRIVATE_KEY],
-      gasPrice: 1000000000,
-    },
-    base_goerli: {
-      url: 'https://goerli.base.org',
-      chainId: 84531,
-      accounts: [PRIVATE_KEY],
     },
   },
   solidity: {
@@ -197,24 +125,6 @@ module.exports = {
       base_mainnet: process.env.BASESCAN_API_KEY,
       base_goerli: process.env.BASESCAN_API_KEY,
     },
-    customChains: [
-      {
-        network: 'base_mainnet',
-        chainId: 8453,
-        urls: {
-          apiURL: 'https://api.basescan.org/api',
-          browserURL: 'https://basescan.org',
-        },
-      },
-      {
-        network: 'base_goerli',
-        chainId: 84531,
-        urls: {
-          apiURL: 'https://api-goerli.basescan.org/api',
-          browserURL: 'https://goerli.basescan.org',
-        },
-      },
-    ],
   },
   paths: {
     sources: './contracts',
@@ -222,7 +132,6 @@ module.exports = {
     cache: './cache',
     artifacts: './artifacts',
     deploy: './deploy',
-    subgraph: './subgraph', // Defaults to './subgraph'
   },
   mocha: {
     timeout: 2000000000,
