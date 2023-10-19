@@ -18,10 +18,10 @@ async function main() {
   let argoQuestAddr = await argoQuest.getAddress();
   //await argoPetz.setPublicMintPrice(ethers.parseEther('0'));
   // await argoPetz.publicMint(10, { value: ethers.parseEther('0') });
-  //await argoQuest.setCanQuest(true);
+  // await argoQuest.setCanQuest(true);
   // await argonauts.setApprovalForAll(argoQuestAddr, true);
   // await argoPetz.setApprovalForAll(argoQuestAddr, true);
-  await argoQuest.startQuest(1, [2954, 3657, 4589, 5069]);
+  await argoQuest.startQuest(3, [6927, 8671]);
 }
 
 main()

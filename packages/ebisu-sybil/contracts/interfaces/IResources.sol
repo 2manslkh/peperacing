@@ -11,4 +11,5 @@ interface IResources {
     }
 
     function mintWithSig(MintRequest calldata request, bytes calldata signature) external;
+    function safeTransferFrom(address from, address to, uint256 id, uint256 value, bytes calldata data) external;
 }

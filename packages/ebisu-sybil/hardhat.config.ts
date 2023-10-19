@@ -69,10 +69,9 @@ module.exports = {
       accounts: [PRIVATE_KEY_TESTNET],
     },
     cronos_mainnet: {
-      url: `https://mainnet.cronoslabs.com/v1/55e37d8975113ae7a44603ef8ce460aa/`,
+      url: `https://cronos.w3node.com/89a2b64ccd1e8cbaebd3fde0b8954df5a8e6043fb5617686c0528db368739ecf/api`,
       chainId: 25,
       accounts: [PRIVATE_KEY],
-      gasLimit: 1000000000000,
     },
   },
   solidity: {
@@ -82,7 +81,7 @@ module.exports = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 10000,
+            runs: 20000,
           },
         },
       },
@@ -121,10 +120,7 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: {
-      base_mainnet: process.env.BASESCAN_API_KEY,
-      base_goerli: process.env.BASESCAN_API_KEY,
-    },
+    apiKey: process.env.ETHERSCAN_API_KEY,
   },
   paths: {
     sources: './contracts',

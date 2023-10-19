@@ -614,8 +614,8 @@
       ]
     },
     "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\ERC721Template.sol": {
-      "lastModificationDate": 1695213260836,
-      "contentHash": "e317b14f92527aeace29227c6c815715",
+      "lastModificationDate": 1697547990067,
+      "contentHash": "48590460ce8f354113113d527885bcaa",
       "sourceName": "contracts/ERC721Template.sol",
       "solcConfig": {
         "version": "0.8.19",
@@ -874,8 +874,8 @@
       ]
     },
     "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\Kazo.sol": {
-      "lastModificationDate": 1695718749682,
-      "contentHash": "25dbd6043d78382fd053df59c09d2cc5",
+      "lastModificationDate": 1697632739426,
+      "contentHash": "85d12abd6a649001e07cf6084d52942e",
       "sourceName": "contracts/Kazo.sol",
       "solcConfig": {
         "version": "0.8.19",

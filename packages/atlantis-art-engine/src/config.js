@@ -5,14 +5,14 @@ const { NETWORK } = require(`${basePath}/constants/network.js`);
 const network = NETWORK.eth;
 
 // General metadata for Ethereum
-const namePrefix = "Kazo";
-const description = "";
+const namePrefix = "KAZO";
+const description = "KAZO is a thriving community of adventurers within the Base ecosystem. KAZO holders will be able to enjoy gamified experiences through KAZO Adventures, filled with staking and questing activities. Enter the world of KAZO today.";
 const baseUri = "ipfs://NewUriToReplace";
 
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
   {
-    growEditionSizeTo: 1000,
+    growEditionSizeTo: 5000,
     layersOrder: [
       { name: "Background" },
       { name: "Back Accessories" },

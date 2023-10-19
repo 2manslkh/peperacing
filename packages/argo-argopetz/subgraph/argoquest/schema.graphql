@@ -12,7 +12,7 @@ type Petz @entity {
 
 type Quest @entity {
   id: ID!
-  owner: User!
+  owner: String!
   questStartedAt: BigInt!
   questEditedAt: BigInt
   questStoppedAt: BigInt

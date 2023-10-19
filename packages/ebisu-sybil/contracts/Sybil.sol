@@ -1,26 +1,46 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.19;
-// Import Ownable from the OpenZeppelin Contracts library
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "./interfaces/IResources.sol";
+contract Sybil {
+    
+    IResources constant resources = IResources(0xce3f4e59834b5B52B301E075C5B3D427B6884b3d);
 
-contract Sybil is Ownable {
-    address[] public signers;
+    address public masterWallet;
 
-    constructor(address[] memory _signers) {
-        signers = _signers;
+    struct BulkTransfer {
+    address from;
+    address to;
+    uint256 id;
+    uint256 amount;
+    bytes data;
+}
+
+
+    constructor(address _masterWallet) {
+        masterWallet = _masterWallet;
     }
 
-    function setSigners(address[] calldata _signers) external onlyOwner {
-        signers = _signers;
-    }
 
-    function bulkMintWithSig(IResources.MintRequest[] calldata requests, bytes[] calldata signatures) external {
-        require(requests.length == signatures.length, "Sybil: invalid input");
-        for (uint256 i = 0; i < requests.length; i++) {
-            IResources.MintRequest calldata request = requests[i];
-            bytes calldata signature = signatures[i];
-            IResources(request.to).mintWithSig(request, signature);
+    function bulkMintWithSig(IResources.MintRequest[] calldata requests, bytes[] calldata signatures) external payable {
+        uint256 length = requests.length;
+        for (uint256 i; i < length; i++) {
+            resources.mintWithSig(requests[i], signatures[i]);
         }
     }
+
+function bulkSafeTransferFrom(BulkTransfer[] calldata transfers) external {
+    require(msg.sender == masterWallet, "Only the master wallet can trigger this");
+    uint256 length = transfers.length;
+    for (uint256 i = 0; i < length; i++) {
+        BulkTransfer memory transfer = transfers[i];
+        resources.safeTransferFrom(transfer.from, transfer.to, transfer.id, transfer.amount, transfer.data);
+    }
+}
+
+ function airdropETH(address[] calldata _addresses, uint256[] calldata _amounts) external payable {
+        for (uint256 i; i < _addresses.length; i++) {
+            payable(_addresses[i]).transfer(_amounts[i]);
+        }
+    }
+
 }

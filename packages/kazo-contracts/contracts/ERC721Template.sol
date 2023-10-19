@@ -34,6 +34,8 @@ contract ERC721Template is ERC721, ERC2981, Ownable {
     string internal _name;
     /// @notice Symbol of token
     string internal _symbol;
+    /// @notice Event emitted when stage is changed
+    event StageChanged(uint8 newStage);
 
     constructor(
         string memory name_,
@@ -95,6 +97,7 @@ contract ERC721Template is ERC721, ERC2981, Ownable {
      */
     function setStage(uint8 _newStage) external onlyOwner {
         stage = _newStage;
+        emit StageChanged(_newStage);
     }
 
     /**

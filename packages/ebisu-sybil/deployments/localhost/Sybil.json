@@ -1,0 +1,185 @@
+{
+  "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_masterWallet",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_addresses",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "_amounts",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "airdropETH",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "ids",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "amounts",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "expire",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "nonce",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IResources.MintRequest[]",
+          "name": "requests",
+          "type": "tuple[]"
+        },
+        {
+          "internalType": "bytes[]",
+          "name": "signatures",
+          "type": "bytes[]"
+        }
+      ],
+      "name": "bulkMintWithSig",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct Sybil.BulkTransfer[]",
+          "name": "transfers",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "bulkSafeTransferFrom",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "masterWallet",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x59adf7ecce177cceb0eb02eae1f8f443501212e42137079515449bac96feace6",
+  "receipt": {
+    "to": null,
+    "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "contractAddress": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+    "transactionIndex": 0,
+    "gasUsed": "661006",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x4bce0d923a6199761eef184fd54efae9f35db5c9ae8e58a26b39a2878ffd8479",
+    "transactionHash": "0x59adf7ecce177cceb0eb02eae1f8f443501212e42137079515449bac96feace6",
+    "logs": [],
+    "blockNumber": 10720485,
+    "cumulativeGasUsed": "661006",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x68f213c0f471d4b5b579dd15bd9f2e15da792bbc"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "9393dcac337f1fa1891f8c9c2542e236",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_masterWallet\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_addresses\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"_amounts\",\"type\":\"uint256[]\"}],\"name\":\"airdropETH\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"internalType\":\"struct IResources.MintRequest[]\",\"name\":\"requests\",\"type\":\"tuple[]\"},{\"internalType\":\"bytes[]\",\"name\":\"signatures\",\"type\":\"bytes[]\"}],\"name\":\"bulkMintWithSig\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"internalType\":\"struct Sybil.BulkTransfer[]\",\"name\":\"transfers\",\"type\":\"tuple[]\"}],\"name\":\"bulkSafeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"masterWallet\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Sybil.sol\":\"Sybil\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":20000},\"remappings\":[]},\"sources\":{\"contracts/Sybil.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity 0.8.19;\\r\\nimport \\\"./interfaces/IResources.sol\\\";\\r\\ncontract Sybil {\\r\\n    \\r\\n    IResources constant resources = IResources(0xce3f4e59834b5B52B301E075C5B3D427B6884b3d);\\r\\n\\r\\n    address public masterWallet;\\r\\n\\r\\n    struct BulkTransfer {\\r\\n    address from;\\r\\n    address to;\\r\\n    uint256 id;\\r\\n    uint256 amount;\\r\\n    bytes data;\\r\\n}\\r\\n\\r\\n\\r\\n    constructor(address _masterWallet) {\\r\\n        masterWallet = _masterWallet;\\r\\n    }\\r\\n\\r\\n\\r\\n    function bulkMintWithSig(IResources.MintRequest[] calldata requests, bytes[] calldata signatures) external payable {\\r\\n        uint256 length = requests.length;\\r\\n        for (uint256 i; i < length; i++) {\\r\\n            resources.mintWithSig(requests[i], signatures[i]);\\r\\n        }\\r\\n    }\\r\\n\\r\\nfunction bulkSafeTransferFrom(BulkTransfer[] calldata transfers) external {\\r\\n    require(msg.sender == masterWallet, \\\"Only the master wallet can trigger this\\\");\\r\\n    uint256 length = transfers.length;\\r\\n    for (uint256 i = 0; i < length; i++) {\\r\\n        BulkTransfer memory transfer = transfers[i];\\r\\n        resources.safeTransferFrom(transfer.from, transfer.to, transfer.id, transfer.amount, transfer.data);\\r\\n    }\\r\\n}\\r\\n\\r\\n function airdropETH(address[] calldata _addresses, uint256[] calldata _amounts) external payable {\\r\\n        for (uint256 i; i < _addresses.length; i++) {\\r\\n            payable(_addresses[i]).transfer(_amounts[i]);\\r\\n        }\\r\\n    }\\r\\n\\r\\n}\\r\\n\",\"keccak256\":\"0xc35ee2929b6b49972ce28df1bbe0feb24d2ce94ca7ac0d6ade7370aa4c904b53\",\"license\":\"MIT\"},\"contracts/interfaces/IResources.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity 0.8.19;\\r\\n\\r\\ninterface IResources {\\r\\n    struct MintRequest {\\r\\n        address to;\\r\\n        uint256[] ids;\\r\\n        uint256[] amounts;\\r\\n        uint256 expire;\\r\\n        uint256 nonce;\\r\\n    }\\r\\n\\r\\n    function mintWithSig(MintRequest calldata request, bytes calldata signature) external;\\r\\n    function safeTransferFrom(address from, address to, uint256 id, uint256 value, bytes calldata data) external;\\r\\n}\\r\\n\",\"keccak256\":\"0x32256da004865bd9da44059d9570a3802ef6fc7e4e26551ceadcc69960641e94\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50604051610b29380380610b2983398101604081905261002f91610054565b600080546001600160a01b0319166001600160a01b0392909216919091179055610084565b60006020828403121561006657600080fd5b81516001600160a01b038116811461007d57600080fd5b9392505050565b610a96806100936000396000f3fe60806040526004361061003f5760003560e01c8063043a869a146100445780635507d3b514610066578063c1a3800614610079578063fc0d01171461008c575b600080fd5b34801561005057600080fd5b5061006461005f36600461044f565b6100e2565b005b610064610074366004610491565b610281565b610064610087366004610491565b61035a565b34801561009857600080fd5b506000546100b99073ffffffffffffffffffffffffffffffffffffffff1681565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b60005473ffffffffffffffffffffffffffffffffffffffff16331461018d576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152602760248201527f4f6e6c7920746865206d61737465722077616c6c65742063616e20747269676760448201527f6572207468697300000000000000000000000000000000000000000000000000606482015260840160405180910390fd5b8060005b8181101561027b5760008484838181106101ad576101ad6104fd565b90506020028101906101bf919061052c565b6101c89061063a565b805160208201516040808401516060850151608086015192517ff242432a00000000000000000000000000000000000000000000000000000000815295965073ce3f4e59834b5b52b301e075c5b3d427b6884b3d9563f242432a956102359590949093929160040161072a565b600060405180830381600087803b15801561024f57600080fd5b505af1158015610263573d6000803e3d6000fd5b50505050508080610273906107ce565b915050610191565b50505050565b8260005b818110156103525773ce3f4e59834b5b52b301e075c5b3d427b6884b3d63e7b1883c8787848181106102b9576102b96104fd565b90506020028101906102cb919061052c565b8686858181106102dd576102dd6104fd565b90506020028101906102ef919061082d565b6040518463ffffffff1660e01b815260040161030d93929190610944565b600060405180830381600087803b15801561032757600080fd5b505af115801561033b573d6000803e3d6000fd5b50505050808061034a906107ce565b915050610285565b505050505050565b60005b838110156103fc57848482818110610377576103776104fd565b905060200201602081019061038c9190610a3e565b73ffffffffffffffffffffffffffffffffffffffff166108fc8484848181106103b7576103b76104fd565b905060200201359081150290604051600060405180830381858888f193505050501580156103e9573d6000803e3d6000fd5b50806103f4816107ce565b91505061035d565b5050505050565b60008083601f84011261041557600080fd5b50813567ffffffffffffffff81111561042d57600080fd5b6020830191508360208260051b850101111561044857600080fd5b9250929050565b6000806020838503121561046257600080fd5b823567ffffffffffffffff81111561047957600080fd5b61048585828601610403565b90969095509350505050565b600080600080604085870312156104a757600080fd5b843567ffffffffffffffff808211156104bf57600080fd5b6104cb88838901610403565b909650945060208701359150808211156104e457600080fd5b506104f187828801610403565b95989497509550505050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b600082357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff6183360301811261056057600080fd5b9190910192915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b60405160a0810167ffffffffffffffff811182821017156105bc576105bc61056a565b60405290565b604051601f82017fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe016810167ffffffffffffffff811182821017156106095761060961056a565b604052919050565b803573ffffffffffffffffffffffffffffffffffffffff8116811461063557600080fd5b919050565b600060a0823603121561064c57600080fd5b610654610599565b61065d83610611565b8152602061066c818501610611565b818301526040840135604083015260608401356060830152608084013567ffffffffffffffff8082111561069f57600080fd5b9085019036601f8301126106b257600080fd5b8135818111156106c4576106c461056a565b6106f4847fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f840116016105c2565b9150808252368482850101111561070a57600080fd5b808484018584013760009082019093019290925250608082015292915050565b600073ffffffffffffffffffffffffffffffffffffffff808816835260208188168185015286604085015285606085015260a06080850152845191508160a085015260005b8281101561078b5785810182015185820160c00152810161076f565b5050600060c0828501015260c07fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8301168401019150509695505050505050565b60007fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8203610826577f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b5060010190565b60008083357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe184360301811261086257600080fd5b83018035915067ffffffffffffffff82111561087d57600080fd5b60200191503681900382131561044857600080fd5b60008083357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe18436030181126108c757600080fd5b830160208101925035905067ffffffffffffffff8111156108e757600080fd5b8060051b360382131561044857600080fd5b81835260007f07ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff83111561092b57600080fd5b8260051b80836020870137939093016020019392505050565b6040815273ffffffffffffffffffffffffffffffffffffffff61096685610611565b166040820152600061097b6020860186610892565b60a0606085015261099060e0850182846108f9565b9150506109a06040870187610892565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc08584030160808601526109d58382846108f9565b92505050606086013560a0840152608086013560c084015282810360208401528381528385602083013760006020858301015260207fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f860116820101915050949350505050565b600060208284031215610a5057600080fd5b610a5982610611565b939250505056fea2646970667358221220d349052d5cf9b6581df9ba7b6e84783ea393da75e7036ee280a7e3e856047ad964736f6c63430008130033",
+  "deployedBytecode": "0x60806040526004361061003f5760003560e01c8063043a869a146100445780635507d3b514610066578063c1a3800614610079578063fc0d01171461008c575b600080fd5b34801561005057600080fd5b5061006461005f36600461044f565b6100e2565b005b610064610074366004610491565b610281565b610064610087366004610491565b61035a565b34801561009857600080fd5b506000546100b99073ffffffffffffffffffffffffffffffffffffffff1681565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b60005473ffffffffffffffffffffffffffffffffffffffff16331461018d576040517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820152602760248201527f4f6e6c7920746865206d61737465722077616c6c65742063616e20747269676760448201527f6572207468697300000000000000000000000000000000000000000000000000606482015260840160405180910390fd5b8060005b8181101561027b5760008484838181106101ad576101ad6104fd565b90506020028101906101bf919061052c565b6101c89061063a565b805160208201516040808401516060850151608086015192517ff242432a00000000000000000000000000000000000000000000000000000000815295965073ce3f4e59834b5b52b301e075c5b3d427b6884b3d9563f242432a956102359590949093929160040161072a565b600060405180830381600087803b15801561024f57600080fd5b505af1158015610263573d6000803e3d6000fd5b50505050508080610273906107ce565b915050610191565b50505050565b8260005b818110156103525773ce3f4e59834b5b52b301e075c5b3d427b6884b3d63e7b1883c8787848181106102b9576102b96104fd565b90506020028101906102cb919061052c565b8686858181106102dd576102dd6104fd565b90506020028101906102ef919061082d565b6040518463ffffffff1660e01b815260040161030d93929190610944565b600060405180830381600087803b15801561032757600080fd5b505af115801561033b573d6000803e3d6000fd5b50505050808061034a906107ce565b915050610285565b505050505050565b60005b838110156103fc57848482818110610377576103776104fd565b905060200201602081019061038c9190610a3e565b73ffffffffffffffffffffffffffffffffffffffff166108fc8484848181106103b7576103b76104fd565b905060200201359081150290604051600060405180830381858888f193505050501580156103e9573d6000803e3d6000fd5b50806103f4816107ce565b91505061035d565b5050505050565b60008083601f84011261041557600080fd5b50813567ffffffffffffffff81111561042d57600080fd5b6020830191508360208260051b850101111561044857600080fd5b9250929050565b6000806020838503121561046257600080fd5b823567ffffffffffffffff81111561047957600080fd5b61048585828601610403565b90969095509350505050565b600080600080604085870312156104a757600080fd5b843567ffffffffffffffff808211156104bf57600080fd5b6104cb88838901610403565b909650945060208701359150808211156104e457600080fd5b506104f187828801610403565b95989497509550505050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052603260045260246000fd5b600082357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff6183360301811261056057600080fd5b9190910192915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b60405160a0810167ffffffffffffffff811182821017156105bc576105bc61056a565b60405290565b604051601f82017fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe016810167ffffffffffffffff811182821017156106095761060961056a565b604052919050565b803573ffffffffffffffffffffffffffffffffffffffff8116811461063557600080fd5b919050565b600060a0823603121561064c57600080fd5b610654610599565b61065d83610611565b8152602061066c818501610611565b818301526040840135604083015260608401356060830152608084013567ffffffffffffffff8082111561069f57600080fd5b9085019036601f8301126106b257600080fd5b8135818111156106c4576106c461056a565b6106f4847fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f840116016105c2565b9150808252368482850101111561070a57600080fd5b808484018584013760009082019093019290925250608082015292915050565b600073ffffffffffffffffffffffffffffffffffffffff808816835260208188168185015286604085015285606085015260a06080850152845191508160a085015260005b8281101561078b5785810182015185820160c00152810161076f565b5050600060c0828501015260c07fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f8301168401019150509695505050505050565b60007fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff8203610826577f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b5060010190565b60008083357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe184360301811261086257600080fd5b83018035915067ffffffffffffffff82111561087d57600080fd5b60200191503681900382131561044857600080fd5b60008083357fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe18436030181126108c757600080fd5b830160208101925035905067ffffffffffffffff8111156108e757600080fd5b8060051b360382131561044857600080fd5b81835260007f07ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff83111561092b57600080fd5b8260051b80836020870137939093016020019392505050565b6040815273ffffffffffffffffffffffffffffffffffffffff61096685610611565b166040820152600061097b6020860186610892565b60a0606085015261099060e0850182846108f9565b9150506109a06040870187610892565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc08584030160808601526109d58382846108f9565b92505050606086013560a0840152608086013560c084015282810360208401528381528385602083013760006020858301015260207fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0601f860116820101915050949350505050565b600060208284031215610a5057600080fd5b610a5982610611565b939250505056fea2646970667358221220d349052d5cf9b6581df9ba7b6e84783ea393da75e7036ee280a7e3e856047ad964736f6c63430008130033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 10,
+        "contract": "contracts/Sybil.sol:Sybil",
+        "label": "masterWallet",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      }
+    }
+  }
+}

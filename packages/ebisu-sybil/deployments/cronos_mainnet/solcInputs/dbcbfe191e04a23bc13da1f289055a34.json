@@ -1,0 +1,38 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/interfaces/IResources.sol": {
+      "content": "// SPDX-License-Identifier: MIT\r\npragma solidity 0.8.19;\r\n\r\ninterface IResources {\r\n    struct MintRequest {\r\n        address to;\r\n        uint256[] ids;\r\n        uint256[] amounts;\r\n        uint256 expire;\r\n        uint256 nonce;\r\n    }\r\n\r\n    function mintWithSig(MintRequest calldata request, bytes calldata signature) external;\r\n}\r\n"
+    },
+    "contracts/Sybil.sol": {
+      "content": "// SPDX-License-Identifier: MIT\r\npragma solidity 0.8.19;\r\nimport \"./interfaces/IResources.sol\";\r\n\r\ncontract Sybil {\r\n    IResources constant resources = IResources(0xce3f4e59834b5B52B301E075C5B3D427B6884b3d);\r\n\r\n    constructor() {\r\n    }\r\n\r\n    function bulkMintWithSig(IResources.MintRequest[] calldata requests, bytes[] calldata signatures) external payable {\r\n        uint256 length = requests.length;\r\n        for (uint256 i; i < length;) {\r\n            resources.mintWithSig(requests[i], signatures[i]);\r\n            unchecked {\r\n                i++;\r\n            }\r\n        }\r\n    }\r\n}\r\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 20000
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

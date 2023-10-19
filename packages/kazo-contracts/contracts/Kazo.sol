@@ -62,19 +62,6 @@ contract Kazo is ERC721Template {
     }
 
     /**
-     * @dev Free mint
-     * @param _nonce Nonce to prevent replay attacks
-     * @param _signature Signature from backend signed by signer address if user is whitelisted
-     */
-    function freeMint(bytes calldata _nonce, bytes calldata _signature) external payable onlyStage(1) {
-        // Check if already free minted
-        require(!hasMinted[msg.sender], "Already minted!");
-        // Set has minted to true
-        hasMinted[msg.sender] = true;
-        _mintWithSignature(1, _nonce, _signature, 0);
-    }
-
-    /**
      * @dev Public Mint
      * @param _amount Amount to mint
      */

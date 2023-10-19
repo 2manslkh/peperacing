@@ -28,13 +28,13 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }: any) => {
     baseURI = 'ipfs://';
     name = 'Mock Leader';
     symbol = 'MOCK';
-    maxSupply = 1000;
+    maxSupply = 5000;
     withdrawAddress = deployer;
     incentiveAddress = deployer;
     whitelistMaxMint = 5;
     feeNumerator = 100;
-    whitelistMintPrice = ethers.parseEther('0.001');
-    publicMintPrice = ethers.parseEther('0.002');
+    whitelistMintPrice = ethers.parseEther('0.008');
+    publicMintPrice = ethers.parseEther('0.01');
   } else if (chainId == '31337') {
     signerAddress = '0xBDfAAD57daecf05786a5Fca0dB9BB0c7Ea2c04E0';
   } else {
