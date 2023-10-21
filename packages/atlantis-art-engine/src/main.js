@@ -299,6 +299,7 @@ const createDna = (_layers) => {
 
     // Keep generating a random number until a suitable element is found
     while (!elementFound) {
+      console.log("Element not found, generating new random number");
       let random = Math.floor(Math.random() * totalWeight);
 
       for (var i = 0; i < layer.elements.length; i++) {

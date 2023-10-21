@@ -28,7 +28,7 @@ const layerConfigurations = [
 
 const shuffleLayerConfigurations = false;
 
-const debugLogs = false;
+const debugLogs = true;
 
 const format = {
   width: 4500,

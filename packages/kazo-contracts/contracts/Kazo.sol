@@ -3,6 +3,9 @@ pragma solidity 0.8.19;
 
 import "./ERC721Template.sol";
 
+/// @title KAZO PFP Contract
+/// KAZO is a thriving community of adventurers within the Base ecosystem. KAZO holders will be able to enjoy gamified experiences through KAZO Adventures, filled with staking and questing activities. Enter the world of KAZO today.
+
 contract Kazo is ERC721Template {
     /// @notice Price for whitelist mint
     uint256 public whitelistMintPrice;
@@ -14,6 +17,8 @@ contract Kazo is ERC721Template {
     mapping(address => uint16) public whitelistMintCount;
     /// @notice Mapping used to track who has already minted for free mint
     mapping(address => bool) public hasMinted;
+    /// @notice Flag to indicate if dev has minted
+    bool public devMinted;
 
     /**
      * @dev Throws if the input stage does not match the current stage
@@ -76,6 +81,12 @@ contract Kazo is ERC721Template {
     function reveal(string memory _baseURI) external onlyOwner {
         revealed = true;
         setBaseURI(_baseURI);
+    }
+
+    function devMint() external onlyOwner {
+        require(!devMinted, "Dev already minted!");
+        devMinted = true;
+        _devMint(100);
     }
 
     /*
