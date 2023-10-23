@@ -137,8 +137,8 @@ const BASE_URL = 'https://cms.ebisusbay.com/api/ryoshi-dynasties';
 const provider = new ethers.JsonRpcProvider("https://cronos.w3node.com/89a2b64ccd1e8cbaebd3fde0b8954df5a8e6043fb5617686c0528db368739ecf/api");
 // Localhost provider
 //const provider = new ethers.JsonRpcProvider("http://localhost:8545");
-const NUM_WALLETS = 200;
-const NUM_SKIP = 0;
+const NUM_WALLETS = 180;
+const NUM_SKIP = 20;
 const BATCH_SIZE = 20;
 const maxRetries = 3; // Adjust as necessary
 
