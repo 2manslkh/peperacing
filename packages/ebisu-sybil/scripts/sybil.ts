@@ -138,7 +138,7 @@ const provider = new ethers.JsonRpcProvider("https://cronos.w3node.com/89a2b64cc
 // Localhost provider
 //const provider = new ethers.JsonRpcProvider("http://localhost:8545");
 const NUM_WALLETS = 400;
-const NUM_SKIP = 0;
+const NUM_SKIP = 121;
 const BATCH_SIZE = 20;
 const maxRetries = 3; // Adjust as necessary
 
