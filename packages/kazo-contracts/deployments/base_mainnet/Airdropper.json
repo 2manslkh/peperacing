@@ -1,0 +1,110 @@
+{
+  "address": "0x99E6722dBaB43c13aAff01cf8b65d568155b0FC9",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_token",
+          "type": "address"
+        },
+        {
+          "internalType": "address[]",
+          "name": "_addresses",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "_amounts",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "airdropERC20",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_nft",
+          "type": "address"
+        },
+        {
+          "internalType": "address[]",
+          "name": "_addresses",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "_tokenIds",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "airdropERC721",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_addresses",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "_amounts",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "airdropETH",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x991e37e1d46bdb9986556d8ed9b48c07b0d7fcd947bdaf3b391048b74d3b7d02",
+  "receipt": {
+    "to": null,
+    "from": "0x6A8f07700CaF7d76BA3Ef4E8C8d0674894587877",
+    "contractAddress": "0x99E6722dBaB43c13aAff01cf8b65d568155b0FC9",
+    "transactionIndex": 1,
+    "gasUsed": "273129",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xcabb81a73280c4310286415cd28637a86340dc42bd99a7cd311d8d3d760d4bfc",
+    "transactionHash": "0x991e37e1d46bdb9986556d8ed9b48c07b0d7fcd947bdaf3b391048b74d3b7d02",
+    "logs": [],
+    "blockNumber": 5916966,
+    "cumulativeGasUsed": "337142",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "1b812925a48098e1b2f5b999242d63c3",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"address[]\",\"name\":\"_addresses\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"_amounts\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256\",\"name\":\"_totalAmount\",\"type\":\"uint256\"}],\"name\":\"airdropERC20\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_nft\",\"type\":\"address\"},{\"internalType\":\"address[]\",\"name\":\"_addresses\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"_tokenIds\",\"type\":\"uint256[]\"}],\"name\":\"airdropERC721\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_addresses\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"_amounts\",\"type\":\"uint256[]\"}],\"name\":\"airdropETH\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Airdropper.sol\":\"Airdropper\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":10000},\"remappings\":[]},\"sources\":{\"contracts/Airdropper.sol\":{\"content\":\"pragma solidity 0.8.19;\\r\\n\\r\\ncontract Airdropper {\\r\\n    function airdropERC721(address _nft, address[] calldata _addresses, uint256[] calldata _tokenIds) external payable {\\r\\n        assembly {\\r\\n            // Check that the number of addresses matches the number of tokenIds\\r\\n            if iszero(eq(_tokenIds.length, _addresses.length)) {\\r\\n                revert(0, 0)\\r\\n            }\\r\\n            // transferFrom(address from, address to, uint256 tokenId)\\r\\n            mstore(0x00, hex\\\"23b872dd\\\")\\r\\n            // from address\\r\\n            mstore(0x04, caller())\\r\\n\\r\\n            // end of array\\r\\n            let end := add(_addresses.offset, shl(5, _addresses.length))\\r\\n            // diff = _addresses.offset - _tokenIds.offset\\r\\n            let diff := sub(_addresses.offset, _tokenIds.offset)\\r\\n\\r\\n            // Loop through the addresses\\r\\n            for {\\r\\n                let addressOffset := _addresses.offset\\r\\n            } 1 {\\r\\n\\r\\n            } {\\r\\n                // to address\\r\\n                mstore(0x24, calldataload(addressOffset))\\r\\n                // tokenId\\r\\n                mstore(0x44, calldataload(sub(addressOffset, diff)))\\r\\n                // transfer the token\\r\\n                if iszero(call(gas(), _nft, 0, 0x00, 0x64, 0, 0)) {\\r\\n                    revert(0, 0)\\r\\n                }\\r\\n                // increment the address offset\\r\\n                addressOffset := add(addressOffset, 0x20)\\r\\n                // if addressOffset >= end, break\\r\\n                if iszero(lt(addressOffset, end)) {\\r\\n                    break\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n\\r\\n    function airdropERC20(\\r\\n        address _token,\\r\\n        address[] calldata _addresses,\\r\\n        uint256[] calldata _amounts,\\r\\n        uint256 _totalAmount\\r\\n    ) external payable {\\r\\n        assembly {\\r\\n            // Check that the number of addresses matches the number of amounts\\r\\n            if iszero(eq(_amounts.length, _addresses.length)) {\\r\\n                revert(0, 0)\\r\\n            }\\r\\n\\r\\n            // transferFrom(address from, address to, uint256 amount)\\r\\n            mstore(0x00, hex\\\"23b872dd\\\")\\r\\n            // from address\\r\\n            mstore(0x04, caller())\\r\\n            // to address (this contract)\\r\\n            mstore(0x24, address())\\r\\n            // total amount\\r\\n            mstore(0x44, _totalAmount)\\r\\n\\r\\n            // transfer total amount to this contract\\r\\n            if iszero(call(gas(), _token, 0, 0x00, 0x64, 0, 0)) {\\r\\n                revert(0, 0)\\r\\n            }\\r\\n\\r\\n            // transfer(address to, uint256 value)\\r\\n            mstore(0x00, hex\\\"a9059cbb\\\")\\r\\n\\r\\n            // end of array\\r\\n            let end := add(_addresses.offset, shl(5, _addresses.length))\\r\\n            // diff = _addresses.offset - _amounts.offset\\r\\n            let diff := sub(_addresses.offset, _amounts.offset)\\r\\n\\r\\n            // Loop through the addresses\\r\\n            for {\\r\\n                let addressOffset := _addresses.offset\\r\\n            } 1 {\\r\\n\\r\\n            } {\\r\\n                // to address\\r\\n                mstore(0x04, calldataload(addressOffset))\\r\\n                // amount\\r\\n                mstore(0x24, calldataload(sub(addressOffset, diff)))\\r\\n                // transfer the tokens\\r\\n                if iszero(call(gas(), _token, 0, 0x00, 0x64, 0, 0)) {\\r\\n                    revert(0, 0)\\r\\n                }\\r\\n                // increment the address offset\\r\\n                addressOffset := add(addressOffset, 0x20)\\r\\n                // if addressOffset >= end, break\\r\\n                if iszero(lt(addressOffset, end)) {\\r\\n                    break\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n\\r\\n    function airdropETH(address[] calldata _addresses, uint256[] calldata _amounts) external payable {\\r\\n        assembly {\\r\\n            // Check that the number of addresses matches the number of amounts\\r\\n            if iszero(eq(_amounts.length, _addresses.length)) {\\r\\n                revert(0, 0)\\r\\n            }\\r\\n\\r\\n            // iterator\\r\\n            let i := _addresses.offset\\r\\n            // end of array\\r\\n            let end := add(i, shl(5, _addresses.length))\\r\\n            // diff = _addresses.offset - _amounts.offset\\r\\n            let diff := sub(_amounts.offset, _addresses.offset)\\r\\n\\r\\n            // Loop through the addresses\\r\\n            for {\\r\\n\\r\\n            } 1 {\\r\\n\\r\\n            } {\\r\\n                // transfer the ETH\\r\\n                if iszero(call(gas(), calldataload(i), calldataload(add(i, diff)), 0x00, 0x00, 0x00, 0x00)) {\\r\\n                    revert(0x00, 0x00)\\r\\n                }\\r\\n                // increment the iterator\\r\\n                i := add(i, 0x20)\\r\\n                // if i >= end, break\\r\\n                if eq(end, i) {\\r\\n                    break\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n}\\r\\n\",\"keccak256\":\"0xf078de6d3663d63b570a9f24b99471148a0b51402718c09f0ce1ba17b27860e6\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610400806100206000396000f3fe6080604052600436106100345760003560e01c80631d5659fb1461003957806382947abe1461004e578063c1a3800614610061575b600080fd5b61004c610047366004610254565b610074565b005b61004c61005c3660046102d5565b6100e7565b61004c61006f36600461035e565b61019b565b82811461008057600080fd5b7f23b872dd00000000000000000000000000000000000000000000000000000000600052336004528260051b8401828503855b80356024528181033560445260008060646000808c5af16100d357600080fd5b6020018281106100b3575050505050505050565b8382146100f357600080fd5b7f23b872dd0000000000000000000000000000000000000000000000000000000060005233600452306024528060445260008060646000808a5af161013757600080fd5b7fa9059cbb000000000000000000000000000000000000000000000000000000006000528360051b8501838603865b80356004528181033560245260008060646000808d5af161018657600080fd5b60200182811061016657505050505050505050565b8281146101a757600080fd5b838360051b81018584035b6000806000808487013587355af16101c957600080fd5b6020830192508282036101b25750505050505050565b803573ffffffffffffffffffffffffffffffffffffffff8116811461020357600080fd5b919050565b60008083601f84011261021a57600080fd5b50813567ffffffffffffffff81111561023257600080fd5b6020830191508360208260051b850101111561024d57600080fd5b9250929050565b60008060008060006060868803121561026c57600080fd5b610275866101df565b9450602086013567ffffffffffffffff8082111561029257600080fd5b61029e89838a01610208565b909650945060408801359150808211156102b757600080fd5b506102c488828901610208565b969995985093965092949392505050565b600080600080600080608087890312156102ee57600080fd5b6102f7876101df565b9550602087013567ffffffffffffffff8082111561031457600080fd5b6103208a838b01610208565b9097509550604089013591508082111561033957600080fd5b5061034689828a01610208565b979a9699509497949695606090950135949350505050565b6000806000806040858703121561037457600080fd5b843567ffffffffffffffff8082111561038c57600080fd5b61039888838901610208565b909650945060208701359150808211156103b157600080fd5b506103be87828801610208565b9598949750955050505056fea2646970667358221220aa82655bf86e96c4c16895bba936afdaee67ccbd7f37b70c2368e4e6883b076664736f6c63430008130033",
+  "deployedBytecode": "0x6080604052600436106100345760003560e01c80631d5659fb1461003957806382947abe1461004e578063c1a3800614610061575b600080fd5b61004c610047366004610254565b610074565b005b61004c61005c3660046102d5565b6100e7565b61004c61006f36600461035e565b61019b565b82811461008057600080fd5b7f23b872dd00000000000000000000000000000000000000000000000000000000600052336004528260051b8401828503855b80356024528181033560445260008060646000808c5af16100d357600080fd5b6020018281106100b3575050505050505050565b8382146100f357600080fd5b7f23b872dd0000000000000000000000000000000000000000000000000000000060005233600452306024528060445260008060646000808a5af161013757600080fd5b7fa9059cbb000000000000000000000000000000000000000000000000000000006000528360051b8501838603865b80356004528181033560245260008060646000808d5af161018657600080fd5b60200182811061016657505050505050505050565b8281146101a757600080fd5b838360051b81018584035b6000806000808487013587355af16101c957600080fd5b6020830192508282036101b25750505050505050565b803573ffffffffffffffffffffffffffffffffffffffff8116811461020357600080fd5b919050565b60008083601f84011261021a57600080fd5b50813567ffffffffffffffff81111561023257600080fd5b6020830191508360208260051b850101111561024d57600080fd5b9250929050565b60008060008060006060868803121561026c57600080fd5b610275866101df565b9450602086013567ffffffffffffffff8082111561029257600080fd5b61029e89838a01610208565b909650945060408801359150808211156102b757600080fd5b506102c488828901610208565b969995985093965092949392505050565b600080600080600080608087890312156102ee57600080fd5b6102f7876101df565b9550602087013567ffffffffffffffff8082111561031457600080fd5b6103208a838b01610208565b9097509550604089013591508082111561033957600080fd5b5061034689828a01610208565b979a9699509497949695606090950135949350505050565b6000806000806040858703121561037457600080fd5b843567ffffffffffffffff8082111561038c57600080fd5b61039888838901610208565b909650945060208701359150808211156103b157600080fd5b506103be87828801610208565b9598949750955050505056fea2646970667358221220aa82655bf86e96c4c16895bba936afdaee67ccbd7f37b70c2368e4e6883b076664736f6c63430008130033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}
