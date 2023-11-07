@@ -1,6 +1,48 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\Airdropper.sol": {
+      "lastModificationDate": 1698623215187,
+      "contentHash": "2b1d9c12b8f0a83192ff59083c7aabfb",
+      "sourceName": "contracts/Airdropper.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.19"
+      ],
+      "artifacts": [
+        "Airdropper"
+      ]
+    },
     "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\common\\ERC721.sol": {
       "lastModificationDate": 1689743343982,
       "contentHash": "6caf1272a407568654e05cec472945c1",
@@ -480,10 +522,10 @@
         "IERC721Receiver"
       ]
     },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\@openzeppelin\\contracts\\interfaces\\IERC2981.sol": {
-      "lastModificationDate": 1689246512478,
-      "contentHash": "23ed9f4f05068d7fc726138726c34bee",
-      "sourceName": "@openzeppelin/contracts/interfaces/IERC2981.sol",
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\KazoStaking.sol": {
+      "lastModificationDate": 1695611652616,
+      "contentHash": "18ed0ceef517af11043a2d8fe208b463",
+      "sourceName": "contracts/KazoStaking.sol",
       "solcConfig": {
         "version": "0.8.19",
         "settings": {
@@ -515,406 +557,17 @@
         }
       },
       "imports": [
-        "../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC2981"
-      ]
-    },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\@openzeppelin\\contracts\\token\\common\\ERC2981.sol": {
-      "lastModificationDate": 1689246512193,
-      "contentHash": "8dbffefc9f90bf604f3b8575e708dc03",
-      "sourceName": "@openzeppelin/contracts/token/common/ERC2981.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 10000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [
-        "../../interfaces/IERC2981.sol",
-        "../../utils/introspection/ERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC2981"
-      ]
-    },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\ERC165.sol": {
-      "lastModificationDate": 1689246512128,
-      "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
-      "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 10000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [
-        "./IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC165"
-      ]
-    },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\ERC721Template.sol": {
-      "lastModificationDate": 1697547990067,
-      "contentHash": "48590460ce8f354113113d527885bcaa",
-      "sourceName": "contracts/ERC721Template.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 10000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [
-        "solady/src/tokens/ERC721.sol",
-        "solady/src/auth/Ownable.sol",
-        "solady/src/utils/LibString.sol",
-        "solady/src/utils/ECDSA.sol",
-        "@openzeppelin/contracts/token/common/ERC2981.sol"
+        "@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/utils/structs/EnumerableSet.sol",
+        "./common/SetUtils.sol",
+        "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol"
       ],
       "versionPragmas": [
         "0.8.19"
       ],
       "artifacts": [
-        "ERC721Template"
-      ]
-    },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\solady\\src\\auth\\Ownable.sol": {
-      "lastModificationDate": 1694147622552,
-      "contentHash": "1b91b3b89f12e22bc73f240100908b7d",
-      "sourceName": "solady/src/auth/Ownable.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 10000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "Ownable"
-      ]
-    },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\solady\\src\\tokens\\ERC721.sol": {
-      "lastModificationDate": 1694147622417,
-      "contentHash": "195591e5e31e8a2363d95b206656a46f",
-      "sourceName": "solady/src/tokens/ERC721.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 10000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ERC721"
-      ]
-    },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\solady\\src\\utils\\ECDSA.sol": {
-      "lastModificationDate": 1694147622367,
-      "contentHash": "a3d1b3d0f0cca85c061ce30f074eeda6",
-      "sourceName": "solady/src/utils/ECDSA.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 10000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "ECDSA"
-      ]
-    },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\solady\\src\\utils\\LibString.sol": {
-      "lastModificationDate": 1694147622490,
-      "contentHash": "2f126f9d30fdf899ea1edb2f21470151",
-      "sourceName": "solady/src/utils/LibString.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 10000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "LibString"
-      ]
-    },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\Minion.sol": {
-      "lastModificationDate": 1695209535676,
-      "contentHash": "c5af28bf6bfd18b6e2efcb43631a8a93",
-      "sourceName": "contracts/Minion.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 10000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [
-        "./ERC721Template.sol"
-      ],
-      "versionPragmas": [
-        "0.8.19"
-      ],
-      "artifacts": [
-        "Minion"
-      ]
-    },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\Kazo.sol": {
-      "lastModificationDate": 1697632739426,
-      "contentHash": "85d12abd6a649001e07cf6084d52942e",
-      "sourceName": "contracts/Kazo.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 10000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [
-        "./ERC721Template.sol"
-      ],
-      "versionPragmas": [
-        "0.8.19"
-      ],
-      "artifacts": [
-        "Kazo"
+        "KazoStaking"
       ]
     },
     "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\common\\SetUtils.sol": {
@@ -1003,6 +656,443 @@
         "EnumerableSet"
       ]
     },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\ERC165.sol": {
+      "lastModificationDate": 1689246512128,
+      "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
+      "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC165"
+      ]
+    },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\@openzeppelin\\contracts\\token\\common\\ERC2981.sol": {
+      "lastModificationDate": 1689246512193,
+      "contentHash": "8dbffefc9f90bf604f3b8575e708dc03",
+      "sourceName": "@openzeppelin/contracts/token/common/ERC2981.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "../../interfaces/IERC2981.sol",
+        "../../utils/introspection/ERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC2981"
+      ]
+    },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\@openzeppelin\\contracts\\interfaces\\IERC2981.sol": {
+      "lastModificationDate": 1689246512478,
+      "contentHash": "23ed9f4f05068d7fc726138726c34bee",
+      "sourceName": "@openzeppelin/contracts/interfaces/IERC2981.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "../utils/introspection/IERC165.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC2981"
+      ]
+    },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\ERC721Template.sol": {
+      "lastModificationDate": 1697979463484,
+      "contentHash": "1ae16e032fba046450edad0a64d5fed3",
+      "sourceName": "contracts/ERC721Template.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "solady/src/tokens/ERC721.sol",
+        "solady/src/auth/Ownable.sol",
+        "solady/src/utils/LibString.sol",
+        "solady/src/utils/ECDSA.sol",
+        "@openzeppelin/contracts/token/common/ERC2981.sol"
+      ],
+      "versionPragmas": [
+        "0.8.19"
+      ],
+      "artifacts": [
+        "ERC721Template"
+      ]
+    },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\solady\\src\\tokens\\ERC721.sol": {
+      "lastModificationDate": 1697986510874,
+      "contentHash": "1bfff6829d51f15158709ff952901f87",
+      "sourceName": "solady/src/tokens/ERC721.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ERC721"
+      ]
+    },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\solady\\src\\auth\\Ownable.sol": {
+      "lastModificationDate": 1697986511000,
+      "contentHash": "c4dc3df5e9b88f1d361e92da30715f29",
+      "sourceName": "solady/src/auth/Ownable.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "Ownable"
+      ]
+    },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\solady\\src\\utils\\ECDSA.sol": {
+      "lastModificationDate": 1697986510777,
+      "contentHash": "3cb3042dd9114d46b4fa630941dbc2ff",
+      "sourceName": "solady/src/utils/ECDSA.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "ECDSA"
+      ]
+    },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\node_modules\\solady\\src\\utils\\LibString.sol": {
+      "lastModificationDate": 1697986510984,
+      "contentHash": "4084ea26df21ac4430746967a8fe1645",
+      "sourceName": "solady/src/utils/LibString.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "LibString"
+      ]
+    },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\Minion.sol": {
+      "lastModificationDate": 1695209535676,
+      "contentHash": "c5af28bf6bfd18b6e2efcb43631a8a93",
+      "sourceName": "contracts/Minion.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ERC721Template.sol"
+      ],
+      "versionPragmas": [
+        "0.8.19"
+      ],
+      "artifacts": [
+        "Minion"
+      ]
+    },
+    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\Kazo.sol": {
+      "lastModificationDate": 1697988112491,
+      "contentHash": "f03d89188e20ed6a0c31d6b17250e1e9",
+      "sourceName": "contracts/Kazo.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 10000
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "./ERC721Template.sol"
+      ],
+      "versionPragmas": [
+        "0.8.19"
+      ],
+      "artifacts": [
+        "Kazo"
+      ]
+    },
     "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\interfaces\\IERC721x.sol": {
       "lastModificationDate": 1689743343989,
       "contentHash": "4a8cc29bd0c9609e2f93e5108720818d",
@@ -1084,54 +1174,6 @@
         "^0.8.13"
       ],
       "artifacts": []
-    },
-    "C:\\Users\\Razer\\Documents\\GitHub\\Argo\\argo-mono\\packages\\kazo-contracts\\contracts\\KazoStaking.sol": {
-      "lastModificationDate": 1695611652616,
-      "contentHash": "18ed0ceef517af11043a2d8fe208b463",
-      "sourceName": "contracts/KazoStaking.sol",
-      "solcConfig": {
-        "version": "0.8.19",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 10000
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata",
-                "devdoc",
-                "userdoc",
-                "storageLayout",
-                "evm.gasEstimates"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          },
-          "metadata": {
-            "useLiteralContent": true
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC721/IERC721.sol",
-        "@openzeppelin/contracts/access/Ownable.sol",
-        "@openzeppelin/contracts/utils/structs/EnumerableSet.sol",
-        "./common/SetUtils.sol",
-        "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol"
-      ],
-      "versionPragmas": [
-        "0.8.19"
-      ],
-      "artifacts": [
-        "KazoStaking"
-      ]
     }
   }
 }

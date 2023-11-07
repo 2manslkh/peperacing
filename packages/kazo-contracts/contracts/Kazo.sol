@@ -17,8 +17,8 @@ contract Kazo is ERC721Template {
     mapping(address => uint16) public whitelistMintCount;
     /// @notice Mapping used to track who has already minted for free mint
     mapping(address => bool) public hasMinted;
-    /// @notice Flag to indicate if dev has minted
-    bool public devMinted;
+    /// @notice Address for royalties and team NFTs
+    address public constant TEAM_ADDRESS = 0x0f768d8E84a04475571e807206B98840Da5E8879;
 
     /**
      * @dev Throws if the input stage does not match the current stage
@@ -46,6 +46,7 @@ contract Kazo is ERC721Template {
         whitelistMaxMint = _whitelistMaxMint;
         _setDefaultRoyalty(_incentiveAddress, _feeNumerator);
         _initializeOwner(msg.sender);
+        _devMint();
     }
 
     /**
@@ -83,10 +84,8 @@ contract Kazo is ERC721Template {
         setBaseURI(_baseURI);
     }
 
-    function devMint() external onlyOwner {
-        require(!devMinted, "Dev already minted!");
-        devMinted = true;
-        _devMint(100);
+    function _devMint() internal {
+        _devMint(100, TEAM_ADDRESS);
     }
 
     /*

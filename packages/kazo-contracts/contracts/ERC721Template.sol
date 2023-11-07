@@ -240,11 +240,17 @@ contract ERC721Template is ERC721, ERC2981, Ownable {
      * @dev Dev Mint
      * @param _amount Amount of tokens to mint
      */
-    function _devMint(uint256 _amount) internal {
+    function _devMint(uint256 _amount, address _incentiveAddress) internal {
         // Check if mints does not exceed MAX_SUPPLY
         require(totalSupply() + _amount <= MAX_SUPPLY, "Exceeded Max Supply!");
 
-        _mintWithRandomness(_amount);
+        for (uint256 i; i < _amount; ) {
+            uint256 tokenId = _useRandomAvailableTokenId();
+            super._mint(_incentiveAddress, tokenId);
+            unchecked {
+                ++i;
+            }
+        }
     }
 
     /**

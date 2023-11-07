@@ -9,7 +9,7 @@ var metadata = JSON.parse(
 // Function to replace 'NewUriToReplace' in image URI
 function replaceUri(item) {
   item.image = item.image.replace(
-    "bafybeic2txcz4sgitlyoeas3scntszrp63dpznf5c5evjdb5whpb5hbozy",
+    "NewUriToReplace",
     "bafybeihxngrk7bor4dxao2elal3eb66slhijxiipxlvdmdpuiahpqlbpju"
   );
   return item;
