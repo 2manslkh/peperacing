@@ -153,7 +153,7 @@ async function getDailyReward(address, signature) {
   const url = `${BASE_URL}/game-tokens/daily-reward?address=${address}&signature=${signature}`;
   // Keep track of the retry attempts
   let attempt = 0;
-  const maxAttempts = 8; // Set a max number of attempts if you want to limit retries
+  const maxAttempts = 10; // Set a max number of attempts if you want to limit retries
   let retryDelay = 30000; // Delay between retries, e.g., 30 seconds
   while (true) {
     try {
@@ -167,6 +167,17 @@ async function getDailyReward(address, signature) {
         console.log(
           `Not time yet to check in (403). Retrying attempt #${attempt} after ${retryDelay / 1000} seconds...`,
         );
+
+        // Wait before retrying
+        await new Promise((resolve) => setTimeout(resolve, retryDelay));
+
+        // Uncomment the line below to implement exponential backoff
+        retryDelay *= 2;
+      } else if (axios.isAxiosError(error) && error.response?.status === 500) {
+        // Optionally cap the number of retries
+        if (++attempt > maxAttempts) throw new Error('Max retry attempts reached.');
+
+        console.log(`Internal server error (500). Retrying attempt #${attempt} after ${retryDelay / 1000} seconds...`);
 
         // Wait before retrying
         await new Promise((resolve) => setTimeout(resolve, retryDelay));
