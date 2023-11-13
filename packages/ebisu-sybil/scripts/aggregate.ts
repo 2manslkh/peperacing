@@ -132,9 +132,7 @@ const SybilABI = [
 const SybilAddress = Sybil.address;
 require('dotenv').config();
 
-const provider = new ethers.JsonRpcProvider(
-  'https://cronos.w3node.com/89a2b64ccd1e8cbaebd3fde0b8954df5a8e6043fb5617686c0528db368739ecf/api',
-);
+const provider = new ethers.JsonRpcProvider('https://mainnet.cronoslabs.com/v1/55e37d8975113ae7a44603ef8ce460aa/');
 // Localhost provider
 const NUM_WALLETS = process.env.NUM_WALLETS ? parseInt(process.env.NUM_WALLETS) : 400;
 const NUM_SKIP = process.env.NUM_SKIP ? parseInt(process.env.NUM_SKIP) : 0;
