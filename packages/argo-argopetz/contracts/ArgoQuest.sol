@@ -92,6 +92,7 @@ contract ArgoQuest is ERC721Holder, Ownable {
         require(tokensLastQuestedAt[tokenId] == 0, "quested already started for [argonaut tokenId]");
         require(argopetzTokenIds.length <= maxCrews, "too many crews [argopetzTokenIds]");
         _addCrew(tokenId, argopetzTokenIds);
+        // _addGears(tokenId, gearTokenIds);
 
         tokensLastQuestedAt[tokenId] = block.timestamp;
 

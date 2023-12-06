@@ -1,12 +1,17 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity 0.8.23;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-// Import ECDSA
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract ForgeToken is ERC20 {
     using ECDSA for bytes32;
+    struct MintRequest {
+        address to;
+        uint256 amount;
+        uint256 expire;
+        uint256 nonce;
+    }
     address public admin;
     address private signerAddress;
     modifier onlyAdmin() {
@@ -19,12 +24,20 @@ contract ForgeToken is ERC20 {
         admin = msg.sender;
     }
 
-    function mintWithSignature(uint256 _amount, bytes calldata _nonce, bytes calldata _signature ) external {
-        require(
-            _authenticate(msg.sender, _nonce, _signature, _amount),
-            "Invalid Signature!"
-        );
-        _mint(msg.sender, _amount);
+    function mintWithSignature(MintRequest calldata _request, bytes calldata _signature) external {
+        require(_authenticate(_request.to, _request.nonce, _signature, _request.amount), "Invalid Signature!");
+        _mint(_request.to, _amount);
+    }
+
+    function bulkMintWithSignatures(MintRequest[] calldata _requests, bytes[] calldata _signatures) external {
+        require(_requests.length == _signatures.length, "Invalid input length");
+        for (uint256 i = 0; i < _requests.length; i++) {
+            require(
+                _authenticate(_requests[i].to, _requests[i].nonce, _signatures[i], _requests[i].amount),
+                "Invalid Signature!"
+            );
+            _mint(_requests[i].to, _requests[i].amount);
+        }
     }
 
     function _authenticate(
@@ -34,11 +47,8 @@ contract ForgeToken is ERC20 {
         uint256 _amount
     ) internal view returns (bool) {
         bytes32 _hash = keccak256(abi.encodePacked(_sender, _nonce, _amount));
-        return
-            signerAddress ==
-            ECDSA.toEthSignedMessageHash(_hash).recover(_signature);
+        return signerAddress == ECDSA.toEthSignedMessageHash(_hash).recover(_signature);
     }
-
 
     function setSignerAddress(address _signerAddress) external onlyAdmin {
         signerAddress = _signerAddress;

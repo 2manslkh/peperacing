@@ -16,13 +16,13 @@ async function main() {
   const masterNode = ethers.HDNodeWallet.fromMnemonic(mnemonic);
   const wallets: string[] = [];
   const eth: BigNumberish[] = [];
-  for (let i = 200; i < 400; i++) {
+  for (let i = 401; i < 1001; i++) {
     const derivedNode = masterNode.derivePath(`m/44'/60'/0'/0/${i}`);
     const wallet = new ethers.Wallet(derivedNode.privateKey);
     wallets.push(wallet.address);
     eth.push(ethers.parseEther('0.5'));
   }
-  let tx = await sybil.airdropETH(wallets, eth, { value: ethers.parseEther('100') });
+  let tx = await sybil.airdropETH(wallets, eth, { value: ethers.parseEther('300') });
   console.log(tx.hash);
 }
 

@@ -21,7 +21,9 @@ async function main() {
   // await argoQuest.setCanQuest(true);
   // await argonauts.setApprovalForAll(argoQuestAddr, true);
   // await argoPetz.setApprovalForAll(argoQuestAddr, true);
-  await argoQuest.startQuest(3, [6927, 8671]);
+  // await argoQuest.startQuest(3, [6927, 8671]);
+  await argoQuest.setArgonauts('0xEcFec2b44f2A95f9AE932f1b6D17C8E6ECcD76C1');
+  await argoQuest.setArgopetz('0x681BaC6cBc89D4bb6AA4cBcB7a31bFA944cA7A10');
 }
 
 main()

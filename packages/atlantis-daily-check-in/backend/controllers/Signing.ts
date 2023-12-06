@@ -98,7 +98,6 @@ export const getSignature = async (req: any, res: any): Promise<void> => {
       },
     });
   } catch (error) {
-    // console.log(error);
     return res.json({ success: false, error: error });
   }
 };

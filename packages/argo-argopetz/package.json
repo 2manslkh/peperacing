@@ -23,6 +23,7 @@
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers",
     "@types/js-yaml": "^4.0.5",
     "@types/node": "^20.5.2",
+    "erc721a": "^4.2.3",
     "ethers": "^6.6.2",
     "fast-csv": "^4.3.6",
     "graphql-request": "^6.1.0",

@@ -620,36 +620,43 @@ async function main() {
   const sybil = new ethers.Contract(SybilAddress, SybilABI, signerWithProvider);
 
   // Get ERC1155 contract
-  const erc1155 = new ethers.Contract('0xce3f4e59834b5B52B301E075C5B3D427B6884b3d', ERC1155ABI, signerWithProvider);
+  let erc1155 = new ethers.Contract('0xce3f4e59834b5B52B301E075C5B3D427B6884b3d', ERC1155ABI, signerWithProvider);
   // Aggregate all ERC1155 tokens to aggregated wallet
 
   const aggregatedWallet = '0x81A8403887CeB1f6b6AA8A2C14eDE31DB0D8744D';
 
   const bulkTrf: Transfer[] = [];
   // Aggregate all ERC1155 tokens to aggregated wallet
-  for (let i = 0; i < NUM_WALLETS; i++) {
+  for (let i = 667; i < 1001; i++) {
     if (i < NUM_SKIP) {
       continue;
     }
     const derivedNode = masterNode.derivePath(`m/44'/60'/0'/0/${i}`);
     const wallet = new ethers.Wallet(derivedNode.privateKey);
-    const balance = await erc1155.balanceOf(wallet.address, 1);
-    // Log wallet and balance
-    console.log(`Wallet ${i} has balance ${balance}`);
-    let transfer = {
-      from: wallet.address,
-      to: aggregatedWallet,
-      id: 1,
-      amount: balance,
-      data: '0x00',
-    };
+    signerWithProvider = wallet.connect(provider);
+    erc1155 = new ethers.Contract('0xce3f4e59834b5B52B301E075C5B3D427B6884b3d', ERC1155ABI, signerWithProvider);
+    console.log('Wallet number ', i);
+    console.log('Approving for wallet ', wallet.address);
+    // const balance = await erc1155.balanceOf(wallet.address, 1);
+    // // Log wallet and balance
+    // console.log(`Wallet ${i} has balance ${balance}`);
+    // let transfer = {
+    //   from: wallet.address,
+    //   to: aggregatedWallet,
+    //   id: 1,
+    //   amount: balance,
+    //   data: '0x00',
+    // };
 
-    bulkTrf.push(transfer);
+    // bulkTrf.push(transfer);
+
+    // Approve ERC1155 contract to spend tokens
+    let tx = await erc1155.setApprovalForAll(SybilAddress, true);
   }
 
   // Call bulk safe transfer
-  let tx = await sybil.bulkSafeTransferFrom(bulkTrf);
-  console.log(`Bulk transfer Transaction Hash: ${tx.hash}`);
+  // let tx = await sybil.bulkSafeTransferFrom(bulkTrf);
+  // console.log(`Bulk transfer Transaction Hash: ${tx.hash}`);
 }
 
 main().catch((error) => {
