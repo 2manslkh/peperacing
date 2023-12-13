@@ -5,11 +5,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: ArgoPetz
-    network: cronos_testnet
+    network: cronos
     source:
-      address: '0x681BaC6cBc89D4bb6AA4cBcB7a31bFA944cA7A10'
+      address: '0xd32C596994A07946699cAea4e669C6e284A85958'
       abi: ArgoPetz
-      startBlock: 11437379
+      startBlock: 9509296
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -26,11 +26,11 @@ dataSources:
       file: ./src/argopetz.ts
   - kind: ethereum/contract
     name: StarMapCrafting
-    network: cronos_testnet
+    network: cronos
     source:
-      address: '0x8F4d41ce93AaE82Ab62444Db3D079549aEB993B3'
+      address: '0xEd2719B371b100e351d9a2Cfa9062AdE036e3be1'
       abi: StarMapCrafting
-      startBlock: 11570806
+      startBlock: 10356725
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -48,7 +48,7 @@ dataSources:
       file: ./src/starmap-crafting.ts
   - kind: ethereum/contract
     name: ArgoQuest
-    network: cronos_testnet
+    network: cronos
     source:
       address: '0x826Fc98655FA54F62B65b64fCa91f3074C646fe2'
       abi: ArgoQuest

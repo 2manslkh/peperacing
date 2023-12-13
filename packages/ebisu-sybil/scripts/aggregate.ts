@@ -635,28 +635,27 @@ async function main() {
     const wallet = new ethers.Wallet(derivedNode.privateKey);
     signerWithProvider = wallet.connect(provider);
     erc1155 = new ethers.Contract('0xce3f4e59834b5B52B301E075C5B3D427B6884b3d', ERC1155ABI, signerWithProvider);
-    console.log('Wallet number ', i);
-    console.log('Approving for wallet ', wallet.address);
-    // const balance = await erc1155.balanceOf(wallet.address, 1);
-    // // Log wallet and balance
-    // console.log(`Wallet ${i} has balance ${balance}`);
-    // let transfer = {
-    //   from: wallet.address,
-    //   to: aggregatedWallet,
-    //   id: 1,
-    //   amount: balance,
-    //   data: '0x00',
-    // };
 
-    // bulkTrf.push(transfer);
+    const balance = await erc1155.balanceOf(wallet.address, 1);
+    // Log wallet and balance
+    console.log(`Wallet ${i} has balance ${balance}`);
+    let transfer = {
+      from: wallet.address,
+      to: aggregatedWallet,
+      id: 1,
+      amount: balance,
+      data: '0x00',
+    };
+
+    bulkTrf.push(transfer);
 
     // Approve ERC1155 contract to spend tokens
-    let tx = await erc1155.setApprovalForAll(SybilAddress, true);
+    // let tx = await erc1155.setApprovalForAll(SybilAddress, true);
   }
 
-  // Call bulk safe transfer
-  // let tx = await sybil.bulkSafeTransferFrom(bulkTrf);
-  // console.log(`Bulk transfer Transaction Hash: ${tx.hash}`);
+  //Call bulk safe transfer
+  let tx = await sybil.bulkSafeTransferFrom(bulkTrf);
+  console.log(`Bulk transfer Transaction Hash: ${tx.hash}`);
 }
 
 main().catch((error) => {
