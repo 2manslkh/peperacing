@@ -627,7 +627,7 @@ async function main() {
 
   const bulkTrf: Transfer[] = [];
   // Aggregate all ERC1155 tokens to aggregated wallet
-  for (let i = 667; i < 1001; i++) {
+  for (let i = 0; i < 1001; i++) {
     if (i < NUM_SKIP) {
       continue;
     }
