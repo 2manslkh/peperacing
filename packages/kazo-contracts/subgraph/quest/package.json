@@ -2,10 +2,7 @@
   "name": "kazo",
   "license": "UNLICENSED",
   "scripts": {
-    "codegen": "graph codegen",
-    "build": "graph build",
-    "test": "graph test",
-    "deploy": "graph codegen && graph build && graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ --access-token 148ec85b12a1bcc8fc6c3c8a4f1130d2 kazo/kazo"
+    "deploy": "graph auth --studio 148ec85b12a1bcc8fc6c3c8a4f1130d2 && graph codegen && graph build && graph deploy --studio kazo"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.51.2",

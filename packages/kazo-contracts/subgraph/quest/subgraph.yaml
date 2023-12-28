@@ -7,9 +7,9 @@ dataSources:
     name: Kazo
     network: base-testnet
     source:
-      address: '0x99E6722dBaB43c13aAff01cf8b65d568155b0FC9'
+      address: '0x7e3a80A1A2b95705A4FA8899461B84f048770C93'
       abi: Kazo
-      startBlock: 10345182
+      startBlock: 11394802
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

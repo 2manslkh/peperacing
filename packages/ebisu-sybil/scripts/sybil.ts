@@ -148,7 +148,7 @@ async function checkIn(address, signature) {
 }
 
 async function getDailyReward(address, signature) {
-  const url = `${BASE_URL}/game-tokens/daily-reward?address=${address}&signature=${signature}`;
+  const url = `${BASE_URL}/game-tokens/daily-reward/claim?address=${address}&signature=${signature}`;
   // Keep track of the retry attempts
   let attempt = 0;
   const maxAttempts = 10; // Set a max number of attempts if you want to limit retries
@@ -232,58 +232,58 @@ async function main() {
 
     console.log(`Getting daily reward for wallet ${i}`);
     let reward = await getDailyReward(wallet.address, signedMessage);
-    // If reward.nonce is undefined, try again
-    while (reward.nonce == undefined) {
-      console.log(`Reward nonce is undefined for wallet ${i}. Trying again...`);
-      // Wait for few seconds
-      await new Promise((r) => setTimeout(r, 10000));
-      reward = await getDailyReward(wallet.address, signedMessage);
-    }
+    // // If reward.nonce is undefined, try again
+    // while (reward.nonce == undefined) {
+    //   console.log(`Reward nonce is undefined for wallet ${i}. Trying again...`);
+    //   // Wait for few seconds
+    //   await new Promise((r) => setTimeout(r, 10000));
+    //   reward = await getDailyReward(wallet.address, signedMessage);
+    // }
 
     // Form MintRequest
-    const mintRequest = {
-      to: wallet.address,
-      ids: reward.tokenIds,
-      amounts: reward.quantity,
-      expire: reward.expiresAt,
-      nonce: reward.nonce,
-    };
-    const signature = reward.signature;
-    requests.push(mintRequest);
-    signatures.push(signature);
+    // const mintRequest = {
+    //   to: wallet.address,
+    //   ids: reward.tokenIds,
+    //   amounts: reward.quantity,
+    //   expire: reward.expiresAt,
+    //   nonce: reward.nonce,
+    // };
+    // const signature = reward.signature;
+    // requests.push(mintRequest);
+    // signatures.push(signature);
 
-    if (requests.length == BATCH_SIZE) {
-      let success = false;
-      for (let attempt = 1; attempt <= maxRetries && !success; attempt++) {
-        try {
-          const bulkMintTx = await sybil.bulkMintWithSig(requests, signatures, { value: ethers.parseEther('0') });
-          await bulkMintTx.wait();
-          console.log(`Bulk Mint Transaction Hash: ${bulkMintTx.hash}`);
+    // if (requests.length == BATCH_SIZE) {
+    //   let success = false;
+    //   for (let attempt = 1; attempt <= maxRetries && !success; attempt++) {
+    //     try {
+    //       const bulkMintTx = await sybil.bulkMintWithSig(requests, signatures, { value: ethers.parseEther('0') });
+    //       await bulkMintTx.wait();
+    //       console.log(`Bulk Mint Transaction Hash: ${bulkMintTx.hash}`);
 
-          requests.length = 0;
-          signatures.length = 0;
+    //       requests.length = 0;
+    //       signatures.length = 0;
 
-          success = true;
-        } catch (error) {
-          console.error(`Attempt ${attempt} failed with error:`, error);
-          // Log the contract sybil
-          console.log('Requests: ', requests);
-          console.log('Signatures: ', signatures);
-          if (attempt < maxRetries) {
-            console.log(`Retrying... (Attempt ${attempt + 1} of ${maxRetries})`);
-          } else {
-            console.error('All attempts failed. Please check the issue.');
-          }
-        }
-      }
-    }
+    //       success = true;
+    //     } catch (error) {
+    //       console.error(`Attempt ${attempt} failed with error:`, error);
+    //       // Log the contract sybil
+    //       console.log('Requests: ', requests);
+    //       console.log('Signatures: ', signatures);
+    //       if (attempt < maxRetries) {
+    //         console.log(`Retrying... (Attempt ${attempt + 1} of ${maxRetries})`);
+    //       } else {
+    //         console.error('All attempts failed. Please check the issue.');
+    //       }
+    //     }
+    //   }
+    // }
   }
-  // If requests array is not empty, call bulk mint
-  if (requests.length > 0) {
-    const bulkMintTx = await sybil.bulkMintWithSig(requests, signatures, { value: ethers.parseEther('0') });
-    await bulkMintTx.wait();
-    console.log(`Bulk Mint Transaction Hash: ${bulkMintTx.hash}`);
-  }
+  // // If requests array is not empty, call bulk mint
+  // if (requests.length > 0) {
+  //   const bulkMintTx = await sybil.bulkMintWithSig(requests, signatures, { value: ethers.parseEther('0') });
+  //   await bulkMintTx.wait();
+  //   console.log(`Bulk Mint Transaction Hash: ${bulkMintTx.hash}`);
+  // }
 }
 
 main().catch((error) => {

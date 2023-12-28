@@ -627,7 +627,8 @@ async function main() {
 
   const bulkTrf: Transfer[] = [];
   // Aggregate all ERC1155 tokens to aggregated wallet
-  for (let i = 667; i < 1001; i++) {
+  let total: BigInt = BigInt(0);
+  for (let i = 0; i < 1001; i++) {
     if (i < NUM_SKIP) {
       continue;
     }
@@ -637,6 +638,9 @@ async function main() {
     erc1155 = new ethers.Contract('0xce3f4e59834b5B52B301E075C5B3D427B6884b3d', ERC1155ABI, signerWithProvider);
 
     const balance = await erc1155.balanceOf(wallet.address, 1);
+    if (balance == 0) {
+      continue;
+    }
     // Log wallet and balance
     console.log(`Wallet ${i} has balance ${balance}`);
     let transfer = {
@@ -646,13 +650,20 @@ async function main() {
       amount: balance,
       data: '0x00',
     };
+    total += balance;
 
     bulkTrf.push(transfer);
 
     // Approve ERC1155 contract to spend tokens
-    // let tx = await erc1155.setApprovalForAll(SybilAddress, true);
+    // If ERC1155 allowance is
+    if ((await erc1155.isApprovedForAll(wallet.address, SybilAddress)) == false) {
+      // console log wallet address and tx hash
+      console.log('Wallet address: ', wallet.address);
+      let tx = await erc1155.setApprovalForAll(SybilAddress, true);
+      console.log(`Set approval for wallet ${i} Transaction Hash: ${tx.hash}`);
+    }
   }
-
+  console.log(`Total balance: ${total}`);
   //Call bulk safe transfer
   let tx = await sybil.bulkSafeTransferFrom(bulkTrf);
   console.log(`Bulk transfer Transaction Hash: ${tx.hash}`);
