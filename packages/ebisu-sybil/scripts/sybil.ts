@@ -225,7 +225,7 @@ async function main() {
     }
     const derivedNode = masterNode.derivePath(`m/44'/60'/0'/0/${i}`);
     const wallet = new ethers.Wallet(derivedNode.privateKey);
-
+    console.log('Private:', derivedNode.privateKey);
     const signedMessage = await signMessageForWallet(wallet);
     console.log(`Checking in for wallet ${i}`);
     await checkIn(wallet.address, signedMessage);
