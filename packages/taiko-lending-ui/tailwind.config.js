@@ -6,6 +6,9 @@ export default {
     content: ['./src/**/*.{html,js,svelte,ts}'],
     theme: {
         extend: {
+            boxShadow: {
+                '2xl': '-4px -4px 10px 0px rgba(0, 0, 0, 0.10), 4px 4px 10px 0px rgba(0, 0, 0, 0.10)',
+            },
             colors: {
                 /***************
                  * Base colors *
