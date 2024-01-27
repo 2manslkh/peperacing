@@ -37,6 +37,7 @@
 		"vitest": "^1.2.1"
 	},
 	"dependencies": {
+		"@tsparticles/svelte": "^3.0.0",
 		"@vitejs/plugin-basic-ssl": "^1.0.2",
 		"@wagmi/cli": "^1.5.2",
 		"@wagmi/core": "1.4.12",
@@ -45,6 +46,7 @@
 		"eslint-plugin-svelte": "^2.35.1",
 		"patch-package": "^8.0.0",
 		"postcss": "^8.4.33",
+		"postcss-import": "^16.0.0",
 		"svelte-i18n": "^4.0.0",
 		"svelte-loading-spinners": "^0.3.4",
 		"svelte-particles": "^2.12.0",

@@ -9,12 +9,12 @@
     </div>
   </div>
   <!-- Right -->
-  <div class="flex flex-row items-center gap-4">
+  <div class="flex flex-col lg:flex-row lg:items-center gap-4">
     <div class="flex-col">
       <div class="body-small-bold opacity-70">Total Supply</div>
       <div class="title-subsection-bold">$1,000,000.00</div>
     </div>
-    <div class="h-full w-0.5 bg-white opacity-50" />
+    <div class="lg:divider" />
     <div class="flex-col">
       <div class="body-small-bold opacity-70">Total Borrow</div>
       <div class="title-subsection-bold">$1,000,000,000.00</div>
