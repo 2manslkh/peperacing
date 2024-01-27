@@ -9,9 +9,9 @@
 
   // 2. Create wagmiConfig
   const metadata = {
-    name: 'Taiko Trailblazer',
-    description: 'Taiko Trailblazer',
-    url: 'Taiko Trailblazer',
+    name: 'Taiko Lending',
+    description: 'Taiko Lending',
+    url: 'Taiko Lending',
     icons: ['https://avatars.githubusercontent.com/u/99078433'],
   };
 
@@ -24,7 +24,7 @@
       chains,
       themeMode: 'dark',
       themeVariables: {
-        '--w3m-font-family': 'Clash Grotesk',
+        '--w3m-font-family': 'Montserrat',
         '--w3m-color-mix-strength': 10,
         '--w3m-accent': '#E81899',
         '--w3m-color-mix': '#FFFFFF',

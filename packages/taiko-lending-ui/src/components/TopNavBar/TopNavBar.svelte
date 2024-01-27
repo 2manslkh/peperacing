@@ -27,7 +27,7 @@
       </header-item>
     </div>
     {#if $web3Modal}
-      <w3m-button />
+      <w3m-button class="bg-pink-600 rounded-full" />
     {/if}
   {/if}
 </div>
